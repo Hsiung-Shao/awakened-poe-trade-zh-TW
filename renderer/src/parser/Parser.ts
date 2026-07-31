@@ -305,6 +305,10 @@ function findInDatabase (item: ParserState) {
 
     const baseTypeRef = baseTypes[0].refName
     info = info.filter(info => info.unique!.base === baseTypeRef)
+    // 上游沒有檢查這裡是否濾空。濾空時 `info[0]` 是 undefined,錯誤會延後到下面的
+    // `item.info.craftable` 才爆成看不懂的 TypeError。回報 item.unknown 才是
+    // 誠實的結果 —— 「查不到這件物品」,而不是「程式壞了」。
+    if (!info.length) return err('item.unknown')
   }
   item.infoVariants = info
   // choose 1st variant, correct one will be picked at the end of parsing

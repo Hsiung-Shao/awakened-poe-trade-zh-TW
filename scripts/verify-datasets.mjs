@@ -131,6 +131,34 @@ export function analyzeDatasets () {
     }
   }
 
+  // 反向撞名:同一個顯示名對到多個不同的 refName。
+  //
+  // 這比 ITEM_MULTIPLE_TRANSLATIONS 嚴重 —— 那個是「同一件東西有兩種譯名」(解析時
+  // 兩種都認得,是好事);這個是「兩件**不同**的東西共用一個譯名」,從物品文字
+  // 根本分辨不出來,送查詢時只能猜一個。
+  //
+  // 實測繁中有 4 組(en 0 組),其中 UNIQUE::永恆鬥爭 曾造成解析崩潰
+  // (見 assets/data/index.ts 的 commonFind 註解)。另外 3 組是基底類型,
+  // 兩邊 category 相同所以不影響分類,但查詢會送出其中一個的英文名。
+  for (const lang of LANGUAGES) {
+    if (lang === REFERENCE_LANGUAGE) continue
+    const refsByName = new Map()
+    for (const row of itemRows[lang]) {
+      const key = `${row.namespace}::${row.name}`
+      if (!refsByName.has(key)) refsByName.set(key, new Set())
+      refsByName.get(key).add(row.refName)
+    }
+    const collisions = [...refsByName].filter(([, refs]) => refs.size > 1)
+    if (collisions.length > 0) {
+      report.warnings.push({
+        code: 'ITEM_NAME_COLLISION',
+        language: lang,
+        count: collisions.length,
+        sample: collisions.map(([key, refs]) => ({ key, refNames: [...refs] }))
+      })
+    }
+  }
+
   // ---------------- stats ----------------
   const statList = {}
   const statRefs = {}
