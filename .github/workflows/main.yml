@@ -1,9 +1,15 @@
+# 這支 workflow 只驗證「建置過得去」,**不發布任何東西**。
+#
+# 上游原本跑 `-p onTagOrDraft` 並帶 GH_TOKEN,推分支就可能把產物寫進草稿
+# Release。本專案的發布是刻意的動作:本機打包 → 產生 SHA256SUMS →
+# 建 GPG 簽章的 tag → 人工建立 Release。既然沒有 code signing,
+# 少一個能寫入 Release 的自動化路徑,就少一條竄改路徑。
 name: Build
 
 on:
   push:
     branches:
-      - 'master'
+      - 'main'
     tags-ignore:
       - '**'
     paths-ignore:
@@ -47,10 +53,10 @@ jobs:
       working-directory: ./main
     - run: npm run build
       working-directory: ./main
-    - run: npm run package "--" -p onTagOrDraft
+    # `-p never`:只打包、不上傳。刻意不給 GH_TOKEN —— 沒有 token 就算
+    # 設定被改回 onTagOrDraft 也寫不進 Release。
+    - run: npm run package "--" -p never
       working-directory: ./main
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Hash
       if: ${{ startsWith(matrix.os, 'windows') }}
       run: type .\main\dist\latest.yml
