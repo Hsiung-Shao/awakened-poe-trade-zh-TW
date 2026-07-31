@@ -1,6 +1,6 @@
 {
-  "name": "awakened-poe-trade",
-  "version": "3.29.102",
+  "name": "awakened-poe-trade-zh-tw",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "node build/script.mjs",
@@ -9,11 +9,11 @@
     "postinstall": "patch-package --patch-dir build"
   },
   "author": {
-    "name": "Alexander Drozdov"
+    "name": "Hsiung-Shao"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/SnosMe/awakened-poe-trade.git"
+    "url": "https://github.com/Hsiung-Shao/awakened-poe-trade-zh-TW.git"
   },
   "main": "dist/main.js",
   "dependencies": {

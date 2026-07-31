@@ -2,12 +2,22 @@
   <div class="p-2 flex flex-col h-full items-center">
     <div class="flex flex-col items-center p-2 mb-4">
       <img class="w-12 h-12" src="/images/TransferOrb.png">
-      <p class="text-base">Awakened PoE Trade</p>
+      <p class="text-base">Awakened PoE Trade-zh-TW</p>
       <p class="">{{ t('app.version', [version]) }}</p>
       <div class="flex gap-2">
-        <a class="border-b" href="https://github.com/SnosMe/awakened-poe-trade/releases" target="_blank">{{ t('app.release_notes') }}</a>
-        <a class="border-b" href="https://github.com/SnosMe/awakened-poe-trade/issues" target="_blank">{{ t('app.report_bug') }}</a>
+        <a class="border-b" :href="`${REPO_URL}/releases`" target="_blank">{{ t('app.release_notes') }}</a>
+        <a class="border-b" :href="`${REPO_URL}/issues`" target="_blank">{{ t('app.report_bug') }}</a>
       </div>
+    </div>
+    <!--
+      本版的版號與上游脫鉤(見 UPSTREAM_VERSION 的註解),所以必須把上游基準版本
+      標出來,否則使用者無從得知這份建置對應官方的哪一版。
+    -->
+    <div class="text-center mb-4 text-gray-500">
+      <p>Traditional Chinese build of
+        <a class="border-b" :href="UPSTREAM_URL" target="_blank">Awakened PoE Trade</a>
+        by SnosMe</p>
+      <p>based on upstream {{ UPSTREAM_VERSION }}</p>
     </div>
     <div class="border border-gray-600 rounded p-2 whitespace-nowrap min-w-min w-72">
       <p>{{ info.str1 }}</p>
@@ -15,8 +25,16 @@
       <button v-if="info.action" @click="info.action"
         class="btn w-full mt-1">{{ info.actionText }}</button>
     </div>
+    <!--
+      上游這裡放的是作者本人的 Discord 帳號。留著會讓這個繁中版的問題回報
+      直接寄到他信箱 —— 他沒有做這份建置,也無從處理。改指向本專案的 issue 區。
+
+      下面兩個 Discord 是公開的社群伺服器(不是任何人的私人聯絡方式),
+      對 PoE 玩家仍然有用,原樣保留。
+    -->
     <div class="text-center mt-auto py-8">
-      <p>{{ t('app.contact_me') }} <br><span class="font-sans text-gray-500 select-all">&lt;@295216259795124225&gt;</span></p>
+      <p>Report an issue with this build at
+        <br><a class="border-b" :href="`${REPO_URL}/issues`" target="_blank">{{ REPO_SLUG }}</a></p>
       <ul class="flex gap-4">
         <li><img class="rounded inline" src="/images/dc_tft.gif"> <a class="border-b" href="https://discord.gg/tftrove" target="_blank">The Forbidden Trove</a></li>
         <li><img class="rounded inline" src="/images/dc_reddit.png"> <a class="border-b" href="https://discord.gg/pathofexile" target="_blank">r/pathofexile</a></li>
@@ -31,6 +49,20 @@ import { useI18n } from 'vue-i18n'
 import { Host } from '@/web/background/IPC'
 import { DateTime } from 'luxon'
 
+const REPO_SLUG = 'Hsiung-Shao/awakened-poe-trade-zh-TW'
+const REPO_URL = `https://github.com/${REPO_SLUG}`
+const UPSTREAM_URL = 'https://github.com/SnosMe/awakened-poe-trade'
+
+/**
+ * 上游的基準版本。**同步上游時要一起更新。**
+ *
+ * 本專案的版號(main/package.json)與上游脫鉤,從 0.1.0 起自成一序 ——
+ * electron-updater 只跟本專案自己的 Release 比 semver,沿用上游號沒有意義,
+ * 而且上游跳號時會反過來打結。代價是使用者看不出對應官方哪一版,
+ * 所以在 About 頁把它標出來。
+ */
+const UPSTREAM_VERSION = '3.29.102 (18a401e)'
+
 function checkForUpdates () {
   Host.sendEvent({
     name: 'CLIENT->MAIN::user-action',
@@ -39,7 +71,9 @@ function checkForUpdates () {
 }
 
 function openDownloadPage () {
-  window.open('https://snosme.github.io/awakened-poe-trade/download')
+  // 本專案不自動下載安裝更新(未簽章,見 main/src/AppUpdater.ts),
+  // 這顆按鈕是使用者取得新版的唯一途徑。
+  window.open(`${REPO_URL}/releases`)
 }
 
 function quitAndInstall () {
@@ -82,7 +116,11 @@ export default defineComponent({
     return {
       t,
       info,
-      version: Host.version
+      version: Host.version,
+      REPO_SLUG,
+      REPO_URL,
+      UPSTREAM_URL,
+      UPSTREAM_VERSION
     }
   }
 })

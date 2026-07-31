@@ -1,6 +1,18 @@
+# 必須顯式指定 owner/repo。省略的話 electron-builder 會回頭讀 package.json 的
+# `repository` 欄 —— 那在本專案剛 fork 出來時仍指著上游,結果是使用者的
+# 「檢查更新」會抓到上游的新版並把這個繁中版整包蓋掉。
 publish:
-  - "github"
-productName: "Awakened PoE Trade"
+  - provider: github
+    owner: Hsiung-Shao
+    repo: awakened-poe-trade-zh-TW
+
+# ⚠ productName 與 appId 是**兩件事**,改了前者不會連帶改後者。
+# appId 沒有顯式設定時,electron-builder 會用 package.json 的 name 生成
+# `com.electron.awakened-poe-trade` —— 那會與官方版共用安裝目錄、登錄檔項目
+# 與 %APPDATA% 設定目錄,兩個版本互相覆蓋。
+productName: "Awakened PoE Trade-zh-TW"
+appId: "com.hsiungshao.awakened-poe-trade-zhtw"
+copyright: "Copyright © 2020 Alexander Drozdov. Traditional Chinese build by Hsiung-Shao."
 npmRebuild: false
 toolsets:
   appimage: 1.0.3

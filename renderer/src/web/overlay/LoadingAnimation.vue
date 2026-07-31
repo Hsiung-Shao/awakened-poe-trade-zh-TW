@@ -5,7 +5,7 @@
     <div :class="$style.widget" v-if="show">
       <div :class="$style.box">
         <div class="py-2 px-4">
-          <div class="text-base">Awakened PoE Trade</div>
+          <div class="text-base">Awakened PoE Trade-zh-TW</div>
           <p>{{ t('app_is_ready') }}</p>
         </div>
       </div>

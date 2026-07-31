@@ -145,7 +145,7 @@ export class OverlayWindow {
         // ----------------------
         'Path of Exile is running with administrator rights.\n' +
         '\n' +
-        'You need to restart Awakened PoE Trade with administrator rights.'
+        'You need to restart Awakened PoE Trade-zh-TW with administrator rights.'
       )
     } else {
       this.server.sendEventTo('broadcast', {
