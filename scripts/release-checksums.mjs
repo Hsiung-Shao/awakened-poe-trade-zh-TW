@@ -60,6 +60,27 @@ if (!fs.existsSync(DIST)) {
   process.exit(1)
 }
 
+/*
+ * 先把帶空格的產物改名成連字號版,再算雜湊。
+ *
+ * electron-builder 產出的檔名帶空格,但它寫進 latest.yml 的 url 是空格換連字號的
+ * 版本 —— 那是它自己上傳時會用的名字。我們手動建立 Release,GitHub 又會把空格
+ * 換成**點**,於是本機檔名、latest.yml、上傳後的 asset、SHA256SUMS 四邊互不相同:
+ * 更新檢查找不到 asset(安靜失敗),使用者核對雜湊也對不上檔名。
+ *
+ * 與其在文件裡叮嚀「記得改名」,不如在這裡改完再算 —— 四邊一次對齊,
+ * 而且雜湊算的就是實際上傳的那個檔。
+ */
+if (process.argv.includes('--write')) {
+  for (const e of fs.readdirSync(DIST, { withFileTypes: true })) {
+    if (!e.isFile() || !e.name.includes(' ')) continue
+    if (!DISTRIBUTABLE.test(e.name)) continue
+    const to = e.name.replace(/ /g, '-')
+    fs.renameSync(path.join(DIST, e.name), path.join(DIST, to))
+    console.log(`改名:${e.name}\n  → ${to}`)
+  }
+}
+
 const entries = fs.readdirSync(DIST, { withFileTypes: true })
 const hashed = []
 const unexpected = []
@@ -98,23 +119,24 @@ if (hashed.length === 0) {
   process.exit(1)
 }
 
-// 斷言三:`latest.yml` 引用的檔名必須與實際上傳的一致。
-//
-// electron-builder 產出的檔名帶空格(`Awakened PoE Trade-zh-TW Setup 3.29.900.exe`),
-// 但它寫進 latest.yml 的 url 是把空格換成連字號的版本 —— 那是它自己上傳時會用的名字。
-// 我們手動建立 Release,GitHub 又會把檔名裡的空格換成**點**,三邊互不相同。
-// 更新器讀 latest.yml 找不到對應 asset 就會失敗,而且是安靜地失敗。
+// 斷言三:`latest.yml` 引用的每個檔案都必須真的存在,且檔名逐字相同。
+// 更新器讀 latest.yml 去找對應的 asset,對不上就是安靜失敗 —— 使用者只會看到
+// 「檢查更新失敗」,不會知道是檔名的問題。
 const latestYml = entries.find(e => e.isFile() && UPDATE_MANIFEST.test(e.name))
-const renames = []
 if (latestYml !== undefined) {
   const yml = fs.readFileSync(path.join(DIST, latestYml.name), 'utf8')
-  const referenced = [...yml.matchAll(/^\s*(?:-\s*url|path):\s*(.+?)\s*$/gm)].map(m => m[1])
-  for (const { name } of hashed) {
-    if (!DISTRIBUTABLE.test(name)) continue
-    const asUploaded = name.replace(/ /g, '-')
-    if (referenced.includes(asUploaded) && asUploaded !== name) {
-      renames.push({ from: name, to: asUploaded })
-    }
+  const referenced = new Set(
+    [...yml.matchAll(/^\s*(?:-\s*url|path):\s*(.+?)\s*$/gm)].map(m => m[1])
+  )
+  const present = new Set(hashed.map(h => h.name))
+  const dangling = [...referenced].filter(r => !present.has(r))
+  if (dangling.length > 0) {
+    console.error(`${latestYml.name} 指向的檔案不存在:`)
+    for (const d of dangling) console.error(`  ${d}`)
+    console.error('\n實際有的是:')
+    for (const h of hashed) console.error(`  ${h.name}`)
+    console.error('\n更新器會照 latest.yml 去找 asset,對不上就是安靜失敗。')
+    process.exit(1)
   }
 }
 
@@ -132,12 +154,6 @@ const body = [
 ].join('\n')
 
 console.log(body)
-
-if (renames.length > 0) {
-  console.log('⚠ 上傳前必須改名,否則 latest.yml 指向的 asset 不存在,更新檢查會安靜地失敗:')
-  for (const r of renames) console.log(`    "${r.from}"\n  → ${r.to}`)
-  console.log('')
-}
 
 if (process.argv.includes('--write')) {
   const out = path.join(DIST, `SHA256SUMS-${VERSION}.txt`)
