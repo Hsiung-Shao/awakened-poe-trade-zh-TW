@@ -1,43 +1,99 @@
-# How this works
+# 開發
 
-There are 2 main parts of the app:
+## 架構
 
-1. renderer: this is the HTML/Javascript-based UI rendered within the Electron container. This runs Vue.js, a React-like Javascript framework for rendering front-end.
-2. main: includes the main app (written in Electron). Handles keyboard shortcuts, brings up the UI and overlays.
+兩個部分,**互相依賴,缺一個都跑不起來**:
 
-Note that these 2 both depend on each other, and one cannot run without the other.
+- **renderer** —— Electron 容器內的 UI(Vue 3 + Vite)
+- **main** —— Electron 主行程,負責熱鍵、視窗、overlay、CORS proxy
 
-# How to develop
+⚠ **沒有根 `package.json`,這不是 npm workspace。** `main/` 與 `renderer/` 是兩個
+各自獨立的套件,所有指令都要在各自目錄下跑。
 
-The most up-to-date instructions can always be derived from CI:
-
-[.github/workflows/main.yml](https://github.com/SnosMe/awakened-poe-trade/blob/master/.github/workflows/main.yml)
-
-Here's what that looks like as of 2023-12-03.
+## 開發模式
 
 ```shell
 cd renderer
-yarn install
-yarn make-index-files
-yarn dev
+npm install
+npm run make-index-files
+npm run dev
 
-# In a second shell
+# 另開一個終端機
 cd main
-yarn install
-yarn dev
+npm install
+npm run dev
 ```
 
-# How to build
+⚠ 在 VSCode 的整合終端機裡,環境變數 `ELECTRON_RUN_AS_NODE=1` 會被子行程繼承,
+讓 `electron.exe` 退化成純 Node、不開視窗也不報錯。啟動前先清掉它。
+
+## 建置與打包
+
+```shell
+cd renderer && npm run make-index-files && npm run build
+cd ../main   && npm run build && npm run package
+```
+
+產物在 `main/dist/`。完整發布流程見 [docs/RELEASING.md](./docs/RELEASING.md)。
+
+---
+
+## 資料維護
 
 ```shell
 cd renderer
-yarn install
-yarn make-index-files
-yarn build
-
-cd ../main
-yarn build
-# We want to sign with a distribution certificate to ensure other users can
-# install without errors
-CSC_NAME="Certificate name in Keychain" yarn package
+npm run gen-disc-variants            # 乾跑,只報告差異
+npm run gen-disc-variants -- --write
+npm run make-index-files             # ⚠ 改過 ndjson 後**必須**重建索引
+npm run verify-datasets              # 檢查 en 與 cmn-Hant 的語言無關鍵是否對齊
 ```
+
+`gen-disc-variants` 會打國際服與台服的交易站 API,用語言無關的 `type` 欄對接,
+重新產生海圖區域與傭兵流派的 79 列變體。回應快取在 `.cache/`,新賽季重跑前先刪掉。
+
+驗證方式:帶 `--write` 跑完後 `git diff` 應為空 —— 它會逐位元組重現已入庫的資料。
+
+`ko` 與 `ru` 由上游社群維護,本專案原樣沿用,兩支腳本都不處理它們。
+
+---
+
+## ⚠ 遊戲改版時必做:更新版號
+
+Electron 把版號寫進 User-Agent,而 **GGG 的 Cloudflare 用它擋過舊的第三方工具**。
+卡的是 `major.minor` 必須等於**當前遊戲版本系列**:
+
+| UA 版號 | 結果 |
+|---|---|
+| `3.29.0` / `3.29.101` / `3.29.900` | 200 |
+| `3.0.0` / `0.1.0` | 403(太舊) |
+| `3.30.0` | 403(**比現行還新也擋**) |
+
+所以本專案用 `3.29.<我們的號>`,patch 從 **900** 起(避開上游的 1xx)。
+
+**遊戲上 3.30 而版號還停在 `3.29.x`,所有使用者會在改版當天同時被硬擋**,
+而且錯誤訊息完全不提版號 —— app 只會說「Failed to load leagues,可能要完成
+CAPTCHA」,內建瀏覽器顯示 Cloudflare 的「Sorry, you have been blocked」。
+
+```shell
+cd main && npm run check-user-agent
+```
+
+用開發模式與打包後兩種 UA 實打 GGG API,被擋就非零退出。**改版後第一件事就是跑它。**
+
+---
+
+## 同步上游
+
+```shell
+git fetch upstream
+git merge upstream/master
+```
+
+衝突只會出現在本專案改過的檔案。改完後務必:
+
+1. `npm run verify-datasets`
+2. `npm run check-user-agent`
+3. 實機測試(一般稀有物 + 海圖 + 傭兵契約書各查一次,結果數要收斂)
+
+⚠ 分支叫 `master` 不是 `main`,因為根目錄有個 `main/` 資料夾 —— 同名會讓
+`git log main` 之類的指令回 `ambiguous argument`。上游應該也是為了這個。
