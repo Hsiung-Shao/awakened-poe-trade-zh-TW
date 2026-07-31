@@ -1,5 +1,6 @@
 {
-  "name": "awakened-poe-trade-zh-tw",
+  "_comment_name": "改名請改 electron-builder.yml 的 productName/appId,不要動這裡:Electron 用 name 推導 %APPDATA%\\<name>,改掉會讓開發模式換到空目錄,症狀是 Failed to load leagues。",
+  "name": "awakened-poe-trade",
   "version": "0.1.0",
   "private": true,
   "scripts": {
