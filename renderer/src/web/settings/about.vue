@@ -107,8 +107,10 @@ export default defineComponent({
         case 'update-downloaded':
           return { str1: t('updates.available', [rawInfo.version]), str2: t('updates.installed_on_exit'), action: quitAndInstall, actionText: t('updates.install_now') }
         case 'update-available':
+          // 只有「使用者自己用 --no-updates 關掉」才說「你關閉了自動下載」;
+          // 其餘情況(含本專案恆為的 unsigned-build)一律引導去 GitHub 手動下載。
           return (rawInfo.noDownloadReason)
-            ? { str1: t('updates.available', [rawInfo.version]), str2: (rawInfo.noDownloadReason === 'not-supported') ? t('updates.download_manually') : t('updates.download_disabled'), action: openDownloadPage, actionText: t('updates.downloads_page') }
+            ? { str1: t('updates.available', [rawInfo.version]), str2: (rawInfo.noDownloadReason === 'disabled-by-flag') ? t('updates.download_disabled') : t('updates.download_manually'), action: openDownloadPage, actionText: t('updates.downloads_page') }
             : { str1: t('updates.available', [rawInfo.version]), str2: t('updates.downloading') }
       }
     })

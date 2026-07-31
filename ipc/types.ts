@@ -43,7 +43,13 @@ export type UpdateInfo =
   } | {
     state: 'update-available'
     version: string
-    noDownloadReason: 'not-supported' | 'disabled-by-flag' | null
+    /**
+     * `unsigned-build` 是本專案新增的:這裡沒有 code signing 憑證,所以
+     * 一律不自動下載安裝(見 main/src/AppUpdater.ts)。它與上游的
+     * `not-supported` 在 UI 上走同一條分支(「可從 GitHub 下載」),
+     * 但語意不同 —— 那是「平台不支援」,這是「我們刻意不做」。
+     */
+    noDownloadReason: 'not-supported' | 'disabled-by-flag' | 'unsigned-build' | null
   } | {
     state: 'update-downloaded'
     version: string
