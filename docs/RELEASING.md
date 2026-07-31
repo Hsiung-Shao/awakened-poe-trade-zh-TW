@@ -68,11 +68,37 @@ npm run verify-datasets          # en 與 cmn-Hant 的語言無關鍵必須對�
 npm run make-index-files         # 確保索引與 ndjson 同步
 ```
 
+```shell
+cd main
+npm run check-user-agent         # ⚠ 見下方,遊戲改版後這是最容易漏掉的一步
+```
+
 `main/package.json` 的 `version` 要 bump。**它是版本的唯一真值** ——
-About 頁、tray 提示、產物檔名、`latest.yml` 全部從它來。
+About 頁、tray 提示、產物檔名、`latest.yml`、**以及 User-Agent** 全部從它來。
 
 > ⚠ 版號必須比上一個 Release **大**。`electron-updater` 純比 semver,
 > 而且 `-rc.1` 這類 prerelease 標記排序**低於**同號正式版,不要拿來當後綴。
+
+> ### ⚠⚠ major.minor 不是我們能自由選的
+>
+> Electron 把版號寫進 User-Agent,而 **GGG 的 Cloudflare 用它擋過舊的第三方工具**。
+> 卡的是 `major.minor` 必須等於**當前遊戲版本系列**:
+>
+> | UA 版本 | 結果 |
+> |---|---|
+> | `3.29.0` / `3.29.101` / `3.29.900` | 200 |
+> | `3.0.0` / `0.1.0` | 403(太舊) |
+> | `3.30.0` | 403(**比現行還新也擋**) |
+>
+> 所以本專案用 `3.29.<我們的號>`,patch 從 **900** 起(避開上游的 1xx)。
+>
+> **遊戲改版到 3.30 時,沒跟著把版號改成 `3.30.9xx`,所有使用者會在改版當天
+> 同時失效。** 症狀極度誤導:app 說「Failed to load leagues,可能要完成 CAPTCHA」,
+> 內建瀏覽器顯示 Cloudflare 的「Sorry, you have been blocked」,兩者都不提版號;
+> 同一台機器用一般瀏覽器 UA 打同一個 API 卻是 200,很容易誤判成 IP 被封或 cookie 過期。
+>
+> `npm run check-user-agent` 會用**開發模式與打包後兩種 UA** 實打 GGG API,
+> 被擋就非零退出。改版後第一件事就是跑它。
 
 ### 2. 清空舊產物再打包
 

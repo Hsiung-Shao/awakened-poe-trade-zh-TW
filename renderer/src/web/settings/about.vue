@@ -56,10 +56,13 @@ const UPSTREAM_URL = 'https://github.com/SnosMe/awakened-poe-trade'
 /**
  * 上游的基準版本。**同步上游時要一起更新。**
  *
- * 本專案的版號(main/package.json)與上游脫鉤,從 0.1.0 起自成一序 ——
- * electron-updater 只跟本專案自己的 Release 比 semver,沿用上游號沒有意義,
- * 而且上游跳號時會反過來打結。代價是使用者看不出對應官方哪一版,
- * 所以在 About 頁把它標出來。
+ * 本專案的版號(main/package.json)只有 patch 段是自己的(900 起),
+ * major.minor 必須跟著遊戲版本系列走 —— 那不是慣例而是硬性限制,
+ * GGG 的 Cloudflare 會擋掉 major.minor 不符的 User-Agent。詳見
+ * scripts/check-user-agent.mjs。
+ *
+ * 因為版號的 patch 段與上游不同,使用者無從得知這份建置對應官方哪一版,
+ * 所以在 About 頁把上游基準標出來。
  */
 const UPSTREAM_VERSION = '3.29.102 (18a401e)'
 

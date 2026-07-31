@@ -9,7 +9,7 @@
 |---|---|
 | 上游專案 | [SnosMe/awakened-poe-trade](https://github.com/SnosMe/awakened-poe-trade) |
 | 上游基準版本 | 3.29.102(commit `18a401e`) |
-| 本版版號 | 0.1.0(**與上游脫鉤,自成一序**) |
+| 本版版號 | 3.29.900(patch 段自成一序,`major.minor` **必須**跟著遊戲版本走) |
 | 授權 | MIT |
 
 ---
@@ -148,6 +148,19 @@ git merge upstream/master
 ```
 
 衝突只會出現在本專案改過的檔案。改完後務必重跑 `verify-datasets` 與實機測試。
+
+### ⚠ 遊戲改版時必做:更新版號
+
+Electron 把版號寫進 User-Agent,**GGG 的 Cloudflare 用它擋過舊的第三方工具**,
+卡的是 `major.minor` 必須等於當前遊戲版本系列。遊戲上 3.30 而版號還停在 `3.29.x`
+的話,**所有使用者會在改版當天同時被硬擋**,而且錯誤訊息完全不會提到版號。
+
+```shell
+cd main && npm run check-user-agent
+```
+
+這支會用開發模式與打包後兩種 UA 實打 GGG API,被擋就非零退出。
+細節與實測數據見 [docs/RELEASING.md](./docs/RELEASING.md)。
 
 ---
 
