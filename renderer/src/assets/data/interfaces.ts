@@ -71,6 +71,16 @@ export interface BaseType {
   tradeTag?: string
   exchangeable?: true
   tradeDisc?: string
+  // Internal trade type id, e.g. `BrineKingsDomain` for a chart area or
+  // `MiscScionWandAttacks` for a mercenary build.
+  //
+  // Most items can be searched by their display name, because that is what the
+  // trade API puts in the `type` field. Charts and Mercenary Warrants are the
+  // exception — their variants are separate searchable types whose `type` field
+  // holds a language-invariant internal id, with the display name in `text`:
+  //   {"type":"BrineKingsDomain","text":"Coral Reef Chart (Brine King's Domain)","disc":"chart_coral_reef"}
+  // Sending the display name for those never matches anything.
+  tradeType?: string
   disc?: {
     propAR?: true
     propEV?: true
@@ -174,6 +184,16 @@ export interface TranslationDict {
   QUALITY_DIVERGENT: RegExp
   QUALITY_PHANTASMAL: RegExp
   AREA_LEVEL: string
+  /**
+   * 同一個英文標籤 `Area Level: ` 的第二種在地化寫法。
+   *
+   * 繁中客戶端對這個欄位用了**兩個不同的詞**:Heist / Expedition 系用
+   * 「地區等級: 」,海圖與聖域研究用「區域等級: 」。上游只收了前者,
+   * 於是後兩類物品的 areaLevel 永遠讀不到。
+   *
+   * 沒有第二種寫法的語系不必提供。
+   */
+  AREA_LEVEL_ALT?: string
   HEIST_WINGS_REVEALED: string
   HEIST_BLUEPRINT_TARGET: string
   HEIST_BLUEPRINT_ENCHANTS: string

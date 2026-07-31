@@ -408,6 +408,19 @@ export function createFilters (
     }
   }
 
+  // Charts and Mercenary Warrants are searched by an internal type id rather
+  // than by their display name — see `BaseType.tradeType`. Both already got a
+  // `searchExact` from the branches above; only the trade-side value is wrong,
+  // so this overrides that one field instead of duplicating those branches.
+  //
+  // Without this, a Mercenary Warrant search returns every warrant in the game
+  // (10000+ results, all at the minimum price) because the build is not part of
+  // the query at all, and a Chart search ignores which area it maps to.
+  if (item.info.tradeType && item.info.tradeDisc) {
+    filters.searchExact.baseTypeTrade = item.info.tradeType
+    filters.discriminator = { trade: item.info.tradeDisc }
+  }
+
   return filters
 }
 

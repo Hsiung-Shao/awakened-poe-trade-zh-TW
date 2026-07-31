@@ -66,6 +66,10 @@ export default {
   QUALITY_DIVERGENT: /^相異的 (.*)$/,
   QUALITY_PHANTASMAL: /^幻影的 (.*)$/,
   AREA_LEVEL: '地區等級: ',
+  // 同一個英文標籤 `Area Level: ` 的第二種繁中寫法。
+  // Heist / Expedition 系用「地區等級」,海圖與聖域研究用「區域等級」。
+  // 上游只收了前者,導致後兩類物品的 areaLevel 永遠讀不到。
+  AREA_LEVEL_ALT: '區域等級: ',
   HEIST_WINGS_REVEALED: '已揭露側廂: ',
   HEIST_BLUEPRINT_TARGET: '劫盜目標：',
   HEIST_BLUEPRINT_ENCHANTS: '附魔裝備',

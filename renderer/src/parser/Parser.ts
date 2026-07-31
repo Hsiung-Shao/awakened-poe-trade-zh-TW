@@ -5,14 +5,14 @@ import {
   ITEM_BY_REF,
   STAT_BY_MATCH_STR,
   StatBetter,
-  BaseType
+  type BaseType
 } from '@/assets/data'
 import { ModifierType, sumStatsByModType } from './modifiers'
 import { linesToStatStrings, tryParseTranslation, getRollOrMinmaxAvg } from './stat-translations'
 import { ItemCategory, ACCESSORY } from './meta'
-import { IncursionRoom, ParsedItem, ItemInfluence, ItemRarity } from './ParsedItem'
+import { IncursionRoom, type ParsedItem, ItemInfluence, ItemRarity } from './ParsedItem'
 import { magicBasetype } from './magic-name'
-import { isModInfoLine, groupLinesByMod, parseModInfoLine, parseModType, ModifierInfo, ParsedModifier, ENCHANT_LINE, SCOURGE_LINE, IMPLICIT_LINE } from './advanced-mod-desc'
+import { isModInfoLine, groupLinesByMod, parseModInfoLine, parseModType, type ModifierInfo, type ParsedModifier, ENCHANT_LINE, SCOURGE_LINE, IMPLICIT_LINE } from './advanced-mod-desc'
 import { calcPropPercentile, QUALITY_STATS } from './calc-q20'
 
 type SectionParseResult =
@@ -22,6 +22,14 @@ type SectionParseResult =
 
 type ParserFn = (section: string[], item: ParserState) => SectionParseResult
 type VirtualParserFn = (item: ParserState) => Result<never, string> | void
+/**
+ * 能看到「目前為止沒有任何 parser 認領的 section」的處理階段。
+ *
+ * 上游沒有這個機制:section 若沒被認領就直接消失。但規格 §6.2 要求
+ * 「未知資料不得靜默丟棄」,而實測繁中 corpus 裡確實有整段詞綴被丟掉的案例。
+ * 可就地從 `sections` 移除已消化的項目。
+ */
+type LeftoverParserFn = (sections: string[][], item: ParserState) => void
 
 interface ParserState extends ParsedItem {
   name: string
@@ -29,7 +37,9 @@ interface ParserState extends ParsedItem {
   infoVariants: BaseType[]
 }
 
-const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
+const parsers: Array<
+  ParserFn | { virtual: VirtualParserFn } | { leftovers: LeftoverParserFn }
+> = [
   parseUnidentified,
   { virtual: parseSuperior },
   { virtual: parseFoulborn },
@@ -57,6 +67,7 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
   parseSockets,
   parseHeistContract,
   parseHeistBlueprint,
+  parseChart,
   parseAreaLevel,
   parseAtzoatlRooms,
   parseMirroredTablet,
@@ -71,6 +82,7 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
   parseModifiers, // scourge
   parseModifiers, // implicit
   parseModifiers, // explicit
+  { leftovers: parseUnannotatedModifiers },
   { virtual: transformToLegacyModifiers },
   { virtual: parseFractured },
   { virtual: parseBlightedMap },
@@ -80,7 +92,7 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
 
 export function parseClipboard (clipboard: string): Result<ParsedItem, string> {
   try {
-    let sections = itemTextToSections(clipboard)
+    let sections = itemTextToSections(normalizeLabelPunctuation(clipboard))
 
     if (sections[0][2] === _$.CANNOT_USE_ITEM) {
       sections[0].pop() // remove CANNOT_USE_ITEM line
@@ -95,6 +107,10 @@ export function parseClipboard (clipboard: string): Result<ParsedItem, string> {
 
     // each section can be parsed at most by one parser
     for (const parser of parsers) {
+      if (typeof parser === 'object' && 'leftovers' in parser) {
+        parser.leftovers(sections, parsed.value)
+        continue
+      }
       if (typeof parser === 'object') {
         const error = parser.virtual(parsed.value)
         if (error) return error
@@ -113,10 +129,73 @@ export function parseClipboard (clipboard: string): Result<ParsedItem, string> {
     }
     return Object.freeze(parsed)
   } catch (e) {
-    console.log(e)
-    return err('item.parse_error')
+    // 上游只回一個沒有內容的 `item.parse_error`,並把例外丟進 console.log。
+    // 結果是使用者只看得到「解析時發生錯誤」,連回報都不知道要附什麼
+    // (上游 issue #1869 就卡在這裡)。把例外訊息帶進錯誤字串,
+    // UI 的未知詞綴回報鈕才有東西可以附。
+    const detail = e instanceof Error ? `${e.name}: ${e.message}` : String(e)
+    return err(`item.parse_error: ${detail}`)
   }
 }
+
+/**
+ * 行首標籤的標點正規化 —— **上游沒有這段**。
+ *
+ * `client_strings` 裡的分段標籤都是半形冒號加空格(`'物品種類: '`、`'護甲: '`),
+ * 而 `parseNamePlate` 等處用 `line.startsWith(_$.ITEM_CLASS)` 精確比對。
+ *
+ * 但實測繁中客戶端存在**兩種標點慣例**:
+ *
+ *     物品種類: 手套     ← 半形冒號 + 空格(本專案 corpus 的樣本)
+ *     物品種類：鞋子     ← 全形冒號、無空格(上游 issue #1869 的回報)
+ *
+ * 後者連第一行都比對不到,直接回 `item.parse_error` —— 那個 issue 至今未解,
+ * 維護者宣稱修好但使用者持續回報。甚至同一份文字裡也會混用
+ * (使用者的樣本中 `物品種類: ` 是半形而 `怪物等級：` 是全形)。
+ *
+ * 做法:從 `CLIENT_STRINGS` 自動導出每個標籤的全形寫法,只在**行首**做替換。
+ * 刻意不做全文 `：` → `: ` 取代 —— 詞綴標註行裡的 `(階層：8)` 會被毀掉,
+ * 而那個位置兩種客戶端本來就都是全形,不需要動。
+ */
+function normalizeLabelPunctuation (text: string): string {
+  const dict = _$ as unknown as Record<string, unknown>
+  /** 全形寫法 → 正規寫法。例:`物品種類：` → `物品種類: ` */
+  const variants: Array<[string, string]> = []
+  for (const key of Object.keys(dict)) {
+    const value = dict[key]
+    if (typeof value !== 'string') continue
+    if (!value.endsWith(': ')) continue
+    variants.push([value.slice(0, -2) + '：', value])
+  }
+  if (variants.length === 0) return text
+
+  // 長的優先,避免短標籤先命中而截斷長標籤(「等級: 」vs「物品等級: 」)
+  variants.sort((a, b) => b[0].length - a[0].length)
+
+  return text.split('\n').map(line => {
+    for (const [fullwidth, canonical] of variants) {
+      if (line.startsWith(fullwidth)) {
+        return canonical + line.slice(fullwidth.length)
+      }
+    }
+    return line
+  }).join('\n')
+}
+
+/**
+ * 分隔線判定。
+ *
+ * ⚠ **這裡刻意偏離上游。** APT 的原始寫法是 `if (line !== '--------')`,嚴格比對
+ * 8 個 dash。但實測繁體中文客戶端(國際服,3.29 Allflame)吐出的分隔線是**變長的**
+ * —— 長度等於前一行的顯示寬度(CJK 字元算 2 欄)。實測樣本 260 條分隔線裡,
+ * 258 條(99.2%)符合這個規律,只有 31 條剛好是 8 個 dash。
+ *
+ * 沿用上游寫法的話,整份物品文字會被當成單一 section,**每一件物品都解析失敗**。
+ *
+ * 改成「整行只有 3 個以上 dash」即視為分隔線,對 8-dash 與變長兩種格式都成立;
+ * 物品文字裡不存在合法的純 dash 內容行,所以不會誤判。
+ */
+const SECTION_SEPARATOR = /^-{3,}$/
 
 function itemTextToSections (text: string) {
   const lines = text.split(/\r?\n/)
@@ -126,7 +205,7 @@ function itemTextToSections (text: string) {
 
   const sections: string[][] = [[]]
   lines.reduce((section, line) => {
-    if (line !== '--------') {
+    if (!SECTION_SEPARATOR.test(line)) {
       section.push(line)
       return section
     } else {
@@ -134,8 +213,29 @@ function itemTextToSections (text: string) {
       sections.push(section)
       return section
     }
-  }, sections[0])
-  return sections.filter(section => section.length)
+  }, sections[0]!)
+  return sections.map(trimBlankEdges).filter(section => section.length)
+}
+
+/**
+ * 剝除 section 前後的空行。
+ *
+ * ⚠ **這裡也偏離上游。** 進階格式在每條分隔線後面會多一個空行,於是 section 的
+ * 第一行是空字串。大量 section parser 是用 `section[0] === _$.某欄位` 判斷的
+ * (例如 `parseUnidentified` 比對「未鑑定」),空行會讓它們全部落空。
+ *
+ * 實例:未鑑定的傳奇地圖 —— `isUnidentified` 沒被設起來,於是走到
+ * 「傳奇且已鑑定」的分支去 UNIQUE 命名空間查基底名,查不到就回 `item.unknown`。
+ *
+ * **只剝前後、不動內部空行**:沒有 `{ 前綴 … }` 標註的物品(例如破裂的腰帶)
+ * 是靠內部空行分隔各條詞綴的,把它們一起清掉會讓多行詞綴黏成一條。
+ */
+function trimBlankEdges (section: string[]): string[] {
+  let start = 0
+  let end = section.length
+  while (start < end && section[start]!.trim() === '') start += 1
+  while (end > start && section[end - 1]!.trim() === '') end -= 1
+  return section.slice(start, end)
 }
 
 function normalizeName (item: ParserState) {
@@ -218,6 +318,9 @@ function findInDatabase (item: ParserState) {
         item.info.unique.base)![0].craftable!.category
     }
   }
+  // noImplicitReturns:此函式在失敗時回 err(...),成功則回 undefined。
+  // 原本靠隱含 undefined,這裡寫明,行為不變。
+  return undefined
 }
 
 function parseMapTier (item: ParserState) {
@@ -955,11 +1058,72 @@ function parseHeistBlueprint (section: string[], item: ParsedItem) {
   return 'SECTION_PARSED'
 }
 
+/**
+ * 海圖(Chart)—— 3.29 Allflame 聯盟的新物品類別。
+ *
+ * 取自上游**尚未合併**的 PR #1884(closes #1872):
+ *   https://github.com/SnosMe/awakened-poe-trade/pull/1884
+ * 該 PR 於 2026-07-28 被關閉但 `merged: false`,所以上游至今不支援海圖 ——
+ * master 最新的 `18a401e`(2026-07-27)與已發布的 v3.29.102 裡都沒有這三個基底。
+ *
+ * 這正是規格 §3.2 說的「新增物品類別」:每季幾乎必定發生、影響**程式碼**、
+ * 永遠無法自動化。所以它需要的是三樣東西一起到位 ——
+ * `ItemCategory.Chart`(meta.ts)、這支 section parser、以及 items/stats 的資料列。
+ */
+function parseChart (section: string[], item: ParsedItem) {
+  if (item.category !== ItemCategory.Chart) return 'PARSER_SKIPPED'
+
+  parseAreaLevelNested(section, item)
+  if (!item.areaLevel) {
+    return 'SECTION_SKIPPED'
+  }
+
+  // 海圖詞綴給的獎勵是彙總在同一個 section 裡的,而且沿用地圖的屬性行字串
+  if (!item.map) {
+    item.map = { tier: undefined }
+  }
+  for (const line of section) {
+    if (line.startsWith(_$.MAP_ITEM_QUANTITY)) {
+      item.map.itemQuantity = parseInt(line.slice(_$.MAP_ITEM_QUANTITY.length), 10)
+    } else if (line.startsWith(_$.MAP_ITEM_RARITY)) {
+      item.map.itemRarity = parseInt(line.slice(_$.MAP_ITEM_RARITY.length), 10)
+    } else if (line.startsWith(_$.MAP_MONSTER_PACK_SIZE)) {
+      item.map.packSize = parseInt(line.slice(_$.MAP_MONSTER_PACK_SIZE.length), 10)
+    }
+  }
+
+  return 'SECTION_PARSED'
+}
+
+/**
+ * 區域等級的標籤 —— **上游只認一種寫法,這裡兩種都認。**
+ *
+ * 英文只有一個 `Area Level: `,但繁中客戶端**用了兩個不同的詞來翻它**:
+ *
+ *   地區等級:    藍圖、契約書、探險日誌(Heist / Expedition 系)
+ *   區域等級:    海圖、聖域研究
+ *
+ * `client_strings` 只收了前者,所以海圖與聖域研究的 `areaLevel` 永遠是 undefined ——
+ * 海圖甚至因此讓 `parseChart` 一開始就 return,整段獎勵屬性跟著遺失。
+ *
+ * 第二種寫法放在資料檔的 `AREA_LEVEL_ALT`(規格 §3.4:parser 程式碼內不得有中文
+ * 字面量,措辭一律留在資料層)。沒有第二種寫法的語系不必提供該欄位。
+ */
+function areaLevelLabels (): string[] {
+  const labels = [_$.AREA_LEVEL]
+  if (_$.AREA_LEVEL_ALT !== undefined && _$.AREA_LEVEL_ALT.length > 0) {
+    labels.push(_$.AREA_LEVEL_ALT)
+  }
+  return labels
+}
+
 function parseAreaLevelNested (section: string[], item: ParsedItem) {
   for (const line of section) {
-    if (line.startsWith(_$.AREA_LEVEL)) {
-      item.areaLevel = Number(line.slice(_$.AREA_LEVEL.length))
-      break
+    for (const label of areaLevelLabels()) {
+      if (line.startsWith(label)) {
+        item.areaLevel = Number(line.slice(label.length))
+        return
+      }
     }
   }
 }
@@ -969,7 +1133,9 @@ function parseAreaLevel (section: string[], item: ParsedItem) {
     item.info.refName !== 'Chronicle of Atzoatl' &&
     item.info.refName !== 'Expedition Logbook' &&
     item.info.refName !== 'Mirrored Tablet' &&
-    item.info.refName !== 'Forbidden Tome'
+    item.info.refName !== 'Forbidden Tome' &&
+    // 海圖由 parseChart 處理,但它若因故沒認領到 section,這裡當備援
+    item.category !== ItemCategory.Chart
   ) return 'PARSER_SKIPPED'
 
   parseAreaLevelNested(section, item)
@@ -1064,6 +1230,97 @@ function markupConditionParser (text: string) {
   })
 
   return text
+}
+
+/**
+ * 沒有 `{ … }` 標註的詞綴區塊 —— **上游沒有這段,是本專案新增的**。
+ *
+ * `parseModifiers` 只認三種標記:`{ 前綴 "…"(階層:N) }` 標註行、` (enchant)`、
+ * ` (scourge)`。都沒有的 section 直接 `SECTION_SKIPPED`,而未被任何 parser 認領
+ * 的 section 會在 pipeline 結束後**無聲消失**。
+ *
+ * 實測繁中 corpus 裡兩種形態同時存在:
+ *   - 胸甲、法杖、手套的詞綴**有**標註
+ *   - 腰帶、藥劑的詞綴**沒有**標註(但一樣帶 `(min-max)` roll 區間)
+ *   - 一般 implicit(非異界/亡焰那種)一律沒有標註
+ *
+ * 於是破裂腰帶整整 7 條詞綴、法杖的 implicit 全部被丟掉,而且
+ * `unknownModifiers` 是空的 —— 使用者完全看不出東西掉了。規格 §6.2 明令禁止。
+ *
+ * 型別判定規則(可由 corpus 回測):
+ *   - 已經解析到帶標註的詞綴 → 剩下的 mod-like section 是 implicit
+ *     (標註只出現在詞綴上,implicit 不會有)
+ *   - 完全沒有帶標註的詞綴 → 有兩段以上時第一段是 implicit,其餘 explicit;
+ *     只有一段就全部視為 explicit
+ */
+function parseUnannotatedModifiers (sections: string[][], item: ParserState): void {
+  if (
+    item.rarity !== ItemRarity.Normal &&
+    item.rarity !== ItemRarity.Magic &&
+    item.rarity !== ItemRarity.Rare &&
+    item.rarity !== ItemRarity.Unique
+  ) return
+
+  const modLike = sections.filter(section => countRecognizedStats(section, item) > 0)
+  if (modLike.length === 0) return
+
+  // 只有真的來自 `{ 前綴 "…"(階層:N) }` 的詞綴才算「已標註」——
+  // 它們一定帶 name 或 tier。`(enchant)` / `(scourge)` 雖然也被 parseModifiers 認得,
+  // 但那不是詞綴標註,把它算進來會讓藥劑的詞綴被誤判成 implicit,
+  // 而 `tryParseTranslation` 對 implicit 查不到那些 stat(trade.ids 沒有 implicit 這個鍵),
+  // 結果整條掉進 unknownModifiers。
+  const hasAnnotatedMods = item.newMods.some(
+    mod => mod.info.name !== undefined || mod.info.tier !== undefined)
+
+  modLike.forEach((section, index) => {
+    const type = hasAnnotatedMods
+      ? ModifierType.Implicit
+      : (modLike.length >= 2 && index === 0)
+          ? ModifierType.Implicit
+          : ModifierType.Explicit
+
+    // 沒有標註時,詞綴之間是用空行分隔的(一條詞綴可能有多行 stat)
+    for (const group of splitByBlankLines(section)) {
+      parseStatsFromMod(group, item, { info: { type, tags: [] }, stats: [] })
+    }
+
+    const at = sections.indexOf(section)
+    if (at !== -1) sections.splice(at, 1)
+  })
+}
+
+/** 這個 section 有幾行能被辨識成已知詞綴?用來區分「詞綴區塊」與敘述文字。 */
+function countRecognizedStats (section: string[], item: ParsedItem): number {
+  const lines = section.filter(line => line.trim().length > 0)
+  if (lines.length === 0) return 0
+
+  let count = 0
+  const iterator = linesToStatStrings(lines)
+  let current = iterator.next()
+  while (!current.done) {
+    const parsedStat = tryParseTranslation(current.value, ModifierType.Explicit, item.category)
+    if (parsedStat) {
+      count += 1
+      current = iterator.next(true)
+    } else {
+      current = iterator.next(false)
+    }
+  }
+  return count
+}
+
+function splitByBlankLines (section: string[]): string[][] {
+  const groups: string[][] = []
+  let group: string[] = []
+  for (const line of section) {
+    if (line.trim() === '') {
+      if (group.length > 0) { groups.push(group); group = [] }
+    } else {
+      group.push(line)
+    }
+  }
+  if (group.length > 0) groups.push(group)
+  return groups
 }
 
 function parseStatsFromMod (lines: string[], item: ParsedItem, modifier: ParsedModifier) {
