@@ -36,7 +36,7 @@
 - ☑ Block force pushes
 
 **這條最重要。** 沒有它,已發布版本的 tag 可以被刪掉再指向另一個 commit,
-使用者跑 `git verify-tag v0.1.0` 驗到的會是攻擊者的版本。
+使用者跑 `git verify-tag v3.29.900` 驗到的會是攻擊者的版本。
 
 ### 4. Immutable releases(若設定裡有這個選項)
 
@@ -120,10 +120,10 @@ cd main && npm run checksums -- --write
 ### 4. 簽章的 tag
 
 ```shell
-git tag -s v0.1.0 -m "Awakened PoE Trade-zh-TW 0.1.0"
+git tag -s v3.29.900 -m "Awakened PoE Trade-zh-TW 3.29.900"
 git push origin main
-git push origin v0.1.0
-git verify-tag v0.1.0            # 自己先驗一次
+git push origin v3.29.900
+git verify-tag v3.29.900            # 自己先驗一次
 ```
 
 ⚠ `git tag` 預設是**字串排序**,`v0.10.0` 會排在 `v0.9.0` 前面。
