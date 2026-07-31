@@ -35,7 +35,7 @@ const UPDATE_MANIFEST = /^latest(-linux|-mac)?\.yml$/
 const IGNORED = [
   /^(main|vision)\.js(\.map)?$/, // esbuild 輸出,會被包進 exe
   /\.blockmap$/, // electron-builder 的差分更新索引,隨 exe 重算
-  /^builder-(debug|effective-config)\.yaml$/,
+  /^builder-(debug|effective-config)\.ya?ml$/, // 實際副檔名是 .yml,不是 .yaml
   /-unpacked$/,
   /^\.icon-(ico|icns)$/,
   /^mac(-arm64)?$/
@@ -98,6 +98,26 @@ if (hashed.length === 0) {
   process.exit(1)
 }
 
+// 斷言三:`latest.yml` 引用的檔名必須與實際上傳的一致。
+//
+// electron-builder 產出的檔名帶空格(`Awakened PoE Trade-zh-TW Setup 3.29.900.exe`),
+// 但它寫進 latest.yml 的 url 是把空格換成連字號的版本 —— 那是它自己上傳時會用的名字。
+// 我們手動建立 Release,GitHub 又會把檔名裡的空格換成**點**,三邊互不相同。
+// 更新器讀 latest.yml 找不到對應 asset 就會失敗,而且是安靜地失敗。
+const latestYml = entries.find(e => e.isFile() && UPDATE_MANIFEST.test(e.name))
+const renames = []
+if (latestYml !== undefined) {
+  const yml = fs.readFileSync(path.join(DIST, latestYml.name), 'utf8')
+  const referenced = [...yml.matchAll(/^\s*(?:-\s*url|path):\s*(.+?)\s*$/gm)].map(m => m[1])
+  for (const { name } of hashed) {
+    if (!DISTRIBUTABLE.test(name)) continue
+    const asUploaded = name.replace(/ /g, '-')
+    if (referenced.includes(asUploaded) && asUploaded !== name) {
+      renames.push({ from: name, to: asUploaded })
+    }
+  }
+}
+
 const body = [
   `# Awakened PoE Trade-zh-TW ${VERSION}`,
   '#',
@@ -112,6 +132,12 @@ const body = [
 ].join('\n')
 
 console.log(body)
+
+if (renames.length > 0) {
+  console.log('⚠ 上傳前必須改名,否則 latest.yml 指向的 asset 不存在,更新檢查會安靜地失敗:')
+  for (const r of renames) console.log(`    "${r.from}"\n  → ${r.to}`)
+  console.log('')
+}
 
 if (process.argv.includes('--write')) {
   const out = path.join(DIST, `SHA256SUMS-${VERSION}.txt`)

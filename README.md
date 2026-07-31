@@ -61,7 +61,15 @@
 到 [Releases](https://github.com/Hsiung-Shao/awakened-poe-trade-zh-TW/releases) 下載,
 有安裝版(`.exe`)與免安裝版(portable)兩種。
 
-可以和官方版**同時安裝** —— 兩者的安裝目錄、登錄檔項目與設定目錄都是分開的。
+可以和官方版**同時安裝**:安裝目錄與解除安裝項目是分開的(靠 `productName` 與 `appId`)。
+
+⚠ 但**設定目錄是共用的**(兩者都是 `%APPDATA%\awakened-poe-trade`)。這代表:
+
+- 從官方版換過來時,**聯盟選擇、熱鍵、登入狀態會自動沿用**,不必重設
+- 但兩個版本**不要同時執行** —— 它們會搶同一個設定檔與同一個本機連接埠
+
+原因是 Electron 的 `app.getName()` 取的是 `package.json` 的 `name`,而 electron-builder
+不會把 `productName` 寫進打包後的 metadata。這是**刻意保留**的行為,讓使用者無痛接續。
 
 ### ⚠ 安裝檔沒有數位簽章
 
