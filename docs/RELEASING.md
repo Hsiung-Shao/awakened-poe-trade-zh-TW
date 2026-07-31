@@ -148,7 +148,38 @@ Release 說明裡要放雜湊值本身,不要只放檔案連結 —— 使用者
 sha256sum <下載回來的檔>
 ```
 
-再用舊版本跑一次「檢查更新」,確認能看到新 Release。
+#### 怎麼實測「檢查更新」
+
+⚠ **開發模式測不出來。** electron-updater 會直接跳過:
+
+```
+Skip checkForUpdates because application is not packed and dev update config is not forced
+```
+
+要測就得跑**打包後**的執行檔,而且版本要比 Release 舊:
+
+1. 暫時把 `main/package.json` 的 version 調低一階(例如 `3.29.899`)
+2. `npm run build && npm run package`,執行產生的 portable exe
+3. 查詢 app 自己的狀態端點 —— 它直接回報更新器狀態,不必看 UI:
+
+```powershell
+# 打包版的 port 是隨機的(開發模式才固定 8584),先找出來
+$pids = (Get-Process | Where-Object { $_.ProcessName -match 'Awakened' }).Id
+$port = (Get-NetTCPConnection -State Listen | Where-Object { $pids -contains $_.OwningProcess }).LocalPort
+(Invoke-WebRequest "http://127.0.0.1:$port/config" -UseBasicParsing).Content | ConvertFrom-Json
+```
+
+期望結果:
+
+```json
+{ "state": "update-available", "version": "3.29.900", "noDownloadReason": "unsigned-build" }
+```
+
+4. **確認沒有自動下載**:`%LOCALAPPDATA%\awakened-poe-trade-updater` 必須不存在
+   或為空。裡面有 `installer.exe` 就代表 autoDownload 沒關掉。
+   ⚠ 該目錄可能有**官方版 APT** 留下的舊檔(兩者共用 app 名稱),測試前先清空,
+   否則會把別人的殘留當成我們自動下載的證據。
+5. 測完把版本改回去,並清掉 `main/dist`
 
 ---
 

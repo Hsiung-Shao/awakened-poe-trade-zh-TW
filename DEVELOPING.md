@@ -27,6 +27,13 @@ npm run dev
 ⚠ 在 VSCode 的整合終端機裡,環境變數 `ELECTRON_RUN_AS_NODE=1` 會被子行程繼承,
 讓 `electron.exe` 退化成純 Node、不開視窗也不報錯。啟動前先清掉它。
 
+⚠ **`npm run dev` 與 `npm run build` 不能混用。** `build/script.mjs` 靠 `--prod`
+決定畫面從哪來:開發模式指向 Vite dev server(`VITE_DEV_SERVER_URL`),正式模式
+改讀磁碟上的 `main/dist/index.html` —— 那個檔案只有 electron-builder 打包時才會放進去。
+跑了 `npm run build` 之後再直接啟動 Electron,會得到
+`ENOENT: no such file or directory, open '...\main\dist\index.html'`。
+要回到開發模式就重跑 `npm run dev`。
+
 ## 建置與打包
 
 ```shell
