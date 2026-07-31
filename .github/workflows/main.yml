@@ -6,10 +6,13 @@
 # 少一個能寫入 Release 的自動化路徑,就少一條竄改路徑。
 name: Build
 
+# 分支叫 master 而不是 main,是因為 repo 根目錄有個 `main/` 資料夾 ——
+# 兩者同名會讓 `git log main` 之類的指令回 "ambiguous argument"。上游用 master
+# 應該也是同一個原因。
 on:
   push:
     branches:
-      - 'main'
+      - 'master'
     tags-ignore:
       - '**'
     paths-ignore:
