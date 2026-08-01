@@ -5121,3 +5121,205 @@
 {"name":"Vaal Scouting Report","refName":"Vaal Scouting Report","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
 {"name":"Veiled Scarab","refName":"Veiled Scarab","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
 {"name":"Whispering Incubator","refName":"Whispering Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"Amplification Rod","refName":"Amplification Rod","namespace":"UNIQUE","unique":{"base":"Spiraled Wand"},"icon":"","src":"zh-tw-missing"}
+{"name":"Anatomical Knowledge","refName":"Anatomical Knowledge","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Ancient Waystones","refName":"Ancient Waystones","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Angler's Plait","refName":"Angler's Plait","namespace":"UNIQUE","unique":{"base":"Unset Ring"},"icon":"","src":"zh-tw-missing"}
+{"name":"Apparitions","refName":"Apparitions","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Asenath's Chant","refName":"Asenath's Chant","namespace":"UNIQUE","unique":{"base":"Iron Circlet"},"icon":"","src":"zh-tw-missing"}
+{"name":"Ashes of the Sun","refName":"Ashes of the Sun","namespace":"UNIQUE","unique":{"base":"Driftwood Club"},"icon":"","src":"zh-tw-missing"}
+{"name":"Assassin's Haste","refName":"Assassin's Haste","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Atziri's Mirror","refName":"Atziri's Mirror","namespace":"UNIQUE","unique":{"base":"Golden Buckler"},"icon":"","src":"zh-tw-missing"}
+{"name":"Blood of Summer","refName":"Blood of Summer","namespace":"UNIQUE","unique":{"base":"Rusted Sword"},"icon":"","src":"zh-tw-missing"}
+{"name":"Blood Sacrifice","refName":"Blood Sacrifice","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Brawn","refName":"Brawn","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Brittle Barrier","refName":"Brittle Barrier","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Broadstroke","refName":"Broadstroke","namespace":"UNIQUE","unique":{"base":"Heavy Quiver"},"icon":"","src":"zh-tw-missing"}
+{"name":"Chaber Cairn","refName":"Chaber Cairn","namespace":"UNIQUE","unique":{"base":"Great Mallet"},"icon":"","src":"zh-tw-missing"}
+{"name":"Cheap Construction","refName":"Cheap Construction","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Chitus' Needle","refName":"Chitus' Needle","namespace":"UNIQUE","unique":{"base":"Elegant Foil"},"icon":"","src":"zh-tw-missing"}
+{"name":"Clear Mind","refName":"Clear Mind","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Coated Shrapnel","refName":"Coated Shrapnel","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Cold Steel","refName":"Cold Steel","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Collateral Damage","refName":"Collateral Damage","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Combustibles","refName":"Combustibles","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Conqueror's Efficiency","refName":"Conqueror's Efficiency","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Conqueror's Longevity","refName":"Conqueror's Longevity","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Conqueror's Potency","refName":"Conqueror's Potency","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Corona Solaris","refName":"Corona Solaris","namespace":"UNIQUE","unique":{"base":"Crystal Wand"},"icon":"","src":"zh-tw-missing"}
+{"name":"Corrupted Energy","refName":"Corrupted Energy","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Cragfall","refName":"Cragfall","namespace":"UNIQUE","unique":{"base":"Serrated Arrow Quiver"},"icon":"","src":"zh-tw-missing"}
+{"name":"Crystal Vault","refName":"Crystal Vault","namespace":"UNIQUE","unique":{"base":"Latticed Ringmail"},"icon":"","src":"zh-tw-missing"}
+{"name":"Death's Opus","refName":"Death's Opus","namespace":"UNIQUE","unique":{"base":"Death Bow"},"icon":"","src":"zh-tw-missing"}
+{"name":"Deidbellow","refName":"Deidbellow","namespace":"UNIQUE","unique":{"base":"Gilded Sallet"},"icon":"","src":"zh-tw-missing"}
+{"name":"Demigod's Authority","refName":"Demigod's Authority","namespace":"UNIQUE","unique":{"base":"Golden Blade"},"icon":"","src":"zh-tw-missing"}
+{"name":"Demigod's Beacon","refName":"Demigod's Beacon","namespace":"UNIQUE","unique":{"base":"Golden Flame"},"icon":"","src":"zh-tw-missing"}
+{"name":"Demigod's Bounty","refName":"Demigod's Bounty","namespace":"UNIQUE","unique":{"base":"Golden Obi"},"icon":"","src":"zh-tw-missing"}
+{"name":"Demigod's Dominance","refName":"Demigod's Dominance","namespace":"UNIQUE","unique":{"base":"Golden Mantle"},"icon":"","src":"zh-tw-missing"}
+{"name":"Demigod's Eye","refName":"Demigod's Eye","namespace":"UNIQUE","unique":{"base":"Golden Hoop"},"icon":"","src":"zh-tw-missing"}
+{"name":"Demigod's Immortality","refName":"Demigod's Immortality","namespace":"UNIQUE","unique":{"base":"Golden Visage"},"icon":"","src":"zh-tw-missing"}
+{"name":"Demigod's Presence","refName":"Demigod's Presence","namespace":"UNIQUE","unique":{"base":"Gold Amulet"},"icon":"","src":"zh-tw-missing"}
+{"name":"Demigod's Stride","refName":"Demigod's Stride","namespace":"UNIQUE","unique":{"base":"Golden Caligae"},"icon":"","src":"zh-tw-missing"}
+{"name":"Demigod's Touch","refName":"Demigod's Touch","namespace":"UNIQUE","unique":{"base":"Golden Bracers"},"icon":"","src":"zh-tw-missing"}
+{"name":"Demigod's Triumph","refName":"Demigod's Triumph","namespace":"UNIQUE","unique":{"base":"Golden Wreath"},"icon":"","src":"zh-tw-missing"}
+{"name":"Divine Inferno","refName":"Divine Inferno","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Doedre's Malevolence","refName":"Doedre's Malevolence","namespace":"UNIQUE","unique":{"base":"Velvet Gloves"},"icon":"","src":"zh-tw-missing"}
+{"name":"Doomfletch's Prism","refName":"Doomfletch's Prism","namespace":"UNIQUE","unique":{"base":"Royal Bow"},"icon":"","src":"zh-tw-missing"}
+{"name":"Dreadbeak","refName":"Dreadbeak","namespace":"UNIQUE","unique":{"base":"Rusted Sword"},"icon":"","src":"zh-tw-missing"}
+{"name":"Dreadsurge","refName":"Dreadsurge","namespace":"UNIQUE","unique":{"base":"Cleaver"},"icon":"","src":"zh-tw-missing"}
+{"name":"Duskblight","refName":"Duskblight","namespace":"UNIQUE","unique":{"base":"Ironscale Boots"},"icon":"","src":"zh-tw-missing"}
+{"name":"El'Abin's Visage","refName":"El'Abin's Visage","namespace":"UNIQUE","unique":{"base":"Fencer Helm"},"icon":"","src":"zh-tw-missing"}
+{"name":"Eldritch Knowledge","refName":"Eldritch Knowledge","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Endless Misery","refName":"Endless Misery","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Ezomyte Hold","refName":"Ezomyte Hold","namespace":"UNIQUE","unique":{"base":"Iron Hat"},"icon":"","src":"zh-tw-missing"}
+{"name":"Fight for Survival","refName":"Fight for Survival","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Fireborn","refName":"Fireborn","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"First Snow","refName":"First Snow","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Fleshrender","refName":"Fleshrender","namespace":"UNIQUE","unique":{"base":"Exquisite Blade"},"icon":"","src":"zh-tw-missing"}
+{"name":"Fortified Legion","refName":"Fortified Legion","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Fox's Fortune","refName":"Fox's Fortune","namespace":"UNIQUE","unique":{"base":"Wild Leather"},"icon":"","src":"zh-tw-missing"}
+{"name":"Fragile Bloom","refName":"Fragile Bloom","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Fragment of Eternity","refName":"Fragment of Eternity","namespace":"UNIQUE","unique":{"base":"Glass Shank"},"icon":"","src":"zh-tw-missing"}
+{"name":"From Dust","refName":"From Dust","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Frostferno","refName":"Frostferno","namespace":"UNIQUE","unique":{"base":"Leather Hood"},"icon":"","src":"zh-tw-missing"}
+{"name":"Frozen Trail","refName":"Frozen Trail","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Geofri's Devotion","refName":"Geofri's Devotion","namespace":"UNIQUE","unique":{"base":"Brass Maul"},"icon":"","src":"zh-tw-missing"}
+{"name":"Geofri's Legacy","refName":"Geofri's Legacy","namespace":"UNIQUE","unique":{"base":"Great Crown"},"icon":"","src":"zh-tw-missing"}
+{"name":"Glitterdisc","refName":"Glitterdisc","namespace":"UNIQUE","unique":{"base":"Burnished Spiked Shield"},"icon":"","src":"zh-tw-missing"}
+{"name":"Greedtrap","refName":"Greedtrap","namespace":"UNIQUE","unique":{"base":"Velvet Slippers"},"icon":"","src":"zh-tw-missing"}
+{"name":"Growing Agony","refName":"Growing Agony","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Hair Trigger","refName":"Hair Trigger","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Hazardous Research","refName":"Hazardous Research","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Heroic Tragedy","refName":"Heroic Tragedy","namespace":"UNIQUE","unique":{"base":"Timeless Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Honoured Alliance","refName":"Honoured Alliance","namespace":"UNIQUE","unique":{"base":"Coral Ring"},"icon":"","src":"zh-tw-missing"}
+{"name":"Hotheaded","refName":"Hotheaded","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Hrimburn","refName":"Hrimburn","namespace":"UNIQUE","unique":{"base":"Goathide Gloves"},"icon":"","src":"zh-tw-missing"}
+{"name":"Hrimnor's Dirge","refName":"Hrimnor's Dirge","namespace":"UNIQUE","unique":{"base":"Sledgehammer"},"icon":"","src":"zh-tw-missing"}
+{"name":"Hungry Abyss","refName":"Hungry Abyss","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Hyrri's Demise","refName":"Hyrri's Demise","namespace":"UNIQUE","unique":{"base":"Sharktooth Arrow Quiver"},"icon":"","src":"zh-tw-missing"}
+{"name":"Inevitability","refName":"Inevitability","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Izaro's Dilemma","refName":"Izaro's Dilemma","namespace":"UNIQUE","unique":{"base":"Imperial Claw"},"icon":"","src":"zh-tw-missing"}
+{"name":"Izaro's Turmoil","refName":"Izaro's Turmoil","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Kaltensoul","refName":"Kaltensoul","namespace":"UNIQUE","unique":{"base":"Painted Buckler"},"icon":"","src":"zh-tw-missing"}
+{"name":"Kaom's Way","refName":"Kaom's Way","namespace":"UNIQUE","unique":{"base":"Coral Ring"},"icon":"","src":"zh-tw-missing"}
+{"name":"Karui Charge","refName":"Karui Charge","namespace":"UNIQUE","unique":{"base":"Jade Amulet"},"icon":"","src":"zh-tw-missing"}
+{"name":"Khatal's Geyser","refName":"Khatal's Geyser","namespace":"UNIQUE","unique":{"base":"Lapis Amulet"},"icon":"","src":"zh-tw-missing"}
+{"name":"Khatal's Weeping","refName":"Khatal's Weeping","namespace":"UNIQUE","unique":{"base":"Lapis Amulet"},"icon":"","src":"zh-tw-missing"}
+{"name":"Lord of Steel","refName":"Lord of Steel","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Malachai's Awakening","refName":"Malachai's Awakening","namespace":"UNIQUE","unique":{"base":"Iron Mask"},"icon":"","src":"zh-tw-missing"}
+{"name":"Malicious Intent","refName":"Malicious Intent","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Mantra of Flames","refName":"Mantra of Flames","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Martial Artistry","refName":"Martial Artistry","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Martyr's Crown","refName":"Martyr's Crown","namespace":"UNIQUE","unique":{"base":"Vine Circlet"},"icon":"","src":"zh-tw-missing"}
+{"name":"Might and Influence","refName":"Might and Influence","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Might in All Forms","refName":"Might in All Forms","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Mirebough","refName":"Mirebough","namespace":"UNIQUE","unique":{"base":"Gnarled Branch"},"icon":"","src":"zh-tw-missing"}
+{"name":"Mutated Growth","refName":"Mutated Growth","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Ngamahu Tiki","refName":"Ngamahu Tiki","namespace":"UNIQUE","unique":{"base":"Coral Amulet"},"icon":"","src":"zh-tw-missing"}
+{"name":"Omen on the Winds","refName":"Omen on the Winds","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Overwhelming Odds","refName":"Overwhelming Odds","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Panquetzaliztli","refName":"Panquetzaliztli","namespace":"UNIQUE","unique":{"base":"Jagged Maul"},"icon":"","src":"zh-tw-missing"}
+{"name":"Pitch Darkness","refName":"Pitch Darkness","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Poacher's Aim","refName":"Poacher's Aim","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Pugilist","refName":"Pugilist","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Queen's Escape","refName":"Queen's Escape","namespace":"UNIQUE","unique":{"base":"Ornate Sword"},"icon":"","src":"zh-tw-missing"}
+{"name":"Rapid Expansion","refName":"Rapid Expansion","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Realm Ender","refName":"Realm Ender","namespace":"UNIQUE","unique":{"base":"Iron Staff"},"icon":"","src":"zh-tw-missing"}
+{"name":"Reefbane","refName":"Reefbane","namespace":"UNIQUE","unique":{"base":"Fishing Rod"},"icon":"","src":"zh-tw-missing"}
+{"name":"Relic of the Cycle","refName":"Relic of the Cycle","namespace":"UNIQUE","unique":{"base":"Crude Bow"},"icon":"","src":"zh-tw-missing"}
+{"name":"Remnant of Empires","refName":"Remnant of Empires","namespace":"UNIQUE","unique":{"base":"Goathide Buckler"},"icon":"","src":"zh-tw-missing"}
+{"name":"Replica Blood Sacrifice","refName":"Replica Blood Sacrifice","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Replica Cheap Construction","refName":"Replica Cheap Construction","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Replica Conqueror's Efficiency","refName":"Replica Conqueror's Efficiency","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Replica Forbidden Shako","refName":"Replica Forbidden Shako","namespace":"UNIQUE","unique":{"base":"Great Crown"},"icon":"","src":"zh-tw-missing"}
+{"name":"Replica Fragile Bloom","refName":"Replica Fragile Bloom","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Replica Hotheaded","refName":"Replica Hotheaded","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Replica Pure Talent","refName":"Replica Pure Talent","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Replica Soul Taker","refName":"Replica Soul Taker","namespace":"UNIQUE","unique":{"base":"Siege Axe"},"icon":"","src":"zh-tw-missing"}
+{"name":"Replica Unstable Payload","refName":"Replica Unstable Payload","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Ring of Blades","refName":"Ring of Blades","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Rolling Flames","refName":"Rolling Flames","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Rotting Legion","refName":"Rotting Legion","namespace":"UNIQUE","unique":{"base":"Loricated Ringmail"},"icon":"","src":"zh-tw-missing"}
+{"name":"Rust of Winter","refName":"Rust of Winter","namespace":"UNIQUE","unique":{"base":"Rusted Hatchet"},"icon":"","src":"zh-tw-missing"}
+{"name":"Sacrificial Harvest","refName":"Sacrificial Harvest","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Sanguine Gambol","refName":"Sanguine Gambol","namespace":"UNIQUE","unique":{"base":"Skinning Knife"},"icon":"","src":"zh-tw-missing"}
+{"name":"Saresh's Darkness","refName":"Saresh's Darkness","namespace":"UNIQUE","unique":{"base":"Chain Belt"},"icon":"","src":"zh-tw-missing"}
+{"name":"Scar of Fate","refName":"Scar of Fate","namespace":"UNIQUE","unique":{"base":"Nailed Fist"},"icon":"","src":"zh-tw-missing"}
+{"name":"Screams of the Desiccated","refName":"Screams of the Desiccated","namespace":"UNIQUE","unique":{"base":"Leather Belt"},"icon":"","src":"zh-tw-missing"}
+{"name":"Serle's Masterwork","refName":"Serle's Masterwork","namespace":"UNIQUE","unique":{"base":"Phantom Mace"},"icon":"","src":"zh-tw-missing"}
+{"name":"Shattered Chains","refName":"Shattered Chains","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Shavronne's Gambit","refName":"Shavronne's Gambit","namespace":"UNIQUE","unique":{"base":"Scholar Boots"},"icon":"","src":"zh-tw-missing"}
+{"name":"Silverbough","refName":"Silverbough","namespace":"UNIQUE","unique":{"base":"Crude Bow"},"icon":"","src":"zh-tw-missing"}
+{"name":"Skysunder","refName":"Skysunder","namespace":"UNIQUE","unique":{"base":"Exquisite Blade"},"icon":"","src":"zh-tw-missing"}
+{"name":"Slivers of Providence","refName":"Slivers of Providence","namespace":"UNIQUE","unique":{"base":"Serrated Arrow Quiver"},"icon":"","src":"zh-tw-missing"}
+{"name":"Solerai's Radiance","refName":"Solerai's Radiance","namespace":"UNIQUE","unique":{"base":"Chain Belt"},"icon":"","src":"zh-tw-missing"}
+{"name":"Song of the Sirens","refName":"Song of the Sirens","namespace":"UNIQUE","unique":{"base":"Fishing Rod"},"icon":"","src":"zh-tw-missing"}
+{"name":"Soul's Wick","refName":"Soul's Wick","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Spine of the First Claimant","refName":"Spine of the First Claimant","namespace":"UNIQUE","unique":{"base":"Iron Sceptre"},"icon":"","src":"zh-tw-missing"}
+{"name":"Spire of Stone","refName":"Spire of Stone","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Spirit Guards","refName":"Spirit Guards","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Spirited Response","refName":"Spirited Response","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Splinter of the Moon","refName":"Splinter of the Moon","namespace":"UNIQUE","unique":{"base":"Driftwood Wand"},"icon":"","src":"zh-tw-missing"}
+{"name":"Spreading Rot","refName":"Spreading Rot","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Static Electricity","refName":"Static Electricity","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Steel Spirit","refName":"Steel Spirit","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Sudden Ignition","refName":"Sudden Ignition","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Sunspite","refName":"Sunspite","namespace":"UNIQUE","unique":{"base":"Clasped Boots"},"icon":"","src":"zh-tw-missing"}
+{"name":"Survival Instincts","refName":"Survival Instincts","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Survival Secrets","refName":"Survival Secrets","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Survival Skills","refName":"Survival Skills","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Talisman of the Victor","refName":"Talisman of the Victor","namespace":"UNIQUE","unique":{"base":"Jet Amulet"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Bane of Hope","refName":"The Bane of Hope","namespace":"UNIQUE","unique":{"base":"Maraketh Bow"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Broken Elegy","refName":"The Broken Elegy","namespace":"UNIQUE","unique":{"base":"Foul Staff"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Cauteriser","refName":"The Cauteriser","namespace":"UNIQUE","unique":{"base":"Woodsplitter"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Dancing Duo","refName":"The Dancing Duo","namespace":"UNIQUE","unique":{"base":"Reaver Sword"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Desecrated Chalice","refName":"The Desecrated Chalice","namespace":"UNIQUE","unique":{"base":"Coronal Maul"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Draugur's Lantern","refName":"The Draugur's Lantern","namespace":"UNIQUE","unique":{"base":"Ancient Spirit Shield"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Effigon","refName":"The Effigon","namespace":"UNIQUE","unique":{"base":"Gold Amulet"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Enmity Divine","refName":"The Enmity Divine","namespace":"UNIQUE","unique":{"base":"Imperial Staff"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Flame of Hope","refName":"The Flame of Hope","namespace":"UNIQUE","unique":{"base":"Maraketh Bow"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Flow Untethered","refName":"The Flow Untethered","namespace":"UNIQUE","unique":{"base":"Cloth Belt"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Fracturing Spinner","refName":"The Fracturing Spinner","namespace":"UNIQUE","unique":{"base":"Blunt Arrow Quiver"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Geomantic Gyre","refName":"The Geomantic Gyre","namespace":"UNIQUE","unique":{"base":"Highborn Staff"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Goddess Unleashed","refName":"The Goddess Unleashed","namespace":"UNIQUE","unique":{"base":"Eternal Sword"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Gryphon","refName":"The Gryphon","namespace":"UNIQUE","unique":{"base":"Jade Hatchet"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Long Winter","refName":"The Long Winter","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Nomad","refName":"The Nomad","namespace":"UNIQUE","unique":{"base":"Studded Belt"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Oak","refName":"The Oak","namespace":"UNIQUE","unique":{"base":"Plank Kite Shield"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Perandus Manor","refName":"The Perandus Manor","namespace":"UNIQUE","unique":{"base":"Valdo Map"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Perandus Pact","refName":"The Perandus Pact","namespace":"UNIQUE","unique":{"base":"Prismatic Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Peregrine","refName":"The Peregrine","namespace":"UNIQUE","unique":{"base":"Visored Sallet"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Redblade","refName":"The Redblade","namespace":"UNIQUE","unique":{"base":"Gladius"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Rippling Thoughts","refName":"The Rippling Thoughts","namespace":"UNIQUE","unique":{"base":"Legion Sword"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Sacred Chalice","refName":"The Sacred Chalice","namespace":"UNIQUE","unique":{"base":"Coronal Maul"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Sands of Time","refName":"The Sands of Time","namespace":"UNIQUE","unique":{"base":"Tyrant's Sekhem"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Signal Fire","refName":"The Signal Fire","namespace":"UNIQUE","unique":{"base":"Blazing Arrow Quiver"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Stormwall","refName":"The Stormwall","namespace":"UNIQUE","unique":{"base":"Royal Staff"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Tactician","refName":"The Tactician","namespace":"UNIQUE","unique":{"base":"Studded Belt"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Tempest","refName":"The Tempest","namespace":"UNIQUE","unique":{"base":"Long Bow"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Tempest's Binding","refName":"The Tempest's Binding","namespace":"UNIQUE","unique":{"base":"Callous Mask"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Unshattered Will","refName":"The Unshattered Will","namespace":"UNIQUE","unique":{"base":"Archon Kite Shield"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Vigil","refName":"The Vigil","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"The Wellhook","refName":"The Wellhook","namespace":"UNIQUE","unique":{"base":"Fishing Rod"},"icon":"","src":"zh-tw-missing"}
+{"name":"Thirst for Horrors","refName":"Thirst for Horrors","namespace":"UNIQUE","unique":{"base":"War Buckler"},"icon":"","src":"zh-tw-missing"}
+{"name":"Thunder of the Dawn","refName":"Thunder of the Dawn","namespace":"UNIQUE","unique":{"base":"Corroded Blade"},"icon":"","src":"zh-tw-missing"}
+{"name":"Timetwist","refName":"Timetwist","namespace":"UNIQUE","unique":{"base":"Moonstone Ring"},"icon":"","src":"zh-tw-missing"}
+{"name":"Unstable Payload","refName":"Unstable Payload","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Vaal Sentencing","refName":"Vaal Sentencing","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Vestige of Divinity","refName":"Vestige of Divinity","namespace":"UNIQUE","unique":{"base":"Gnarled Branch"},"icon":"","src":"zh-tw-missing"}
+{"name":"Violent Dead","refName":"Violent Dead","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Viper's Scales","refName":"Viper's Scales","namespace":"UNIQUE","unique":{"base":"Full Scale Armour"},"icon":"","src":"zh-tw-missing"}
+{"name":"Voidheart","refName":"Voidheart","namespace":"UNIQUE","unique":{"base":"Iron Ring"},"icon":"","src":"zh-tw-missing"}
+{"name":"Volley Fire","refName":"Volley Fire","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Wall of Brambles","refName":"Wall of Brambles","namespace":"UNIQUE","unique":{"base":"Plate Vest"},"icon":"","src":"zh-tw-missing"}
+{"name":"Warlord's Reach","refName":"Warlord's Reach","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Warrior's Tale","refName":"Warrior's Tale","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Weight of Sin","refName":"Weight of Sin","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Weight of the Empire","refName":"Weight of the Empire","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Whakatutuki o Matua","refName":"Whakatutuki o Matua","namespace":"UNIQUE","unique":{"base":"Tarnished Spirit Shield"},"icon":"","src":"zh-tw-missing"}
+{"name":"Wildfire","refName":"Wildfire","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Wildwrap","refName":"Wildwrap","namespace":"UNIQUE","unique":{"base":"Strapped Leather"},"icon":"","src":"zh-tw-missing"}
+{"name":"Windshriek","refName":"Windshriek","namespace":"UNIQUE","unique":{"base":"Reinforced Greaves"},"icon":"","src":"zh-tw-missing"}
+{"name":"Winter Burial","refName":"Winter Burial","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Winter's Bounty","refName":"Winter's Bounty","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"Worldcarver","refName":"Worldcarver","namespace":"UNIQUE","unique":{"base":"Dragonscale Gauntlets"},"icon":"","src":"zh-tw-missing"}

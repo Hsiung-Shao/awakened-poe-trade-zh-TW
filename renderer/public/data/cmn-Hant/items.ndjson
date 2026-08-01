@@ -5126,3 +5126,205 @@
 {"name":"瓦爾偵查報告","refName":"Vaal Scouting Report","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
 {"name":"隱匿聖甲蟲","refName":"Veiled Scarab","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
 {"name":"低語的培育器","refName":"Whispering Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"增幅杖","refName":"Amplification Rod","namespace":"UNIQUE","unique":{"base":"Spiraled Wand"},"icon":"","src":"zh-tw-missing"}
+{"name":"真知灼見","refName":"Anatomical Knowledge","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"遠古基石","refName":"Ancient Waystones","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"漁夫之辮","refName":"Angler's Plait","namespace":"UNIQUE","unique":{"base":"Unset Ring"},"icon":"","src":"zh-tw-missing"}
+{"name":"映像","refName":"Apparitions","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"安賽娜絲的歌頌","refName":"Asenath's Chant","namespace":"UNIQUE","unique":{"base":"Iron Circlet"},"icon":"","src":"zh-tw-missing"}
+{"name":"燼杵","refName":"Ashes of the Sun","namespace":"UNIQUE","unique":{"base":"Driftwood Club"},"icon":"","src":"zh-tw-missing"}
+{"name":"刺殺者迷影","refName":"Assassin's Haste","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"阿茲里之鏡","refName":"Atziri's Mirror","namespace":"UNIQUE","unique":{"base":"Golden Buckler"},"icon":"","src":"zh-tw-missing"}
+{"name":"炎夏之血","refName":"Blood of Summer","namespace":"UNIQUE","unique":{"base":"Rusted Sword"},"icon":"","src":"zh-tw-missing"}
+{"name":"血犧","refName":"Blood Sacrifice","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"筋骨強化","refName":"Brawn","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"易碎屏障","refName":"Brittle Barrier","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"疾襲之鋒","refName":"Broadstroke","namespace":"UNIQUE","unique":{"base":"Heavy Quiver"},"icon":"","src":"zh-tw-missing"}
+{"name":"忠誠之記","refName":"Chaber Cairn","namespace":"UNIQUE","unique":{"base":"Great Mallet"},"icon":"","src":"zh-tw-missing"}
+{"name":"廉價建設","refName":"Cheap Construction","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"切特斯之針","refName":"Chitus' Needle","namespace":"UNIQUE","unique":{"base":"Elegant Foil"},"icon":"","src":"zh-tw-missing"}
+{"name":"理智","refName":"Clear Mind","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"榴星","refName":"Coated Shrapnel","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"冷鋼","refName":"Cold Steel","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"戰殤","refName":"Collateral Damage","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"燃盡","refName":"Combustibles","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"征服者的迅捷","refName":"Conqueror's Efficiency","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"征服者的長生","refName":"Conqueror's Longevity","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"征服者的力量","refName":"Conqueror's Potency","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"日耀之冕","refName":"Corona Solaris","namespace":"UNIQUE","unique":{"base":"Crystal Wand"},"icon":"","src":"zh-tw-missing"}
+{"name":"腐化能量","refName":"Corrupted Energy","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"落石","refName":"Cragfall","namespace":"UNIQUE","unique":{"base":"Serrated Arrow Quiver"},"icon":"","src":"zh-tw-missing"}
+{"name":"水晶寶庫","refName":"Crystal Vault","namespace":"UNIQUE","unique":{"base":"Latticed Ringmail"},"icon":"","src":"zh-tw-missing"}
+{"name":"死亡之作","refName":"Death's Opus","namespace":"UNIQUE","unique":{"base":"Death Bow"},"icon":"","src":"zh-tw-missing"}
+{"name":"喪吼","refName":"Deidbellow","namespace":"UNIQUE","unique":{"base":"Gilded Sallet"},"icon":"","src":"zh-tw-missing"}
+{"name":"半神權威","refName":"Demigod's Authority","namespace":"UNIQUE","unique":{"base":"Golden Blade"},"icon":"","src":"zh-tw-missing"}
+{"name":"昇華之燈","refName":"Demigod's Beacon","namespace":"UNIQUE","unique":{"base":"Golden Flame"},"icon":"","src":"zh-tw-missing"}
+{"name":"昇華珍寶","refName":"Demigod's Bounty","namespace":"UNIQUE","unique":{"base":"Golden Obi"},"icon":"","src":"zh-tw-missing"}
+{"name":"昇華統御","refName":"Demigod's Dominance","namespace":"UNIQUE","unique":{"base":"Golden Mantle"},"icon":"","src":"zh-tw-missing"}
+{"name":"昇華之眼","refName":"Demigod's Eye","namespace":"UNIQUE","unique":{"base":"Golden Hoop"},"icon":"","src":"zh-tw-missing"}
+{"name":"昇華不朽","refName":"Demigod's Immortality","namespace":"UNIQUE","unique":{"base":"Golden Visage"},"icon":"","src":"zh-tw-missing"}
+{"name":"昇華之印","refName":"Demigod's Presence","namespace":"UNIQUE","unique":{"base":"Gold Amulet"},"icon":"","src":"zh-tw-missing"}
+{"name":"昇華之途","refName":"Demigod's Stride","namespace":"UNIQUE","unique":{"base":"Golden Caligae"},"icon":"","src":"zh-tw-missing"}
+{"name":"昇華之指","refName":"Demigod's Touch","namespace":"UNIQUE","unique":{"base":"Golden Bracers"},"icon":"","src":"zh-tw-missing"}
+{"name":"昇華之冠","refName":"Demigod's Triumph","namespace":"UNIQUE","unique":{"base":"Golden Wreath"},"icon":"","src":"zh-tw-missing"}
+{"name":"神聖煉獄","refName":"Divine Inferno","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"德瑞的惡意","refName":"Doedre's Malevolence","namespace":"UNIQUE","unique":{"base":"Velvet Gloves"},"icon":"","src":"zh-tw-missing"}
+{"name":"滅世之獄","refName":"Doomfletch's Prism","namespace":"UNIQUE","unique":{"base":"Royal Bow"},"icon":"","src":"zh-tw-missing"}
+{"name":"恐懼之喙","refName":"Dreadbeak","namespace":"UNIQUE","unique":{"base":"Rusted Sword"},"icon":"","src":"zh-tw-missing"}
+{"name":"畏懼波動","refName":"Dreadsurge","namespace":"UNIQUE","unique":{"base":"Cleaver"},"icon":"","src":"zh-tw-missing"}
+{"name":"日落破滅","refName":"Duskblight","namespace":"UNIQUE","unique":{"base":"Ironscale Boots"},"icon":"","src":"zh-tw-missing"}
+{"name":"伊蘭雅本的面紗","refName":"El'Abin's Visage","namespace":"UNIQUE","unique":{"base":"Fencer Helm"},"icon":"","src":"zh-tw-missing"}
+{"name":"異能知識","refName":"Eldritch Knowledge","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"無盡謎團","refName":"Endless Misery","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"艾茲麥之握","refName":"Ezomyte Hold","namespace":"UNIQUE","unique":{"base":"Iron Hat"},"icon":"","src":"zh-tw-missing"}
+{"name":"存戰","refName":"Fight for Survival","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"炎域","refName":"Fireborn","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"初雪","refName":"First Snow","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"血肉撕扯者","refName":"Fleshrender","namespace":"UNIQUE","unique":{"base":"Exquisite Blade"},"icon":"","src":"zh-tw-missing"}
+{"name":"堅守軍團","refName":"Fortified Legion","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"狐毛之富","refName":"Fox's Fortune","namespace":"UNIQUE","unique":{"base":"Wild Leather"},"icon":"","src":"zh-tw-missing"}
+{"name":"脆弱的繁華","refName":"Fragile Bloom","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"亙古之靈","refName":"Fragment of Eternity","namespace":"UNIQUE","unique":{"base":"Glass Shank"},"icon":"","src":"zh-tw-missing"}
+{"name":"塵土歸來","refName":"From Dust","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"霜獄","refName":"Frostferno","namespace":"UNIQUE","unique":{"base":"Leather Hood"},"icon":"","src":"zh-tw-missing"}
+{"name":"跡凍","refName":"Frozen Trail","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"吉爾菲的奉獻","refName":"Geofri's Devotion","namespace":"UNIQUE","unique":{"base":"Brass Maul"},"icon":"","src":"zh-tw-missing"}
+{"name":"吉爾菲的遺產","refName":"Geofri's Legacy","namespace":"UNIQUE","unique":{"base":"Great Crown"},"icon":"","src":"zh-tw-missing"}
+{"name":"七彩碟","refName":"Glitterdisc","namespace":"UNIQUE","unique":{"base":"Burnished Spiked Shield"},"icon":"","src":"zh-tw-missing"}
+{"name":"貪婪之跡","refName":"Greedtrap","namespace":"UNIQUE","unique":{"base":"Velvet Slippers"},"icon":"","src":"zh-tw-missing"}
+{"name":"茁壯苦痛","refName":"Growing Agony","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"髮閘機關","refName":"Hair Trigger","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"危機學","refName":"Hazardous Research","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"英勇的悲劇","refName":"Heroic Tragedy","namespace":"UNIQUE","unique":{"base":"Timeless Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"榮耀同盟","refName":"Honoured Alliance","namespace":"UNIQUE","unique":{"base":"Coral Ring"},"icon":"","src":"zh-tw-missing"}
+{"name":"腦衝","refName":"Hotheaded","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"李姆本","refName":"Hrimburn","namespace":"UNIQUE","unique":{"base":"Goathide Gloves"},"icon":"","src":"zh-tw-missing"}
+{"name":"雷姆諾的輓歌","refName":"Hrimnor's Dirge","namespace":"UNIQUE","unique":{"base":"Sledgehammer"},"icon":"","src":"zh-tw-missing"}
+{"name":"饑饉深淵","refName":"Hungry Abyss","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"西里的死亡","refName":"Hyrri's Demise","namespace":"UNIQUE","unique":{"base":"Sharktooth Arrow Quiver"},"icon":"","src":"zh-tw-missing"}
+{"name":"必然","refName":"Inevitability","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"伊澤洛之謎","refName":"Izaro's Dilemma","namespace":"UNIQUE","unique":{"base":"Imperial Claw"},"icon":"","src":"zh-tw-missing"}
+{"name":"伊澤洛之亂","refName":"Izaro's Turmoil","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"冰霜之魂","refName":"Kaltensoul","namespace":"UNIQUE","unique":{"base":"Painted Buckler"},"icon":"","src":"zh-tw-missing"}
+{"name":"岡姆之路","refName":"Kaom's Way","namespace":"UNIQUE","unique":{"base":"Coral Ring"},"icon":"","src":"zh-tw-missing"}
+{"name":"卡魯充能","refName":"Karui Charge","namespace":"UNIQUE","unique":{"base":"Jade Amulet"},"icon":"","src":"zh-tw-missing"}
+{"name":"卡塔爾之泉","refName":"Khatal's Geyser","namespace":"UNIQUE","unique":{"base":"Lapis Amulet"},"icon":"","src":"zh-tw-missing"}
+{"name":"卡塔爾之泣","refName":"Khatal's Weeping","namespace":"UNIQUE","unique":{"base":"Lapis Amulet"},"icon":"","src":"zh-tw-missing"}
+{"name":"鋼鐵君主","refName":"Lord of Steel","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"瑪拉凱的覺醒","refName":"Malachai's Awakening","namespace":"UNIQUE","unique":{"base":"Iron Mask"},"icon":"","src":"zh-tw-missing"}
+{"name":"不善意圖","refName":"Malicious Intent","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"烈炎之兆","refName":"Mantra of Flames","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"武藝之相","refName":"Martial Artistry","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"烈士之冠","refName":"Martyr's Crown","namespace":"UNIQUE","unique":{"base":"Vine Circlet"},"icon":"","src":"zh-tw-missing"}
+{"name":"強權之勢","refName":"Might and Influence","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"卓絕之力","refName":"Might in All Forms","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"尼根","refName":"Mirebough","namespace":"UNIQUE","unique":{"base":"Gnarled Branch"},"icon":"","src":"zh-tw-missing"}
+{"name":"墮落異體","refName":"Mutated Growth","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"拿瑪乎蒂基","refName":"Ngamahu Tiki","namespace":"UNIQUE","unique":{"base":"Coral Amulet"},"icon":"","src":"zh-tw-missing"}
+{"name":"乘風之兆","refName":"Omen on the Winds","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"絕對壓制","refName":"Overwhelming Odds","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"噸擊之錘","refName":"Panquetzaliztli","namespace":"UNIQUE","unique":{"base":"Jagged Maul"},"icon":"","src":"zh-tw-missing"}
+{"name":"黯黑之調","refName":"Pitch Darkness","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"盜獵者的準心","refName":"Poacher's Aim","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"迅擊者","refName":"Pugilist","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"逃亡女王","refName":"Queen's Escape","namespace":"UNIQUE","unique":{"base":"Ornate Sword"},"icon":"","src":"zh-tw-missing"}
+{"name":"急速擴張","refName":"Rapid Expansion","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"魂界終結","refName":"Realm Ender","namespace":"UNIQUE","unique":{"base":"Iron Staff"},"icon":"","src":"zh-tw-missing"}
+{"name":"災禍之礁","refName":"Reefbane","namespace":"UNIQUE","unique":{"base":"Fishing Rod"},"icon":"","src":"zh-tw-missing"}
+{"name":"輪迴之記","refName":"Relic of the Cycle","namespace":"UNIQUE","unique":{"base":"Crude Bow"},"icon":"","src":"zh-tw-missing"}
+{"name":"帝國的殘壁","refName":"Remnant of Empires","namespace":"UNIQUE","unique":{"base":"Goathide Buckler"},"icon":"","src":"zh-tw-missing"}
+{"name":"贗品．血犧","refName":"Replica Blood Sacrifice","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"贗品．廉價建設","refName":"Replica Cheap Construction","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"贗品．征服者的迅捷","refName":"Replica Conqueror's Efficiency","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"贗品．禁忌軍帽","refName":"Replica Forbidden Shako","namespace":"UNIQUE","unique":{"base":"Great Crown"},"icon":"","src":"zh-tw-missing"}
+{"name":"贗品．脆弱的繁華","refName":"Replica Fragile Bloom","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"贗品．腦衝","refName":"Replica Hotheaded","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"贗品．純才","refName":"Replica Pure Talent","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"贗品．開膛斧","refName":"Replica Soul Taker","namespace":"UNIQUE","unique":{"base":"Siege Axe"},"icon":"","src":"zh-tw-missing"}
+{"name":"贗品．不穩定承載","refName":"Replica Unstable Payload","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"環形刃","refName":"Ring of Blades","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"滾動烈焰","refName":"Rolling Flames","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"腐敗軍團","refName":"Rotting Legion","namespace":"UNIQUE","unique":{"base":"Loricated Ringmail"},"icon":"","src":"zh-tw-missing"}
+{"name":"霜刃","refName":"Rust of Winter","namespace":"UNIQUE","unique":{"base":"Rusted Hatchet"},"icon":"","src":"zh-tw-missing"}
+{"name":"原生祭儀","refName":"Sacrificial Harvest","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"血腥之躍","refName":"Sanguine Gambol","namespace":"UNIQUE","unique":{"base":"Skinning Knife"},"icon":"","src":"zh-tw-missing"}
+{"name":"薩雷許之闇","refName":"Saresh's Darkness","namespace":"UNIQUE","unique":{"base":"Chain Belt"},"icon":"","src":"zh-tw-missing"}
+{"name":"命運傷痕","refName":"Scar of Fate","namespace":"UNIQUE","unique":{"base":"Nailed Fist"},"icon":"","src":"zh-tw-missing"}
+{"name":"塵燥之吼","refName":"Screams of the Desiccated","namespace":"UNIQUE","unique":{"base":"Leather Belt"},"icon":"","src":"zh-tw-missing"}
+{"name":"瑟雷的傑作","refName":"Serle's Masterwork","namespace":"UNIQUE","unique":{"base":"Phantom Mace"},"icon":"","src":"zh-tw-missing"}
+{"name":"破碎之鍊","refName":"Shattered Chains","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"薛朗的詭計","refName":"Shavronne's Gambit","namespace":"UNIQUE","unique":{"base":"Scholar Boots"},"icon":"","src":"zh-tw-missing"}
+{"name":"銀枝","refName":"Silverbough","namespace":"UNIQUE","unique":{"base":"Crude Bow"},"icon":"","src":"zh-tw-missing"}
+{"name":"墜天者","refName":"Skysunder","namespace":"UNIQUE","unique":{"base":"Exquisite Blade"},"icon":"","src":"zh-tw-missing"}
+{"name":"白銀恩典","refName":"Slivers of Providence","namespace":"UNIQUE","unique":{"base":"Serrated Arrow Quiver"},"icon":"","src":"zh-tw-missing"}
+{"name":"索拉萊的輝耀","refName":"Solerai's Radiance","namespace":"UNIQUE","unique":{"base":"Chain Belt"},"icon":"","src":"zh-tw-missing"}
+{"name":"海妖魅曲","refName":"Song of the Sirens","namespace":"UNIQUE","unique":{"base":"Fishing Rod"},"icon":"","src":"zh-tw-missing"}
+{"name":"魂靈之芯","refName":"Soul's Wick","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"先驅之脊","refName":"Spine of the First Claimant","namespace":"UNIQUE","unique":{"base":"Iron Sceptre"},"icon":"","src":"zh-tw-missing"}
+{"name":"石塔","refName":"Spire of Stone","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"精神守護","refName":"Spirit Guards","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"先祖回音","refName":"Spirited Response","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"碎月","refName":"Splinter of the Moon","namespace":"UNIQUE","unique":{"base":"Driftwood Wand"},"icon":"","src":"zh-tw-missing"}
+{"name":"拓蝕","refName":"Spreading Rot","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"靜電之源","refName":"Static Electricity","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"堅毅心靈","refName":"Steel Spirit","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"急遽點燃","refName":"Sudden Ignition","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"日咒","refName":"Sunspite","namespace":"UNIQUE","unique":{"base":"Clasped Boots"},"icon":"","src":"zh-tw-missing"}
+{"name":"生存本能","refName":"Survival Instincts","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"生存秘技","refName":"Survival Secrets","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"生存技巧","refName":"Survival Skills","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"勝者護符","refName":"Talisman of the Victor","namespace":"UNIQUE","unique":{"base":"Jet Amulet"},"icon":"","src":"zh-tw-missing"}
+{"name":"希望之終","refName":"The Bane of Hope","namespace":"UNIQUE","unique":{"base":"Maraketh Bow"},"icon":"","src":"zh-tw-missing"}
+{"name":"破碎輓歌","refName":"The Broken Elegy","namespace":"UNIQUE","unique":{"base":"Foul Staff"},"icon":"","src":"zh-tw-missing"}
+{"name":"燒灼器","refName":"The Cauteriser","namespace":"UNIQUE","unique":{"base":"Woodsplitter"},"icon":"","src":"zh-tw-missing"}
+{"name":"雙人舞","refName":"The Dancing Duo","namespace":"UNIQUE","unique":{"base":"Reaver Sword"},"icon":"","src":"zh-tw-missing"}
+{"name":"瀆染髒盃","refName":"The Desecrated Chalice","namespace":"UNIQUE","unique":{"base":"Coronal Maul"},"icon":"","src":"zh-tw-missing"}
+{"name":"屍鬼提燈","refName":"The Draugur's Lantern","namespace":"UNIQUE","unique":{"base":"Ancient Spirit Shield"},"icon":"","src":"zh-tw-missing"}
+{"name":"艾非根","refName":"The Effigon","namespace":"UNIQUE","unique":{"base":"Gold Amulet"},"icon":"","src":"zh-tw-missing"}
+{"name":"惡言聖語","refName":"The Enmity Divine","namespace":"UNIQUE","unique":{"base":"Imperial Staff"},"icon":"","src":"zh-tw-missing"}
+{"name":"希望之焰","refName":"The Flame of Hope","namespace":"UNIQUE","unique":{"base":"Maraketh Bow"},"icon":"","src":"zh-tw-missing"}
+{"name":"潺流不息","refName":"The Flow Untethered","namespace":"UNIQUE","unique":{"base":"Cloth Belt"},"icon":"","src":"zh-tw-missing"}
+{"name":"裂斷蛛絲","refName":"The Fracturing Spinner","namespace":"UNIQUE","unique":{"base":"Blunt Arrow Quiver"},"icon":"","src":"zh-tw-missing"}
+{"name":"風水輪迴","refName":"The Geomantic Gyre","namespace":"UNIQUE","unique":{"base":"Highborn Staff"},"icon":"","src":"zh-tw-missing"}
+{"name":"女神的束縛","refName":"The Goddess Unleashed","namespace":"UNIQUE","unique":{"base":"Eternal Sword"},"icon":"","src":"zh-tw-missing"}
+{"name":"獅鷲","refName":"The Gryphon","namespace":"UNIQUE","unique":{"base":"Jade Hatchet"},"icon":"","src":"zh-tw-missing"}
+{"name":"凜冽久冬","refName":"The Long Winter","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"游牧","refName":"The Nomad","namespace":"UNIQUE","unique":{"base":"Studded Belt"},"icon":"","src":"zh-tw-missing"}
+{"name":"橡樹","refName":"The Oak","namespace":"UNIQUE","unique":{"base":"Plank Kite Shield"},"icon":"","src":"zh-tw-missing"}
+{"name":"普蘭德斯莊園","refName":"The Perandus Manor","namespace":"UNIQUE","unique":{"base":"Valdo Map"},"icon":"","src":"zh-tw-missing"}
+{"name":"普蘭德斯協議","refName":"The Perandus Pact","namespace":"UNIQUE","unique":{"base":"Prismatic Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"疾風的沉思","refName":"The Peregrine","namespace":"UNIQUE","unique":{"base":"Visored Sallet"},"icon":"","src":"zh-tw-missing"}
+{"name":"紅刃","refName":"The Redblade","namespace":"UNIQUE","unique":{"base":"Gladius"},"icon":"","src":"zh-tw-missing"}
+{"name":"漣漪冥想","refName":"The Rippling Thoughts","namespace":"UNIQUE","unique":{"base":"Legion Sword"},"icon":"","src":"zh-tw-missing"}
+{"name":"神浸聖盃","refName":"The Sacred Chalice","namespace":"UNIQUE","unique":{"base":"Coronal Maul"},"icon":"","src":"zh-tw-missing"}
+{"name":"時間之砂","refName":"The Sands of Time","namespace":"UNIQUE","unique":{"base":"Tyrant's Sekhem"},"icon":"","src":"zh-tw-missing"}
+{"name":"狼煙","refName":"The Signal Fire","namespace":"UNIQUE","unique":{"base":"Blazing Arrow Quiver"},"icon":"","src":"zh-tw-missing"}
+{"name":"風暴堅牆","refName":"The Stormwall","namespace":"UNIQUE","unique":{"base":"Royal Staff"},"icon":"","src":"zh-tw-missing"}
+{"name":"智勇軍師","refName":"The Tactician","namespace":"UNIQUE","unique":{"base":"Studded Belt"},"icon":"","src":"zh-tw-missing"}
+{"name":"暴風雨","refName":"The Tempest","namespace":"UNIQUE","unique":{"base":"Long Bow"},"icon":"","src":"zh-tw-missing"}
+{"name":"風暴的拘束","refName":"The Tempest's Binding","namespace":"UNIQUE","unique":{"base":"Callous Mask"},"icon":"","src":"zh-tw-missing"}
+{"name":"不滅意志","refName":"The Unshattered Will","namespace":"UNIQUE","unique":{"base":"Archon Kite Shield"},"icon":"","src":"zh-tw-missing"}
+{"name":"監視守夜","refName":"The Vigil","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"深井之鉤","refName":"The Wellhook","namespace":"UNIQUE","unique":{"base":"Fishing Rod"},"icon":"","src":"zh-tw-missing"}
+{"name":"顫慄之飢","refName":"Thirst for Horrors","namespace":"UNIQUE","unique":{"base":"War Buckler"},"icon":"","src":"zh-tw-missing"}
+{"name":"曙雷","refName":"Thunder of the Dawn","namespace":"UNIQUE","unique":{"base":"Corroded Blade"},"icon":"","src":"zh-tw-missing"}
+{"name":"時空扭曲","refName":"Timetwist","namespace":"UNIQUE","unique":{"base":"Moonstone Ring"},"icon":"","src":"zh-tw-missing"}
+{"name":"不穩定承載","refName":"Unstable Payload","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"瓦爾之訴","refName":"Vaal Sentencing","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"莊重之杖","refName":"Vestige of Divinity","namespace":"UNIQUE","unique":{"base":"Gnarled Branch"},"icon":"","src":"zh-tw-missing"}
+{"name":"亡者之殘","refName":"Violent Dead","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"毒蛇之度","refName":"Viper's Scales","namespace":"UNIQUE","unique":{"base":"Full Scale Armour"},"icon":"","src":"zh-tw-missing"}
+{"name":"虛空心靈","refName":"Voidheart","namespace":"UNIQUE","unique":{"base":"Iron Ring"},"icon":"","src":"zh-tw-missing"}
+{"name":"怒火齊發","refName":"Volley Fire","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"荊棘之牆","refName":"Wall of Brambles","namespace":"UNIQUE","unique":{"base":"Plate Vest"},"icon":"","src":"zh-tw-missing"}
+{"name":"督軍之力","refName":"Warlord's Reach","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"戰士的故事","refName":"Warrior's Tale","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"罪惡的重量","refName":"Weight of Sin","namespace":"UNIQUE","unique":{"base":"Viridian Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"帝國重量","refName":"Weight of the Empire","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"養育之恩","refName":"Whakatutuki o Matua","namespace":"UNIQUE","unique":{"base":"Tarnished Spirit Shield"},"icon":"","src":"zh-tw-missing"}
+{"name":"燐火","refName":"Wildfire","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"野變","refName":"Wildwrap","namespace":"UNIQUE","unique":{"base":"Strapped Leather"},"icon":"","src":"zh-tw-missing"}
+{"name":"風嘯","refName":"Windshriek","namespace":"UNIQUE","unique":{"base":"Reinforced Greaves"},"icon":"","src":"zh-tw-missing"}
+{"name":"冬葬","refName":"Winter Burial","namespace":"UNIQUE","unique":{"base":"Crimson Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"冬季賞金","refName":"Winter's Bounty","namespace":"UNIQUE","unique":{"base":"Cobalt Jewel"},"icon":"","src":"zh-tw-missing"}
+{"name":"巧奪天工","refName":"Worldcarver","namespace":"UNIQUE","unique":{"base":"Dragonscale Gauntlets"},"icon":"","src":"zh-tw-missing"}

@@ -1,24 +1,42 @@
 {
   "_readme": [
-    "交易站支援、但上游 APT 資料庫沒有的物品。每一筆都通過四道獨立驗證:",
+    "交易站支援、但上游 APT 資料庫沒有的物品。分兩份:`items` 與 `uniques`。",
+    "",
+    "⚠ 這份表由維護者的 GGPK 管線產生,那條管線只在本機、不進本 repo。",
+    "   要重新產生請見 docs/MISSING-ITEMS.md。",
+    "",
+    "⚠ 判定基準必須是**上游原始資料**(git show 18a401e:...),不是工作目錄裡那份 ——",
+    "   否則第二次產生時會把已經補上的物品當成「上游本來就有」而從表裡刪掉。",
+    "",
+    "=== items:通貨 / 命運卡 / 接肢 ===",
+    "每一筆都通過四道獨立驗證:",
     "  1. 國際服交易 API 有這個英文名(交易站真的搜得到)",
     "  2. 上游的 en/items.ndjson 沒有它(確實是缺漏,非我們誤判)",
     "  3. GGPK 遊戲檔(第一真值)查得到英文->繁中",
     "  4. 台服交易 API 也認得那個繁中名(第三方獨立證人)",
     "繁中名若已被現有資料佔用一律剔除 —— 撞名會讓查表拿到錯的物品。",
     "",
-    "⚠ 這份表由維護者的 GGPK 管線產生,那條管線只在本機、不進本 repo。",
-    "   要重新產生請見 docs/MISSING-ITEMS.md。",
+    "只收 currency / card / graft:它們依名稱精確搜尋,缺了就是查不到。",
+    "防具/武器/飾品的**非傳奇**物品不收 —— APT 對它們依基底類型搜尋,",
+    "光靠名稱比對無法區分「真的缺」與「設計不同」。",
     "",
-    "目前涵蓋 currency / card / graft:它們依名稱精確搜尋,缺了就是查不到。",
+    "=== uniques:傳奇物品 ===",
+    "傳奇**確實是依物品名查表**(Parser.ts 的 ITEM_BY_TRANSLATED('UNIQUE', name)),",
+    "所以上面那條「依基底類型搜尋」的排除理由對它們不成立 —— 缺了就是查不到。",
     "",
-    "⚠ 判定基準必須是**上游原始資料**(git show 18a401e:...),不是工作目錄裡那份 ——",
-    "   否則第二次產生時會把已經補上的物品當成「上游本來就有」而從表裡刪掉。",
+    "三個獨立證人,至少兩個相符且無人反對才收:",
+    "  A. GGPK words.Text2(第一真值)。「傳奇名在 Text2」這條判準用上游既有的",
+    "     1254 筆傳奇回測過,1254/1254 相符。",
+    "  B. poedb.tw /tw/api/Trade,以它自己語言無關的 `us` 欄位對接,並用它自己的",
+    "     `type` == 'Unique' 分流(同一個英文名在 poedb 常有多筆:Wildfire 同時是",
+    "     技能寶石與傳奇珠寶)。同樣回測 1254 筆,零不符。",
+    "  C. 台服交易 API:該繁中名必須掛在「英文底材所對應的繁中底材」底下。",
+    "     底材對應本身是語言無關的(en/items.ndjson 的 refName <-> name)。",
     "",
-    "防具/武器/飾品/珠寶等分類覆蓋率只有 5 成左右,那代表 APT 對它們有不同的處理方式",
-    "(依基底類型而非物品名)。光靠名稱比對無法區分「真的缺」與「設計不同」,所以不收。"
+    "`base` 是**英文 refName**,語言無關,兩個語系共用。",
+    "`note` 記錄該筆有什麼保留 —— 不是裝飾,是下次重跑時該優先複查的清單。"
   ],
-  "_generatedAt": "2026-08-01",
+  "_generatedAt": "2026-08-02",
   "_upstreamBase": "18a401e (3.29.102)",
   "items": [
     {
@@ -1042,6 +1060,1227 @@
       "group": "currency",
       "refName": "Whispering Incubator",
       "name": "低語的培育器"
+    }
+  ],
+  "uniques": [
+    {
+      "refName": "Amplification Rod",
+      "name": "增幅杖",
+      "base": "Spiraled Wand",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Anatomical Knowledge",
+      "name": "真知灼見",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Ancient Waystones",
+      "name": "遠古基石",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Angler's Plait",
+      "name": "漁夫之辮",
+      "base": "Unset Ring",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Apparitions",
+      "name": "映像",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Asenath's Chant",
+      "name": "安賽娜絲的歌頌",
+      "base": "Iron Circlet",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Ashes of the Sun",
+      "name": "燼杵",
+      "base": "Driftwood Club",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Assassin's Haste",
+      "name": "刺殺者迷影",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Atziri's Mirror",
+      "name": "阿茲里之鏡",
+      "base": "Golden Buckler",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Blood of Summer",
+      "name": "炎夏之血",
+      "base": "Rusted Sword",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Blood Sacrifice",
+      "name": "血犧",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Brawn",
+      "name": "筋骨強化",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Brittle Barrier",
+      "name": "易碎屏障",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Broadstroke",
+      "name": "疾襲之鋒",
+      "base": "Heavy Quiver",
+      "witness": "GGPK+poedb",
+      "note": "台服交易站未上架"
+    },
+    {
+      "refName": "Chaber Cairn",
+      "name": "忠誠之記",
+      "base": "Great Mallet",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Cheap Construction",
+      "name": "廉價建設",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Chitus' Needle",
+      "name": "切特斯之針",
+      "base": "Elegant Foil",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Clear Mind",
+      "name": "理智",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Coated Shrapnel",
+      "name": "榴星",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Cold Steel",
+      "name": "冷鋼",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Collateral Damage",
+      "name": "戰殤",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Combustibles",
+      "name": "燃盡",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Conqueror's Efficiency",
+      "name": "征服者的迅捷",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Conqueror's Longevity",
+      "name": "征服者的長生",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Conqueror's Potency",
+      "name": "征服者的力量",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Corona Solaris",
+      "name": "日耀之冕",
+      "base": "Crystal Wand",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Corrupted Energy",
+      "name": "腐化能量",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Cragfall",
+      "name": "落石",
+      "base": "Serrated Arrow Quiver",
+      "witness": "GGPK+poedb",
+      "note": "台服交易站未上架"
+    },
+    {
+      "refName": "Crystal Vault",
+      "name": "水晶寶庫",
+      "base": "Latticed Ringmail",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Death's Opus",
+      "name": "死亡之作",
+      "base": "Death Bow",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Deidbellow",
+      "name": "喪吼",
+      "base": "Gilded Sallet",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Demigod's Authority",
+      "name": "半神權威",
+      "base": "Golden Blade",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Demigod's Beacon",
+      "name": "昇華之燈",
+      "base": "Golden Flame",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Demigod's Bounty",
+      "name": "昇華珍寶",
+      "base": "Golden Obi",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Demigod's Dominance",
+      "name": "昇華統御",
+      "base": "Golden Mantle",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Demigod's Eye",
+      "name": "昇華之眼",
+      "base": "Golden Hoop",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Demigod's Immortality",
+      "name": "昇華不朽",
+      "base": "Golden Visage",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Demigod's Presence",
+      "name": "昇華之印",
+      "base": "Gold Amulet",
+      "witness": "GGPK+poedb",
+      "note": "台服交易站未上架"
+    },
+    {
+      "refName": "Demigod's Stride",
+      "name": "昇華之途",
+      "base": "Golden Caligae",
+      "witness": "GGPK+poedb",
+      "note": "台服交易站未上架"
+    },
+    {
+      "refName": "Demigod's Touch",
+      "name": "昇華之指",
+      "base": "Golden Bracers",
+      "witness": "GGPK+poedb",
+      "note": "台服交易站未上架"
+    },
+    {
+      "refName": "Demigod's Triumph",
+      "name": "昇華之冠",
+      "base": "Golden Wreath",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Divine Inferno",
+      "name": "神聖煉獄",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Doedre's Malevolence",
+      "name": "德瑞的惡意",
+      "base": "Velvet Gloves",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Doomfletch's Prism",
+      "name": "滅世之獄",
+      "base": "Royal Bow",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Dreadbeak",
+      "name": "恐懼之喙",
+      "base": "Rusted Sword",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Dreadsurge",
+      "name": "畏懼波動",
+      "base": "Cleaver",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Duskblight",
+      "name": "日落破滅",
+      "base": "Ironscale Boots",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "El'Abin's Visage",
+      "name": "伊蘭雅本的面紗",
+      "base": "Fencer Helm",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Eldritch Knowledge",
+      "name": "異能知識",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Endless Misery",
+      "name": "無盡謎團",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Ezomyte Hold",
+      "name": "艾茲麥之握",
+      "base": "Iron Hat",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Fight for Survival",
+      "name": "存戰",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Fireborn",
+      "name": "炎域",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "First Snow",
+      "name": "初雪",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Fleshrender",
+      "name": "血肉撕扯者",
+      "base": "Exquisite Blade",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Fortified Legion",
+      "name": "堅守軍團",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Fox's Fortune",
+      "name": "狐毛之富",
+      "base": "Wild Leather",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Fragile Bloom",
+      "name": "脆弱的繁華",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Fragment of Eternity",
+      "name": "亙古之靈",
+      "base": "Glass Shank",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "From Dust",
+      "name": "塵土歸來",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Frostferno",
+      "name": "霜獄",
+      "base": "Leather Hood",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Frozen Trail",
+      "name": "跡凍",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Geofri's Devotion",
+      "name": "吉爾菲的奉獻",
+      "base": "Brass Maul",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Geofri's Legacy",
+      "name": "吉爾菲的遺產",
+      "base": "Great Crown",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Glitterdisc",
+      "name": "七彩碟",
+      "base": "Burnished Spiked Shield",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Greedtrap",
+      "name": "貪婪之跡",
+      "base": "Velvet Slippers",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Growing Agony",
+      "name": "茁壯苦痛",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Hair Trigger",
+      "name": "髮閘機關",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Hazardous Research",
+      "name": "危機學",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Heroic Tragedy",
+      "name": "英勇的悲劇",
+      "base": "Timeless Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Honoured Alliance",
+      "name": "榮耀同盟",
+      "base": "Coral Ring",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Hotheaded",
+      "name": "腦衝",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Hrimburn",
+      "name": "李姆本",
+      "base": "Goathide Gloves",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Hrimnor's Dirge",
+      "name": "雷姆諾的輓歌",
+      "base": "Sledgehammer",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Hungry Abyss",
+      "name": "饑饉深淵",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Hyrri's Demise",
+      "name": "西里的死亡",
+      "base": "Sharktooth Arrow Quiver",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Inevitability",
+      "name": "必然",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Izaro's Dilemma",
+      "name": "伊澤洛之謎",
+      "base": "Imperial Claw",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Izaro's Turmoil",
+      "name": "伊澤洛之亂",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Kaltensoul",
+      "name": "冰霜之魂",
+      "base": "Painted Buckler",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Kaom's Way",
+      "name": "岡姆之路",
+      "base": "Coral Ring",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Karui Charge",
+      "name": "卡魯充能",
+      "base": "Jade Amulet",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Khatal's Geyser",
+      "name": "卡塔爾之泉",
+      "base": "Lapis Amulet",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Khatal's Weeping",
+      "name": "卡塔爾之泣",
+      "base": "Lapis Amulet",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Lord of Steel",
+      "name": "鋼鐵君主",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Malachai's Awakening",
+      "name": "瑪拉凱的覺醒",
+      "base": "Iron Mask",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Malicious Intent",
+      "name": "不善意圖",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Mantra of Flames",
+      "name": "烈炎之兆",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Martial Artistry",
+      "name": "武藝之相",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Martyr's Crown",
+      "name": "烈士之冠",
+      "base": "Vine Circlet",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Might and Influence",
+      "name": "強權之勢",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Might in All Forms",
+      "name": "卓絕之力",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Mirebough",
+      "name": "尼根",
+      "base": "Gnarled Branch",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Mutated Growth",
+      "name": "墮落異體",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Ngamahu Tiki",
+      "name": "拿瑪乎蒂基",
+      "base": "Coral Amulet",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Omen on the Winds",
+      "name": "乘風之兆",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Overwhelming Odds",
+      "name": "絕對壓制",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Panquetzaliztli",
+      "name": "噸擊之錘",
+      "base": "Jagged Maul",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Pitch Darkness",
+      "name": "黯黑之調",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Poacher's Aim",
+      "name": "盜獵者的準心",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Pugilist",
+      "name": "迅擊者",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Queen's Escape",
+      "name": "逃亡女王",
+      "base": "Ornate Sword",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Rapid Expansion",
+      "name": "急速擴張",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Realm Ender",
+      "name": "魂界終結",
+      "base": "Iron Staff",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Reefbane",
+      "name": "災禍之礁",
+      "base": "Fishing Rod",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Relic of the Cycle",
+      "name": "輪迴之記",
+      "base": "Crude Bow",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Remnant of Empires",
+      "name": "帝國的殘壁",
+      "base": "Goathide Buckler",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Replica Blood Sacrifice",
+      "name": "贗品．血犧",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Replica Cheap Construction",
+      "name": "贗品．廉價建設",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Replica Conqueror's Efficiency",
+      "name": "贗品．征服者的迅捷",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Replica Forbidden Shako",
+      "name": "贗品．禁忌軍帽",
+      "base": "Great Crown",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Replica Fragile Bloom",
+      "name": "贗品．脆弱的繁華",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Replica Hotheaded",
+      "name": "贗品．腦衝",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Replica Pure Talent",
+      "name": "贗品．純才",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Replica Soul Taker",
+      "name": "贗品．開膛斧",
+      "base": "Siege Axe",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Replica Unstable Payload",
+      "name": "贗品．不穩定承載",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Ring of Blades",
+      "name": "環形刃",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Rolling Flames",
+      "name": "滾動烈焰",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Rotting Legion",
+      "name": "腐敗軍團",
+      "base": "Loricated Ringmail",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Rust of Winter",
+      "name": "霜刃",
+      "base": "Rusted Hatchet",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Sacrificial Harvest",
+      "name": "原生祭儀",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Sanguine Gambol",
+      "name": "血腥之躍",
+      "base": "Skinning Knife",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Saresh's Darkness",
+      "name": "薩雷許之闇",
+      "base": "Chain Belt",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Scar of Fate",
+      "name": "命運傷痕",
+      "base": "Nailed Fist",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Screams of the Desiccated",
+      "name": "塵燥之吼",
+      "base": "Leather Belt",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Serle's Masterwork",
+      "name": "瑟雷的傑作",
+      "base": "Phantom Mace",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Shattered Chains",
+      "name": "破碎之鍊",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Shavronne's Gambit",
+      "name": "薛朗的詭計",
+      "base": "Scholar Boots",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Silverbough",
+      "name": "銀枝",
+      "base": "Crude Bow",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Skysunder",
+      "name": "墜天者",
+      "base": "Exquisite Blade",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Slivers of Providence",
+      "name": "白銀恩典",
+      "base": "Serrated Arrow Quiver",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Solerai's Radiance",
+      "name": "索拉萊的輝耀",
+      "base": "Chain Belt",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Song of the Sirens",
+      "name": "海妖魅曲",
+      "base": "Fishing Rod",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Soul's Wick",
+      "name": "魂靈之芯",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Spine of the First Claimant",
+      "name": "先驅之脊",
+      "base": "Iron Sceptre",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Spire of Stone",
+      "name": "石塔",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Spirit Guards",
+      "name": "精神守護",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Spirited Response",
+      "name": "先祖回音",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Splinter of the Moon",
+      "name": "碎月",
+      "base": "Driftwood Wand",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Spreading Rot",
+      "name": "拓蝕",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Static Electricity",
+      "name": "靜電之源",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Steel Spirit",
+      "name": "堅毅心靈",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Sudden Ignition",
+      "name": "急遽點燃",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Sunspite",
+      "name": "日咒",
+      "base": "Clasped Boots",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Survival Instincts",
+      "name": "生存本能",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Survival Secrets",
+      "name": "生存秘技",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Survival Skills",
+      "name": "生存技巧",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Talisman of the Victor",
+      "name": "勝者護符",
+      "base": "Jet Amulet",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Bane of Hope",
+      "name": "希望之終",
+      "base": "Maraketh Bow",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Broken Elegy",
+      "name": "破碎輓歌",
+      "base": "Foul Staff",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Cauteriser",
+      "name": "燒灼器",
+      "base": "Woodsplitter",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Dancing Duo",
+      "name": "雙人舞",
+      "base": "Reaver Sword",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Desecrated Chalice",
+      "name": "瀆染髒盃",
+      "base": "Coronal Maul",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Draugur's Lantern",
+      "name": "屍鬼提燈",
+      "base": "Ancient Spirit Shield",
+      "witness": "國際服+台服交易站,底材強制配對",
+      "note": "GGPK/poedb 快照皆無此名(比快照新)"
+    },
+    {
+      "refName": "The Effigon",
+      "name": "艾非根",
+      "base": "Gold Amulet",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Enmity Divine",
+      "name": "惡言聖語",
+      "base": "Imperial Staff",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Flame of Hope",
+      "name": "希望之焰",
+      "base": "Maraketh Bow",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Flow Untethered",
+      "name": "潺流不息",
+      "base": "Cloth Belt",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Fracturing Spinner",
+      "name": "裂斷蛛絲",
+      "base": "Blunt Arrow Quiver",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Geomantic Gyre",
+      "name": "風水輪迴",
+      "base": "Highborn Staff",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Goddess Unleashed",
+      "name": "女神的束縛",
+      "base": "Eternal Sword",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Gryphon",
+      "name": "獅鷲",
+      "base": "Jade Hatchet",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Long Winter",
+      "name": "凜冽久冬",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Nomad",
+      "name": "游牧",
+      "base": "Studded Belt",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Oak",
+      "name": "橡樹",
+      "base": "Plank Kite Shield",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Perandus Manor",
+      "name": "普蘭德斯莊園",
+      "base": "Valdo Map",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Perandus Pact",
+      "name": "普蘭德斯協議",
+      "base": "Prismatic Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Peregrine",
+      "name": "疾風的沉思",
+      "base": "Visored Sallet",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Redblade",
+      "name": "紅刃",
+      "base": "Gladius",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Rippling Thoughts",
+      "name": "漣漪冥想",
+      "base": "Legion Sword",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Sacred Chalice",
+      "name": "神浸聖盃",
+      "base": "Coronal Maul",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Sands of Time",
+      "name": "時間之砂",
+      "base": "Tyrant's Sekhem",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Signal Fire",
+      "name": "狼煙",
+      "base": "Blazing Arrow Quiver",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Stormwall",
+      "name": "風暴堅牆",
+      "base": "Royal Staff",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Tactician",
+      "name": "智勇軍師",
+      "base": "Studded Belt",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Tempest",
+      "name": "暴風雨",
+      "base": "Long Bow",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Tempest's Binding",
+      "name": "風暴的拘束",
+      "base": "Callous Mask",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Unshattered Will",
+      "name": "不滅意志",
+      "base": "Archon Kite Shield",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Vigil",
+      "name": "監視守夜",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "The Wellhook",
+      "name": "深井之鉤",
+      "base": "Fishing Rod",
+      "witness": "GGPK+poedb",
+      "note": "台服交易站未上架"
+    },
+    {
+      "refName": "Thirst for Horrors",
+      "name": "顫慄之飢",
+      "base": "War Buckler",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Thunder of the Dawn",
+      "name": "曙雷",
+      "base": "Corroded Blade",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Timetwist",
+      "name": "時空扭曲",
+      "base": "Moonstone Ring",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Unstable Payload",
+      "name": "不穩定承載",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Vaal Sentencing",
+      "name": "瓦爾之訴",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Vestige of Divinity",
+      "name": "莊重之杖",
+      "base": "Gnarled Branch",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Violent Dead",
+      "name": "亡者之殘",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Viper's Scales",
+      "name": "毒蛇之度",
+      "base": "Full Scale Armour",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Voidheart",
+      "name": "虛空心靈",
+      "base": "Iron Ring",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Volley Fire",
+      "name": "怒火齊發",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Wall of Brambles",
+      "name": "荊棘之牆",
+      "base": "Plate Vest",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Warlord's Reach",
+      "name": "督軍之力",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Warrior's Tale",
+      "name": "戰士的故事",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Weight of Sin",
+      "name": "罪惡的重量",
+      "base": "Viridian Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Weight of the Empire",
+      "name": "帝國重量",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Whakatutuki o Matua",
+      "name": "養育之恩",
+      "base": "Tarnished Spirit Shield",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Wildfire",
+      "name": "燐火",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Wildwrap",
+      "name": "野變",
+      "base": "Strapped Leather",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Windshriek",
+      "name": "風嘯",
+      "base": "Reinforced Greaves",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Winter Burial",
+      "name": "冬葬",
+      "base": "Crimson Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Winter's Bounty",
+      "name": "冬季賞金",
+      "base": "Cobalt Jewel",
+      "witness": "GGPK+poedb"
+    },
+    {
+      "refName": "Worldcarver",
+      "name": "巧奪天工",
+      "base": "Dragonscale Gauntlets",
+      "witness": "GGPK+poedb"
     }
   ]
 }

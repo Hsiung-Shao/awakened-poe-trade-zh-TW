@@ -6,11 +6,15 @@
 //   (Facetor's Lens)、黃金(Gold)、獸魂玉(Bestiary Orb)——
 //   查價時只會得到「Unknown Item」。這**不是繁中的問題**,英文版一樣查不到。
 //
-// 對照表怎麼來的、為什麼只收 currency 與 card:見 missing-items.json 的 _readme,
+// 缺的不只通貨。上游也少了 202 個**傳奇物品**(連 Voidheart、Timetwist 這種
+// 老東西都沒有)。傳奇是依物品名查表的,所以缺了同樣是查不到。
+//
+// 對照表怎麼來的、為什麼只收這幾類:見 missing-items.json 的 _readme,
 // 以及 docs/MISSING-ITEMS.md。
 //
 // 用法:node scripts/gen-missing-items.mjs [--write]
-// 不帶 --write 只報告。寫入後必須跑 npm run make-index-files 重建索引。
+// 不帶 --write 只報告。寫入後必須接著跑 gen-disc-variants 與 make-index-files,
+// 順序見 DEVELOPING.md;`npm run regen-data` 會一次跑完。
 
 import fs from 'node:fs'
 import path from 'node:path'
@@ -28,9 +32,28 @@ const DATA = path.join(ROOT, 'renderer/public/data')
  */
 const MARKER = 'zh-tw-missing'
 
+/**
+ * 複合鍵 `namespace + refName` 的分隔字元。用 NUL 是因為兩邊都不可能含它 ——
+ * 空白不行,物品名本身就有空白("The Draugur's Lantern")。
+ *
+ * ⚠ 一定要寫成跳脫序列。原始碼裡放**原始 NUL 位元組**會讓 git 把整個檔判成
+ *   二進位檔,從此 diff 只剩「Bin 4501 -> 8159 bytes」,審查等於瞎的。
+ */
+const SEP = '\u0000'
+
 function makeRow (entry, lang) {
   const name = (lang === 'en') ? entry.refName : entry.name
   const base = { name, refName: entry.refName }
+
+  // 傳奇。`unique.base` 是英文 refName,語言無關,兩個語系共用同一個值。
+  // 解析器靠它把同名的不同傳奇分開(Parser.ts:307),也靠它從底材取得
+  // item.category(Parser.ts:321)—— 所以底材必須在 en 資料裡且帶
+  // craftable.category,下面有斷言擋著。
+  // 不給 disenchantValue:那是「賣給商人值多少」,型別上是選填,而我們沒有
+  // 可信的來源。給個猜的數字比不給更糟。
+  if (entry.namespace === 'UNIQUE') {
+    return { ...base, namespace: 'UNIQUE', unique: { base: entry.base }, icon: '', src: MARKER }
+  }
 
   if (entry.group === 'card') {
     return { ...base, namespace: 'DIVINATION_CARD', exchangeable: true, icon: '', src: MARKER }
@@ -50,10 +73,39 @@ function makeRow (entry, lang) {
 }
 
 const table = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/missing-items.json'), 'utf8'))
-const entries = table.items
-console.log(`對照表 ${entries.length} 筆(上游基準 ${table._upstreamBase})`)
+const entries = [
+  ...table.items.map(e => ({ ...e, namespace: e.group === 'card' ? 'DIVINATION_CARD' : 'ITEM' })),
+  ...table.uniques.map(e => ({ ...e, namespace: 'UNIQUE' }))
+]
+console.log(`對照表 items ${table.items.length} 筆、uniques ${table.uniques.length} 筆` +
+            `(上游基準 ${table._upstreamBase})`)
+
+/**
+ * 傳奇的底材必須在 en 資料裡且帶 craftable.category。
+ *
+ * 少了它,解析器在 Parser.ts:321 的
+ *   ITEM_BY_REF('ITEM', item.info.unique.base)![0].craftable!.category
+ * 會在兩個 non-null 斷言上炸成 TypeError —— 症狀是「解析物品時發生錯誤」,
+ * 完全看不出是資料的問題。寧可在這裡硬失敗。
+ */
+function assertUniqueBases () {
+  const enRows = fs.readFileSync(path.join(DATA, 'en/items.ndjson'), 'utf8')
+    .split(/\r?\n/).filter(l => l.length).map(l => JSON.parse(l))
+  const byRef = new Map()
+  for (const r of enRows) {
+    if (r.namespace === 'ITEM' && !byRef.has(r.refName)) byRef.set(r.refName, r)
+  }
+  const bad = table.uniques.filter(u => !byRef.get(u.base)?.craftable?.category)
+  if (bad.length) {
+    console.error(`\n✗ ${bad.length} 個傳奇的底材在 en 資料裡不存在或缺 craftable.category:`)
+    for (const u of bad) console.error(`    ${u.refName} -> ${u.base}`)
+    process.exit(1)
+  }
+}
+assertUniqueBases()
 
 let changed = 0
+let droppedVariants = 0
 for (const lang of ['en', 'cmn-Hant']) {
   const file = path.join(DATA, lang, 'items.ndjson')
   const raw = fs.readFileSync(file, 'utf8')
@@ -63,19 +115,36 @@ for (const lang of ['en', 'cmn-Hant']) {
   const rows = raw.split(/\r?\n/).filter(l => l.length)
 
   // 先移除上一輪產生的列,讓這支腳本可重複執行。
+  //
+  // ⚠ 這一刀會**連 gen-disc-variants 產生的變體列一起砍掉**,那是刻意的。
+  //   占卜寶珠的 100 個區域變體是「本表的基底列」的變體,同時帶 `src` 與
+  //   `tradeType`。它們必須**緊接在基底列之後**,索引才找得到(索引依
+  //   namespace::refName 去重,只留第一筆的位移,查表再往後走相鄰同名列)。
+  //   而本腳本會把重建的基底列接在檔尾 —— 只留變體、不留基底,相鄰關係就斷了。
+  //   所以正確做法是兩支都重跑,順序固定:先本腳本,再 gen-disc-variants。
+  //   下面的 droppedVariants 會在真的砍到變體時大聲提醒。
   const kept = rows.filter(l => !l.includes(`"src":"${MARKER}"`))
+  droppedVariants += rows.length - kept.length -
+    rows.filter(l => l.includes(`"src":"${MARKER}"`) && !l.includes('"tradeType"')).length
 
   // 上游若已自行補上某個物品,就讓上游的版本勝出 —— 我們的列只有名字,
   // 上游的通常還有 icon 與 tradeTag。
+  //
+  // 判斷**必須帶 namespace**。同一個英文名在不同 namespace 是不同東西:
+  // Wildfire 既是技能寶石(GEM)也是傳奇珠寶(UNIQUE)。不分 namespace 的話,
+  // 上游哪天補上寶石版,我們的傳奇珠瑰就會被誤判成「上游已有」而悄悄消失。
   const existing = new Set()
   for (const l of kept) {
-    try { existing.add(JSON.parse(l).refName) } catch { /* 略過壞行,下面的解析會報 */ }
+    try {
+      const r = JSON.parse(l)
+      existing.add(r.namespace + SEP + r.refName)
+    } catch { /* 略過壞行,下面的解析會報 */ }
   }
 
   const adopted = []
   const added = []
   for (const e of entries) {
-    if (existing.has(e.refName)) { adopted.push(e.refName); continue }
+    if (existing.has(e.namespace + SEP + e.refName)) { adopted.push(e.refName); continue }
     added.push(JSON.stringify(makeRow(e, lang)))
   }
 
@@ -91,8 +160,18 @@ for (const lang of ['en', 'cmn-Hant']) {
   }
 }
 
-if (!process.argv.includes('--write')) {
-  console.log('\n(乾跑。加 --write 才會寫入,寫入後必須跑 npm run make-index-files)')
-} else {
-  console.log(`\n已寫入 ${changed} 列。接著必須跑:npm run make-index-files`)
+if (droppedVariants > 0) {
+  console.log(`\n⚠ 順帶移除了 ${droppedVariants} 列 disc 變體(占卜寶珠 / 海圖 / 傭兵契約書)。`)
+  console.log('   它們只有 gen-disc-variants 會重建,而且必須排在基底列後面。')
 }
+
+if (!process.argv.includes('--write')) {
+  console.log('\n(乾跑。加 --write 才會寫入。)')
+} else {
+  console.log(`\n已寫入 ${changed} 列。`)
+}
+console.log('\n接著**依序**跑完這三步,少一步資料就是壞的:')
+console.log('   npm run gen-disc-variants -- --write')
+console.log('   npm run make-index-files')
+console.log('   npm run verify-datasets')
+console.log('(或一次跑完:npm run regen-data)')

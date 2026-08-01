@@ -49,16 +49,46 @@ cd ../main   && npm run build && npm run package
 
 ```shell
 cd renderer
-npm run gen-disc-variants            # 乾跑,只報告差異
-npm run gen-disc-variants -- --write
-npm run make-index-files             # ⚠ 改過 ndjson 後**必須**重建索引
-npm run verify-datasets              # 檢查 en 與 cmn-Hant 的語言無關鍵是否對齊
+npm run regen-data                   # 這一條就是全部。順序見下。
 ```
 
-`gen-disc-variants` 會打國際服與台服的交易站 API,用語言無關的 `type` 欄對接,
-重新產生海圖區域與傭兵流派的 79 列變體。回應快取在 `.cache/`,新賽季重跑前先刪掉。
+它依序做四件事,**順序是硬性的**:
 
-驗證方式:帶 `--write` 跑完後 `git diff` 應為空 —— 它會逐位元組重現已入庫的資料。
+```
+gen-missing-items --write   補上游缺的物品(通貨/命運卡/接肢/傳奇)
+gen-disc-variants --write   補同名多變體(占卜寶珠區域、海圖區域、傭兵流派)
+make-index-files            重建 byte-offset 索引
+verify-datasets             檢查 en 與 cmn-Hant 的語言無關鍵是否對齊
+```
+
+要單獨乾跑看差異就 `npm run gen-missing-items` / `npm run gen-disc-variants`
+(不帶 `--write`)。
+
+> ### ⚠ 為什麼不能只跑其中一支
+>
+> 兩支都會「先移除自己上一輪產生的列」,而**判準有重疊**:占卜寶珠的 100 列區域
+> 變體是前者產生的基底列的變體,同時帶 `"src":"zh-tw-missing"` 與 `"tradeType"`。
+> 只跑 `gen-missing-items` 會把它們掃掉而不重建 —— **淨損 100 列,零錯誤訊息**。
+>
+> 順序也不能對調。前者把重建的列接在**檔尾**,後者把變體插在**基底列的下一行**;
+> 索引依 `namespace::refName` 去重、只留第一筆的位移,查表再往後走相鄰同名列。
+> 基底與變體一旦不相鄰,變體就永遠查不到。
+>
+> ⚠ `verify-datasets` **抓不到這種錯**。它比的是兩個語系之間是否對齊,而兩邊被砍掉
+> 的是同一批 —— 一致地錯,照樣 PASS。改完資料要比的是**列數與上一版的差異**:
+>
+> ```shell
+> git show HEAD:renderer/public/data/cmn-Hant/items.ndjson | wc -l
+> wc -l < renderer/public/data/cmn-Hant/items.ndjson
+> ```
+
+`gen-disc-variants` 會打國際服與台服的交易站 API,用語言無關的 `type` 欄對接,
+重新產生占卜寶珠 / 海圖 / 傭兵的 394 列變體。回應快取在 `.cache/`,新賽季重跑前先刪掉。
+
+`gen-missing-items` 只讀 `scripts/missing-items.json`,**不打任何 API**。那份對照表
+怎麼來的、每一筆通過哪些驗證,見 [docs/MISSING-ITEMS.md](./docs/MISSING-ITEMS.md)。
+
+驗證方式:跑完後 `git diff` 應為空 —— 它們會逐位元組重現已入庫的資料。
 
 `ko` 與 `ru` 由上游社群維護,本專案原樣沿用,兩支腳本都不處理它們。
 
