@@ -108,6 +108,12 @@ cd renderer && npm run build
 cd ../main   && npm run build && npm run package
 ```
 
+> ⚠ `package` 一定要帶 `-p never`(已寫在 npm script 裡,不要拿掉)。
+> electron-builder 的**預設策略是 `onTagOrDraft`** —— 只要 `electron-builder.yml`
+> 有 `publish` 設定,而 HEAD 剛好在 tag 上、或遠端已有 draft release,
+> 它就會**自己建立 draft 並上傳檔案**。實際發生過:本機打包一次就多出一個
+> 內容不完整的 draft release。發布必須是刻意的動作,由下面的 `gh release create` 執行。
+
 ### 3. 產生雜湊清單
 
 ```shell

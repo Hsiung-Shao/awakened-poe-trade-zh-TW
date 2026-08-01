@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "node build/script.mjs",
     "build": "tsc --noEmit && node build/script.mjs --prod",
-    "package": "electron-builder build",
+    "_comment_package": "-p never 是必要的,不是保險。electron-builder 的預設策略是 onTagOrDraft:只要 electron-builder.yml 有 publish 設定、而 HEAD 剛好在 tag 上或已有 draft release,它就會自己建 draft 並上傳 —— 本機打包一次就悄悄發布一次。發布必須是刻意的動作,由 gh release create 執行。",
+    "package": "electron-builder build -p never",
     "checksums": "node ../scripts/release-checksums.mjs",
     "check-user-agent": "node ../scripts/check-user-agent.mjs",
     "postinstall": "patch-package --patch-dir build"
