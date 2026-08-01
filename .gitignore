@@ -30,3 +30,6 @@ docs/.vitepress/cache
 # 交易站 API 回應快取(scripts/gen-disc-variants.mjs)。
 # 刪掉它就會重新抓一次線上資料 —— 新賽季要重跑產生器時記得先刪。
 .cache/
+
+# 維護者守則,只留本地(與另兩個 POE 專案一致),也避免污染與 upstream 的 diff。
+CLAUDE.md
