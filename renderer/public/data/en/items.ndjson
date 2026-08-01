@@ -4970,7 +4970,107 @@
 {"name":"Replicating Eshgraft","refName":"Replicating Eshgraft","namespace":"ITEM","craftable":{"category":"Graft"},"icon":"","src":"zh-tw-missing"}
 {"name":"Sacred Incubator","refName":"Sacred Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
 {"name":"Scroll Fragment","refName":"Scroll Fragment","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
-{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{}}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Pit"},"tradeDisc":"scrying_orb","tradeType":"11490"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Cage"},"tradeDisc":"scrying_orb","tradeType":"3883"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Core"},"tradeDisc":"scrying_orb","tradeType":"35484"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Lair"},"tradeDisc":"scrying_orb","tradeType":"8823"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Mesa"},"tradeDisc":"scrying_orb","tradeType":"19999"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Park"},"tradeDisc":"scrying_orb","tradeType":"32613"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Pier"},"tradeDisc":"scrying_orb","tradeType":"60732"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Port"},"tradeDisc":"scrying_orb","tradeType":"47088"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Reef"},"tradeDisc":"scrying_orb","tradeType":"53973"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Silo"},"tradeDisc":"scrying_orb","tradeType":"24497"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Atoll"},"tradeDisc":"scrying_orb","tradeType":"19776"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Beach"},"tradeDisc":"scrying_orb","tradeType":"62685"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Cells"},"tradeDisc":"scrying_orb","tradeType":"3775"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Dunes"},"tradeDisc":"scrying_orb","tradeType":"53116"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Geode"},"tradeDisc":"scrying_orb","tradeType":"58981"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Plaza"},"tradeDisc":"scrying_orb","tradeType":"35076"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Siege"},"tradeDisc":"scrying_orb","tradeType":"3756"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Tower"},"tradeDisc":"scrying_orb","tradeType":"54446"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Vault"},"tradeDisc":"scrying_orb","tradeType":"57839"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Arcade"},"tradeDisc":"scrying_orb","tradeType":"44259"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Bazaar"},"tradeDisc":"scrying_orb","tradeType":"36556"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Belfry"},"tradeDisc":"scrying_orb","tradeType":"59460"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Crater"},"tradeDisc":"scrying_orb","tradeType":"5132"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Desert"},"tradeDisc":"scrying_orb","tradeType":"34997"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Fields"},"tradeDisc":"scrying_orb","tradeType":"36207"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Ghetto"},"tradeDisc":"scrying_orb","tradeType":"14879"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Grotto"},"tradeDisc":"scrying_orb","tradeType":"19420"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Museum"},"tradeDisc":"scrying_orb","tradeType":"33220"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Palace"},"tradeDisc":"scrying_orb","tradeType":"51878"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Shrine"},"tradeDisc":"scrying_orb","tradeType":"64812"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Strand"},"tradeDisc":"scrying_orb","tradeType":"10021"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Summit"},"tradeDisc":"scrying_orb","tradeType":"60634"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Temple"},"tradeDisc":"scrying_orb","tradeType":"45792"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Arsenal"},"tradeDisc":"scrying_orb","tradeType":"25202"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Caldera"},"tradeDisc":"scrying_orb","tradeType":"64414"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Channel"},"tradeDisc":"scrying_orb","tradeType":"22278"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Chateau"},"tradeDisc":"scrying_orb","tradeType":"39459"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Estuary"},"tradeDisc":"scrying_orb","tradeType":"40753"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Factory"},"tradeDisc":"scrying_orb","tradeType":"41763"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Foundry"},"tradeDisc":"scrying_orb","tradeType":"31509"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Gardens"},"tradeDisc":"scrying_orb","tradeType":"11533"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Iceberg"},"tradeDisc":"scrying_orb","tradeType":"59084"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Lookout"},"tradeDisc":"scrying_orb","tradeType":"48831"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Marshes"},"tradeDisc":"scrying_orb","tradeType":"42115"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Orchard"},"tradeDisc":"scrying_orb","tradeType":"38855"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Plateau"},"tradeDisc":"scrying_orb","tradeType":"34832"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Terrace"},"tradeDisc":"scrying_orb","tradeType":"42558"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Volcano"},"tradeDisc":"scrying_orb","tradeType":"30639"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Basilica"},"tradeDisc":"scrying_orb","tradeType":"27821"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Cemetery"},"tradeDisc":"scrying_orb","tradeType":"12635"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Ramparts"},"tradeDisc":"scrying_orb","tradeType":"52736"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Shipyard"},"tradeDisc":"scrying_orb","tradeType":"11724"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Alleyways"},"tradeDisc":"scrying_orb","tradeType":"42968"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Arid Lake"},"tradeDisc":"scrying_orb","tradeType":"27782"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Colonnade"},"tradeDisc":"scrying_orb","tradeType":"31349"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Colosseum"},"tradeDisc":"scrying_orb","tradeType":"16355"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Graveyard"},"tradeDisc":"scrying_orb","tradeType":"53902"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Lava Lake"},"tradeDisc":"scrying_orb","tradeType":"20343"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Mausoleum"},"tradeDisc":"scrying_orb","tradeType":"57831"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Promenade"},"tradeDisc":"scrying_orb","tradeType":"54757"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Residence"},"tradeDisc":"scrying_orb","tradeType":"4755"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Waterways"},"tradeDisc":"scrying_orb","tradeType":"28402"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Cold River"},"tradeDisc":"scrying_orb","tradeType":"38080"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Courthouse"},"tradeDisc":"scrying_orb","tradeType":"49777"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Excavation"},"tradeDisc":"scrying_orb","tradeType":"33025"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Laboratory"},"tradeDisc":"scrying_orb","tradeType":"43561"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Stagnation"},"tradeDisc":"scrying_orb","tradeType":"3182"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"City Square"},"tradeDisc":"scrying_orb","tradeType":"44762"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Coral Ruins"},"tradeDisc":"scrying_orb","tradeType":"41363"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Crystal Ore"},"tradeDisc":"scrying_orb","tradeType":"17684"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Dark Forest"},"tradeDisc":"scrying_orb","tradeType":"34447"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Spider Lair"},"tradeDisc":"scrying_orb","tradeType":"60607"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Sunken City"},"tradeDisc":"scrying_orb","tradeType":"11215"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Toxic Sewer"},"tradeDisc":"scrying_orb","tradeType":"25747"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Conservatory"},"tradeDisc":"scrying_orb","tradeType":"6755"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Flooded Mine"},"tradeDisc":"scrying_orb","tradeType":"63065"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Grave Trough"},"tradeDisc":"scrying_orb","tradeType":"34760"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Ivory Temple"},"tradeDisc":"scrying_orb","tradeType":"16982"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Malformation"},"tradeDisc":"scrying_orb","tradeType":"3421"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Vaal Pyramid"},"tradeDisc":"scrying_orb","tradeType":"28018"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Arachnid Nest"},"tradeDisc":"scrying_orb","tradeType":"36866"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Arachnid Tomb"},"tradeDisc":"scrying_orb","tradeType":"7465"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Desert Spring"},"tradeDisc":"scrying_orb","tradeType":"10211"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Forking River"},"tradeDisc":"scrying_orb","tradeType":"29382"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Frozen Cabins"},"tradeDisc":"scrying_orb","tradeType":"51403"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Fungal Hollow"},"tradeDisc":"scrying_orb","tradeType":"34425"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Jungle Valley"},"tradeDisc":"scrying_orb","tradeType":"4003"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Mineral Pools"},"tradeDisc":"scrying_orb","tradeType":"44313"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Sulphur Vents"},"tradeDisc":"scrying_orb","tradeType":"6074"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Bramble Valley"},"tradeDisc":"scrying_orb","tradeType":"44170"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Phantasmagoria"},"tradeDisc":"scrying_orb","tradeType":"47634"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Relic Chambers"},"tradeDisc":"scrying_orb","tradeType":"35162"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Burial Chambers"},"tradeDisc":"scrying_orb","tradeType":"43016"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Forbidden Woods"},"tradeDisc":"scrying_orb","tradeType":"26156"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Haunted Mansion"},"tradeDisc":"scrying_orb","tradeType":"1215"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Infested Valley"},"tradeDisc":"scrying_orb","tradeType":"24414"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Primordial Pool"},"tradeDisc":"scrying_orb","tradeType":"25302"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Tropical Island"},"tradeDisc":"scrying_orb","tradeType":"5647"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Overgrown Shrine"},"tradeDisc":"scrying_orb","tradeType":"26468"}
+{"name":"Scrying Orb","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing","disc":{"sectionText":"Primordial Blocks"},"tradeDisc":"scrying_orb","tradeType":"15595"}
 {"name":"Seal of Lunaris","refName":"Seal of Lunaris","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
 {"name":"Seal of Solaris","refName":"Seal of Solaris","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
 {"name":"Simple Iron Net","refName":"Simple Iron Net","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}

@@ -17,7 +17,32 @@ interface CreateOptions {
   useEn: boolean
 }
 
+/**
+ * 海圖區域、傭兵流派、占卜寶珠的地圖區域,交易站是用**內部類型 id** 搜尋的,
+ * 不是顯示名(見 `BaseType.tradeType`)。`createFiltersInner` 已經在各自的分支
+ * 裡填好 `searchExact`,只有要送給交易站的那個值是錯的,所以這裡覆寫那一個欄位。
+ *
+ * ⚠ 覆寫**必須包在最外層**。`createFiltersInner` 有十幾個提早 return 的分支
+ * (通貨、命運卡、邀請函、地圖…),原本把這段寫在函式尾端,結果只有「走到最後」
+ * 的物品類別才生效 —— 占卜寶珠是通貨,在通貨那個分支就 return 了,查詢送出的是
+ * 基底 `Scrying Orb` 而不是區域,等於沒有收斂。逐個分支補遲早會漏掉一個。
+ *
+ * 沒有這段的話:傭兵契約書會撈回全遊戲所有契約書(10000+ 筆、全是最低價),
+ * 海圖與占卜寶珠則忽略它對應的區域。
+ */
 export function createFilters (
+  item: ParsedItem,
+  opts: CreateOptions
+): ItemFilters {
+  const filters = createFiltersInner(item, opts)
+  if (item.info.tradeType && item.info.tradeDisc) {
+    filters.searchExact.baseTypeTrade = item.info.tradeType
+    filters.discriminator = { trade: item.info.tradeDisc }
+  }
+  return filters
+}
+
+function createFiltersInner (
   item: ParsedItem,
   opts: CreateOptions
 ): ItemFilters {
@@ -406,19 +431,6 @@ export function createFilters (
         disabled: false
       }
     }
-  }
-
-  // Charts and Mercenary Warrants are searched by an internal type id rather
-  // than by their display name — see `BaseType.tradeType`. Both already got a
-  // `searchExact` from the branches above; only the trade-side value is wrong,
-  // so this overrides that one field instead of duplicating those branches.
-  //
-  // Without this, a Mercenary Warrant search returns every warrant in the game
-  // (10000+ results, all at the minimum price) because the build is not part of
-  // the query at all, and a Chart search ignores which area it maps to.
-  if (item.info.tradeType && item.info.tradeDisc) {
-    filters.searchExact.baseTypeTrade = item.info.tradeType
-    filters.discriminator = { trade: item.info.tradeDisc }
   }
 
   return filters

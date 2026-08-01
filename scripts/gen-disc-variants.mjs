@@ -44,17 +44,37 @@ const REALMS = {
 // 但英文客戶端的對應標籤我**沒有樣本可以驗證**,猜一個字串進去會變成只有英文玩家
 // 才會踩到的無聲失效。變體名本身已經夠獨特,兩語系一律只比對它。
 
-const WANTED_DISC = (disc) => disc === 'mercenary_warrant' || disc.startsWith('chart_')
+/*
+ * 交易站目前有 12 種 disc,這裡只收沒人處理的那幾種:
+ *
+ *   alt_x / alt_y / alt_z (215)  上游資料自己就帶 tradeDisc,不要重複產生
+ *   blighted / uberblighted (282) 上游在 Parser.ts 用 MAP_BLIGHTED 剝掉前綴、
+ *                                 歸到基底地圖處理,不走 disc 機制
+ *   legacy (85) / map (32)        舊版唯一變體與無顯示名的地圖變體,尚未評估
+ *
+ *   chart_* (16) / mercenary_warrant (63) / scrying_orb (100)  ← 本專案補的
+ *
+ * scrying_orb(占卜寶珠)與海圖同形:變體的 `type` 是語言無關的數字 id
+ * (10021、10211…),顯示名在 `text`,要查詢的區域寫在物品的「地圖區域: 」那行。
+ */
+const WANTED_DISC = (disc) =>
+  disc === 'mercenary_warrant' || disc === 'scrying_orb' || disc.startsWith('chart_')
 
-// 兩服的變體清單並非完全一致。台服交易站少了這個 type,但國際服有;
-// 缺了它,該區域的海圖只會退回基底類型,等於沒有收斂。
+// 兩服的變體清單並非完全一致:台服交易站少了這幾個 type,但國際服有。
+// 缺了它們,那些區域只會退回基底類型,等於沒有收斂。
 //
-// 譯名取自 GGPK(第一真值)`deepwaterrooms` 的 `SandyFishy1`,與台服其餘 78 筆
-// 逐筆比對 100% 一致的同一張表,所以用它補這一格是安全的。
-// 若哪天台服補上了,下面的比對會顯示「兩服都有」,這筆 override 就可以刪掉。
+// 譯名一律取自 GGPK(第一真值)。若哪天台服補上了,下面的比對會顯示
+// 「該服已提供」,對應的 override 就可以刪掉。
 const MISSING_TRANSLATIONS = {
   'cmn-Hant': {
-    UnremarkableSeabed: { base: '沙質海床海圖', variant: '平凡海床', disc: 'chart_sandy_seabed' }
+    // 海圖:與台服其餘 78 筆逐筆比對 100% 一致的同一張 `deepwaterrooms` 表
+    UnremarkableSeabed: { base: '沙質海床海圖', variant: '平凡海床', disc: 'chart_sandy_seabed' },
+    // 占卜寶珠:台服交易站少了這 4 個地圖區域(同樣的 type 也被凋落地圖使用,
+    // 但那類由上游的 parser 剝前綴處理,不走這裡)
+    20343: { base: '占卜寶珠', variant: '岩漿熔湖', disc: 'scrying_orb' },
+    25202: { base: '占卜寶珠', variant: '古兵工廠', disc: 'scrying_orb' },
+    26156: { base: '占卜寶珠', variant: '禁忌之森', disc: 'scrying_orb' },
+    58981: { base: '占卜寶珠', variant: '詭譎晶洞', disc: 'scrying_orb' }
   }
 }
 
