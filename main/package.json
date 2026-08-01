@@ -2,7 +2,7 @@
   "_comment_name": "改名請改 electron-builder.yml 的 productName/appId,不要動這裡:Electron 用 name 推導 %APPDATA%\\<name>,改掉會讓開發模式換到空目錄,症狀是 Failed to load leagues。",
   "name": "awakened-poe-trade",
   "_comment_version": "⚠ major.minor 必須等於當前遊戲版本系列(現為 3.29),否則 GGG 的 Cloudflare 會硬擋整個 app(403,連聯盟清單都載不到)。Electron 把版號寫進 User-Agent,GGG 據此擋過舊的第三方工具。實測:3.29.0/3.29.101/3.29.900 通過,3.0.0/0.1.0/3.30.0 全部 403 —— 比現行還新也擋。patch 段隨我們用,900 起是本專案的號段以免與上游的 1xx 撞號。遊戲改版務必先跑 `npm run check-user-agent`。",
-  "version": "3.29.900",
+  "version": "3.29.899",
   "private": true,
   "scripts": {
     "dev": "node build/script.mjs",

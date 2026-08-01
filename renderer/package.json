@@ -8,6 +8,7 @@
     "build": "vue-tsc --noEmit && vite build",
     "make-index-files": "node src/assets/make-index-files.mjs",
     "gen-disc-variants": "node ../scripts/gen-disc-variants.mjs",
+    "gen-missing-items": "node ../scripts/gen-missing-items.mjs",
     "verify-datasets": "node ../scripts/verify-datasets.mjs"
   },
   "dependencies": {

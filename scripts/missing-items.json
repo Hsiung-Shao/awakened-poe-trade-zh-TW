@@ -1,0 +1,1047 @@
+{
+  "_readme": [
+    "交易站支援、但上游 APT 資料庫沒有的物品。每一筆都通過四道獨立驗證:",
+    "  1. 國際服交易 API 有這個英文名(交易站真的搜得到)",
+    "  2. 上游的 en/items.ndjson 沒有它(確實是缺漏,非我們誤判)",
+    "  3. GGPK 遊戲檔(第一真值)查得到英文->繁中",
+    "  4. 台服交易 API 也認得那個繁中名(第三方獨立證人)",
+    "繁中名若已被現有資料佔用一律剔除 —— 撞名會讓查表拿到錯的物品。",
+    "",
+    "⚠ 這份表由維護者的 GGPK 管線產生,那條管線只在本機、不進本 repo。",
+    "   要重新產生請見 docs/MISSING-ITEMS.md。",
+    "",
+    "目前涵蓋 currency / card / graft:它們依名稱精確搜尋,缺了就是查不到。",
+    "",
+    "⚠ 判定基準必須是**上游原始資料**(git show 18a401e:...),不是工作目錄裡那份 ——",
+    "   否則第二次產生時會把已經補上的物品當成「上游本來就有」而從表裡刪掉。",
+    "",
+    "防具/武器/飾品/珠寶等分類覆蓋率只有 5 成左右,那代表 APT 對它們有不同的處理方式",
+    "(依基底類型而非物品名)。光靠名稱比對無法區分「真的缺」與「設計不同」,所以不收。"
+  ],
+  "_generatedAt": "2026-08-01",
+  "_upstreamBase": "18a401e (3.29.102)",
+  "items": [
+    {
+      "group": "currency",
+      "refName": "Abberathine Horns",
+      "name": "艾貝拉斯犄角"
+    },
+    {
+      "group": "currency",
+      "refName": "Abyssal Incubator",
+      "name": "深淵的培育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Admiral Proclar's Pipe",
+      "name": "普克勒上將的煙斗"
+    },
+    {
+      "group": "graft",
+      "refName": "Aegis Tulgraft",
+      "name": "托沃的聖盾接肢",
+      "category": "Graft"
+    },
+    {
+      "group": "currency",
+      "refName": "Albino Crab Claw",
+      "name": "白化螃蟹鉗子"
+    },
+    {
+      "group": "currency",
+      "refName": "Alchemical Chalice",
+      "name": "煉金聖杯"
+    },
+    {
+      "group": "currency",
+      "refName": "Alchemy Shard",
+      "name": "點金石碎片"
+    },
+    {
+      "group": "currency",
+      "refName": "Alteration Shard",
+      "name": "改造石碎片"
+    },
+    {
+      "group": "currency",
+      "refName": "Ancient Seal",
+      "name": "古代封印"
+    },
+    {
+      "group": "currency",
+      "refName": "Ancient Shard",
+      "name": "古變石碎片"
+    },
+    {
+      "group": "currency",
+      "refName": "Apprentice Cartographer's Seal",
+      "name": "製圖封印．見習"
+    },
+    {
+      "group": "currency",
+      "refName": "Augmentation Implant",
+      "name": "增幅植入物"
+    },
+    {
+      "group": "currency",
+      "refName": "Awakened Sextant",
+      "name": "製圖六分儀．覺醒"
+    },
+    {
+      "group": "graft",
+      "refName": "Battering Uulgraft",
+      "name": "烏爾尼托的破壞接肢",
+      "category": "Graft"
+    },
+    {
+      "group": "currency",
+      "refName": "Bestiary Orb",
+      "name": "獸魂玉"
+    },
+    {
+      "group": "currency",
+      "refName": "Binding Shard",
+      "name": "束縛石碎片"
+    },
+    {
+      "group": "card",
+      "refName": "Birth of the Three",
+      "name": "三者之誕"
+    },
+    {
+      "group": "currency",
+      "refName": "Blessing of Chayula",
+      "name": "夏烏拉的祝福"
+    },
+    {
+      "group": "currency",
+      "refName": "Blessing of Esh",
+      "name": "艾許的祝福"
+    },
+    {
+      "group": "card",
+      "refName": "Blessing of God",
+      "name": "與神同行"
+    },
+    {
+      "group": "currency",
+      "refName": "Blessing of Tul",
+      "name": "托沃的祝福"
+    },
+    {
+      "group": "currency",
+      "refName": "Blessing of Uul-Netol",
+      "name": "烏爾尼多的祝福"
+    },
+    {
+      "group": "currency",
+      "refName": "Blessing of Xoph",
+      "name": "索伏的祝福"
+    },
+    {
+      "group": "currency",
+      "refName": "Blighted Incubator",
+      "name": "凋落的培育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Blighted Scouting Report",
+      "name": "凋落偵查報告"
+    },
+    {
+      "group": "currency",
+      "refName": "Box of Tripyxis",
+      "name": "三稜箱"
+    },
+    {
+      "group": "currency",
+      "refName": "Broken Mirror of Kalandra",
+      "name": "碎裂的卡蘭德魔鏡"
+    },
+    {
+      "group": "currency",
+      "refName": "Bust of Emperor Caspiro",
+      "name": "帝王卡斯皮羅半身像"
+    },
+    {
+      "group": "currency",
+      "refName": "Cartographer's Chisel",
+      "name": "製圖釘"
+    },
+    {
+      "group": "currency",
+      "refName": "Cartographer's Incubator",
+      "name": "製圖師的培育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Celestial Armoursmith's Incubator",
+      "name": "眾星．鐵匠的培育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Celestial Blacksmith's Incubator",
+      "name": "眾星．鑄鐵的培育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Celestial Jeweller's Incubator",
+      "name": "眾星．珠寶匠的培育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Ceremonial Goblet",
+      "name": "禮儀酒杯"
+    },
+    {
+      "group": "currency",
+      "refName": "Challenging Incubator",
+      "name": "挑戰的培育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Charged Compass",
+      "name": "充能的羅盤"
+    },
+    {
+      "group": "currency",
+      "refName": "Comprehensive Scouting Report",
+      "name": "全面偵查報告"
+    },
+    {
+      "group": "currency",
+      "refName": "Crest of Ezomyr",
+      "name": "艾茲麥之紋"
+    },
+    {
+      "group": "currency",
+      "refName": "Crested Golden Idol",
+      "name": "桂冠黃金神像"
+    },
+    {
+      "group": "currency",
+      "refName": "Dekhara's Resolve",
+      "name": "部下的決心"
+    },
+    {
+      "group": "currency",
+      "refName": "Delirious Scouting Report",
+      "name": "譫妄偵查報告"
+    },
+    {
+      "group": "currency",
+      "refName": "Deregulation Scroll",
+      "name": "反常卷軸"
+    },
+    {
+      "group": "currency",
+      "refName": "Diviner's Incubator",
+      "name": "聖者的培育器"
+    },
+    {
+      "group": "graft",
+      "refName": "Draining Eshgraft",
+      "name": "艾許的汲取接肢",
+      "category": "Graft"
+    },
+    {
+      "group": "currency",
+      "refName": "Eldritch Incubator",
+      "name": "異界尊師的培育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Electroshock Scroll",
+      "name": "電擊卷軸"
+    },
+    {
+      "group": "currency",
+      "refName": "Elevated Sextant",
+      "name": "製圖六分儀．高尚"
+    },
+    {
+      "group": "currency",
+      "refName": "Empty Coffin",
+      "name": "空靈柩"
+    },
+    {
+      "group": "currency",
+      "refName": "Enchanted Incubator",
+      "name": "附魔的培育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Engineer's Orb",
+      "name": "工程石"
+    },
+    {
+      "group": "currency",
+      "refName": "Engineer's Shard",
+      "name": "工程石碎片"
+    },
+    {
+      "group": "currency",
+      "refName": "Enigmatic Assembly A4",
+      "name": "神秘配件 A4"
+    },
+    {
+      "group": "currency",
+      "refName": "Enigmatic Assembly B2",
+      "name": "神秘配件 B2"
+    },
+    {
+      "group": "currency",
+      "refName": "Enigmatic Assembly C5",
+      "name": "神秘配件 C5"
+    },
+    {
+      "group": "currency",
+      "refName": "Enigmatic Assembly D1",
+      "name": "神秘配件 D1"
+    },
+    {
+      "group": "graft",
+      "refName": "Erupting Xophgraft",
+      "name": "索伏的噴湧接肢",
+      "category": "Graft"
+    },
+    {
+      "group": "currency",
+      "refName": "Essence Burner",
+      "name": "精華燃燒器"
+    },
+    {
+      "group": "currency",
+      "refName": "Exalted Implant",
+      "name": "崇高植入物"
+    },
+    {
+      "group": "currency",
+      "refName": "Exceptional Black Scythe Artifact",
+      "name": "卓越黑暗血鐮文物"
+    },
+    {
+      "group": "currency",
+      "refName": "Exceptional Broken Circle Artifact",
+      "name": "卓越破碎之環文物"
+    },
+    {
+      "group": "currency",
+      "refName": "Exceptional Order Artifact",
+      "name": "卓越秩序文物"
+    },
+    {
+      "group": "currency",
+      "refName": "Exceptional Sun Artifact",
+      "name": "卓越豔陽文物"
+    },
+    {
+      "group": "currency",
+      "refName": "Explorer's Scouting Report",
+      "name": "探險家偵查報告"
+    },
+    {
+      "group": "currency",
+      "refName": "Ez Myrae Tome",
+      "name": "伊茲．邁拉書冊"
+    },
+    {
+      "group": "currency",
+      "refName": "Facetor's Lens",
+      "name": "費斯特之鏡"
+    },
+    {
+      "group": "currency",
+      "refName": "Feral Incubator",
+      "name": "狂野的培育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Filled Coffin",
+      "name": "滿靈柩"
+    },
+    {
+      "group": "currency",
+      "refName": "Fine Incubator",
+      "name": "精緻的培育器"
+    },
+    {
+      "group": "graft",
+      "refName": "Flamecaller Xophgraft",
+      "name": "索伏的換焰接肢",
+      "category": "Graft"
+    },
+    {
+      "group": "currency",
+      "refName": "Flask of Welakath",
+      "name": "瓦勒克撒藥劑"
+    },
+    {
+      "group": "graft",
+      "refName": "Fleshgraft",
+      "name": "血肉接肢",
+      "category": "Graft"
+    },
+    {
+      "group": "currency",
+      "refName": "Forbidden Lamp",
+      "name": "禁忌之燈"
+    },
+    {
+      "group": "currency",
+      "refName": "Foreboding Incubator",
+      "name": "預示的培育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Fossilised Incubator",
+      "name": "化石的培育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Fragmentation Scroll",
+      "name": "碎片卷軸"
+    },
+    {
+      "group": "currency",
+      "refName": "Fragmented Incubator",
+      "name": "碎片培育器"
+    },
+    {
+      "group": "graft",
+      "refName": "Freezing Tulgraft",
+      "name": "托沃的冷凍接肢",
+      "category": "Graft"
+    },
+    {
+      "group": "currency",
+      "refName": "Gemcutter's Incubator",
+      "name": "寶石匠的培育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Geomancer's Incubator",
+      "name": "占卜師的培育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Gold",
+      "name": "黃金"
+    },
+    {
+      "group": "currency",
+      "refName": "Golden Ceremonial Mask",
+      "name": "黃金儀式面紗"
+    },
+    {
+      "group": "currency",
+      "refName": "Golden Grotesque",
+      "name": "黃金怪誕圖像"
+    },
+    {
+      "group": "currency",
+      "refName": "Golden Hetzapal Idol",
+      "name": "黃金赫扎帕爾神像"
+    },
+    {
+      "group": "currency",
+      "refName": "Golden Matatl Idol",
+      "name": "黃金麥塔爾神像"
+    },
+    {
+      "group": "currency",
+      "refName": "Golden Napuatzi Idol",
+      "name": "黃金納普阿茲神像"
+    },
+    {
+      "group": "currency",
+      "refName": "Golden Prayer Idol",
+      "name": "黃金獵物神像"
+    },
+    {
+      "group": "currency",
+      "refName": "Golden Sacrificial Glyph",
+      "name": "黃金祭品雕像"
+    },
+    {
+      "group": "currency",
+      "refName": "Golden Slave Idol",
+      "name": "黃金奴隸神像"
+    },
+    {
+      "group": "currency",
+      "refName": "Golden Xoplotli Idol",
+      "name": "黃金柔帕立神像"
+    },
+    {
+      "group": "currency",
+      "refName": "Grand Black Scythe Artifact",
+      "name": "宏偉黑暗血鐮文物"
+    },
+    {
+      "group": "currency",
+      "refName": "Grand Broken Circle Artifact",
+      "name": "宏偉破碎之環文物"
+    },
+    {
+      "group": "currency",
+      "refName": "Grand Order Artifact",
+      "name": "宏偉秩序文物"
+    },
+    {
+      "group": "currency",
+      "refName": "Grand Sun Artifact",
+      "name": "宏偉豔陽文物"
+    },
+    {
+      "group": "currency",
+      "refName": "Greater Black Scythe Artifact",
+      "name": "高階黑暗血鐮文物"
+    },
+    {
+      "group": "currency",
+      "refName": "Greater Broken Circle Artifact",
+      "name": "高階破碎之環文物"
+    },
+    {
+      "group": "currency",
+      "refName": "Greater Order Artifact",
+      "name": "高階秩序文物"
+    },
+    {
+      "group": "currency",
+      "refName": "Greater Sun Artifact",
+      "name": "高階豔陽文物"
+    },
+    {
+      "group": "currency",
+      "refName": "Haemocombustion Scroll",
+      "name": "爆燃卷軸"
+    },
+    {
+      "group": "currency",
+      "refName": "Hand of Arimor",
+      "name": "阿里摩爾之手"
+    },
+    {
+      "group": "currency",
+      "refName": "Harbinger's Orb",
+      "name": "神諭石"
+    },
+    {
+      "group": "currency",
+      "refName": "Harbinger's Shard",
+      "name": "神諭石碎片"
+    },
+    {
+      "group": "graft",
+      "refName": "Hardening Uulgraft",
+      "name": "烏爾尼托的硬化接肢",
+      "category": "Graft"
+    },
+    {
+      "group": "currency",
+      "refName": "Heart Coil",
+      "name": "心型線圈"
+    },
+    {
+      "group": "currency",
+      "refName": "Honoured Incubator",
+      "name": "榮耀的培育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Horizon Shard",
+      "name": "地平石碎片"
+    },
+    {
+      "group": "graft",
+      "refName": "Impaling Uulgraft",
+      "name": "烏爾尼托的穿刺接肢",
+      "category": "Graft"
+    },
+    {
+      "group": "currency",
+      "refName": "Impossible Crystal",
+      "name": "不思議水晶"
+    },
+    {
+      "group": "currency",
+      "refName": "Imprint",
+      "name": "印記"
+    },
+    {
+      "group": "currency",
+      "refName": "Incense of Keth",
+      "name": "凱斯的香水"
+    },
+    {
+      "group": "currency",
+      "refName": "Influenced Scouting Report",
+      "name": "勢力偵查報告"
+    },
+    {
+      "group": "currency",
+      "refName": "Infused Engineer's Orb",
+      "name": "充能的工程石"
+    },
+    {
+      "group": "currency",
+      "refName": "Infused Incubator",
+      "name": "注能的培育器"
+    },
+    {
+      "group": "graft",
+      "refName": "Jolting Eshgraft",
+      "name": "艾許的震顫接肢",
+      "category": "Graft"
+    },
+    {
+      "group": "currency",
+      "refName": "Journeyman Cartographer's Seal",
+      "name": "製圖封印．學者"
+    },
+    {
+      "group": "currency",
+      "refName": "Kalguuran Incubator",
+      "name": "卡爾葛的培育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Lesser Black Scythe Artifact",
+      "name": "低階黑暗血鐮文物"
+    },
+    {
+      "group": "currency",
+      "refName": "Lesser Broken Circle Artifact",
+      "name": "低階破碎之環文物"
+    },
+    {
+      "group": "currency",
+      "refName": "Lesser Order Artifact",
+      "name": "低階秩序文物"
+    },
+    {
+      "group": "currency",
+      "refName": "Lesser Sun Artifact",
+      "name": "低階豔陽文物"
+    },
+    {
+      "group": "currency",
+      "refName": "Living Ice",
+      "name": "活冰"
+    },
+    {
+      "group": "currency",
+      "refName": "Maddening Incubator",
+      "name": "瘋狂的培育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Master Cartographer's Seal",
+      "name": "製圖封印．大師"
+    },
+    {
+      "group": "currency",
+      "refName": "Miraged Incubator",
+      "name": "蜃景的培育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Mirror of Teklatipitzi",
+      "name": "塔克勒提普利斯之鏡"
+    },
+    {
+      "group": "graft",
+      "refName": "Molten Xophgraft",
+      "name": "索伏的熔岩接肢",
+      "category": "Graft"
+    },
+    {
+      "group": "currency",
+      "refName": "Mysterious Incubator",
+      "name": "神祕的培育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Necromancy Net",
+      "name": "亡靈捕獸網"
+    },
+    {
+      "group": "currency",
+      "refName": "Obscured Incubator",
+      "name": "朦朧的培育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Ogham Candelabra",
+      "name": "奧格姆．德拉布拉"
+    },
+    {
+      "group": "currency",
+      "refName": "Oil Extractor",
+      "name": "精油淬鍊"
+    },
+    {
+      "group": "currency",
+      "refName": "Omen of Acceleration",
+      "name": "加速之預兆"
+    },
+    {
+      "group": "currency",
+      "refName": "Omen of Bequeathal",
+      "name": "傳承之預兆"
+    },
+    {
+      "group": "currency",
+      "refName": "Omen of Resurgence",
+      "name": "復甦之預兆"
+    },
+    {
+      "group": "currency",
+      "refName": "Omen of Revenge",
+      "name": "復仇之預兆"
+    },
+    {
+      "group": "currency",
+      "refName": "Operative's Scouting Report",
+      "name": "技工偵查報告"
+    },
+    {
+      "group": "currency",
+      "refName": "Orb of Horizons",
+      "name": "地平石"
+    },
+    {
+      "group": "currency",
+      "refName": "Orbala's Fifth Adventure",
+      "name": "奧爾巴拉的第五次冒險"
+    },
+    {
+      "group": "currency",
+      "refName": "Ornate Incubator",
+      "name": "華麗的孵育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Otherworldly Incubator",
+      "name": "超凡的培育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Otherworldly Scouting Report",
+      "name": "超凡偵查報告"
+    },
+    {
+      "group": "currency",
+      "refName": "Perandus Coin",
+      "name": "普蘭德斯金幣"
+    },
+    {
+      "group": "currency",
+      "refName": "Primal Incubator",
+      "name": "先祖培育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Regal Implant",
+      "name": "富豪植入物"
+    },
+    {
+      "group": "currency",
+      "refName": "Reinforced Iron Net",
+      "name": "強化硬鐵捕獸網"
+    },
+    {
+      "group": "currency",
+      "refName": "Reinforced Rope Net",
+      "name": "強化套索捕獸網"
+    },
+    {
+      "group": "currency",
+      "refName": "Reinforced Steel Net",
+      "name": "強化鋼鐵捕獸網"
+    },
+    {
+      "group": "currency",
+      "refName": "Remnant of Corruption",
+      "name": "遺忘的污染器皿"
+    },
+    {
+      "group": "graft",
+      "refName": "Replicating Eshgraft",
+      "name": "艾許的重現接肢",
+      "category": "Graft"
+    },
+    {
+      "group": "currency",
+      "refName": "Sacred Incubator",
+      "name": "神聖的培育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Scroll Fragment",
+      "name": "卷軸碎片"
+    },
+    {
+      "group": "currency",
+      "refName": "Scrying Orb",
+      "name": "占卜寶珠"
+    },
+    {
+      "group": "currency",
+      "refName": "Seal of Lunaris",
+      "name": "月影神封印"
+    },
+    {
+      "group": "currency",
+      "refName": "Seal of Solaris",
+      "name": "日耀神封印"
+    },
+    {
+      "group": "currency",
+      "refName": "Simple Iron Net",
+      "name": "簡易硬鐵捕獸網"
+    },
+    {
+      "group": "currency",
+      "refName": "Simple Rope Net",
+      "name": "簡易套索捕獸網"
+    },
+    {
+      "group": "currency",
+      "refName": "Simple Steel Net",
+      "name": "簡易鋼鐵捕獸網"
+    },
+    {
+      "group": "currency",
+      "refName": "Singular Incubator",
+      "name": "卓越的培育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Singular Scouting Report",
+      "name": "卓越偵查報告"
+    },
+    {
+      "group": "currency",
+      "refName": "Skittering Incubator",
+      "name": "飛掠的培育器"
+    },
+    {
+      "group": "card",
+      "refName": "Soul Quenched",
+      "name": "靈魂安息"
+    },
+    {
+      "group": "currency",
+      "refName": "Specularity Scroll",
+      "name": "反射卷軸"
+    },
+    {
+      "group": "graft",
+      "refName": "Spiking Uulgraft",
+      "name": "烏爾尼托的銳釘接肢",
+      "category": "Graft"
+    },
+    {
+      "group": "currency",
+      "refName": "Splinter of Chayula",
+      "name": "夏烏拉裂片"
+    },
+    {
+      "group": "currency",
+      "refName": "Splinter of Esh",
+      "name": "艾許裂片"
+    },
+    {
+      "group": "currency",
+      "refName": "Splinter of Tul",
+      "name": "托沃裂片"
+    },
+    {
+      "group": "currency",
+      "refName": "Splinter of Uul-Netol",
+      "name": "烏爾尼多裂片"
+    },
+    {
+      "group": "currency",
+      "refName": "Splinter of Xoph",
+      "name": "索伏裂片"
+    },
+    {
+      "group": "graft",
+      "refName": "Squalling Tulgraft",
+      "name": "托沃的狂號接肢",
+      "category": "Graft"
+    },
+    {
+      "group": "currency",
+      "refName": "Staff of the First Sin Eater",
+      "name": "罪孽嗜者初代長杖"
+    },
+    {
+      "group": "graft",
+      "refName": "Stoking Xophgraft",
+      "name": "索伏的燃灼接肢",
+      "category": "Graft"
+    },
+    {
+      "group": "graft",
+      "refName": "Storming Eshgraft",
+      "name": "艾許的雷暴接肢",
+      "category": "Graft"
+    },
+    {
+      "group": "currency",
+      "refName": "Strong Iron Net",
+      "name": "堅固硬鐵捕獸網"
+    },
+    {
+      "group": "currency",
+      "refName": "Strong Rope Net",
+      "name": "堅固套索捕獸網"
+    },
+    {
+      "group": "currency",
+      "refName": "Strong Steel Net",
+      "name": "堅固鋼鐵捕獸網"
+    },
+    {
+      "group": "graft",
+      "refName": "Summoning Tulgraft",
+      "name": "托沃的召喚接肢",
+      "category": "Graft"
+    },
+    {
+      "group": "currency",
+      "refName": "Sword of the Inverse Relic",
+      "name": "逆反聖之劍"
+    },
+    {
+      "group": "currency",
+      "refName": "Thaumaturge's Incubator",
+      "name": "幻術師的培育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Thaumaturgical Net",
+      "name": "幻術捕獸網"
+    },
+    {
+      "group": "card",
+      "refName": "The Cartographer",
+      "name": "製圖師"
+    },
+    {
+      "group": "card",
+      "refName": "The Cheater",
+      "name": "詐欺師"
+    },
+    {
+      "group": "currency",
+      "refName": "The Goddess of Water",
+      "name": "女神之水"
+    },
+    {
+      "group": "currency",
+      "refName": "The Golden Ibis",
+      "name": "黃金愛必斯"
+    },
+    {
+      "group": "card",
+      "refName": "The Landing",
+      "name": "降落"
+    },
+    {
+      "group": "card",
+      "refName": "The Master",
+      "name": "大師級"
+    },
+    {
+      "group": "card",
+      "refName": "The Obscured",
+      "name": "晦澀"
+    },
+    {
+      "group": "card",
+      "refName": "The Puzzle",
+      "name": "謎"
+    },
+    {
+      "group": "currency",
+      "refName": "The Sea Pearl Heirloom",
+      "name": "海洋珍珠傳家寶"
+    },
+    {
+      "group": "card",
+      "refName": "The Sustenance",
+      "name": "賴以為生"
+    },
+    {
+      "group": "card",
+      "refName": "The Valley of Steel Boxes",
+      "name": "鋼之山谷"
+    },
+    {
+      "group": "currency",
+      "refName": "Time-light Scroll",
+      "name": "時光卷軸"
+    },
+    {
+      "group": "currency",
+      "refName": "Time-Lost Incubator",
+      "name": "時間遺忘的培育器"
+    },
+    {
+      "group": "currency",
+      "refName": "Transmutation Shard",
+      "name": "蛻變石碎片"
+    },
+    {
+      "group": "currency",
+      "refName": "Tusked Hominid Skull",
+      "name": "人類先祖骷髏"
+    },
+    {
+      "group": "currency",
+      "refName": "Uncarved Gemstone",
+      "name": "未雕刻寶石"
+    },
+    {
+      "group": "currency",
+      "refName": "Unshaping Orb",
+      "name": "還原玉"
+    },
+    {
+      "group": "currency",
+      "refName": "Unstable Implant",
+      "name": "不穩定植入物"
+    },
+    {
+      "group": "currency",
+      "refName": "Urn of Farud",
+      "name": "詐欺之甕"
+    },
+    {
+      "group": "currency",
+      "refName": "Urn of the Original Ashes",
+      "name": "原始灰燼之甕"
+    },
+    {
+      "group": "currency",
+      "refName": "Vaal Scouting Report",
+      "name": "瓦爾偵查報告"
+    },
+    {
+      "group": "currency",
+      "refName": "Veiled Scarab",
+      "name": "隱匿聖甲蟲"
+    },
+    {
+      "group": "currency",
+      "refName": "Whispering Incubator",
+      "name": "低語的培育器"
+    }
+  ]
+}

@@ -4825,3 +4825,204 @@
 {"name":"薩爾的揚音","refName":"Zeel's Amplifier","namespace":"UNIQUE","unique":{"base":"Polished Spiked Shield","disenchantValue":4.13},"icon":"https://webtw.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQXJtb3Vycy9TaGllbGRzL1plYWxzQW1wbGlmaWVyIiwidyI6MiwiaCI6Miwic2NhbGUiOjF9XQ/d1e9af3da7/ZealsAmplifier.png"}
 {"name":"澤佛伊之心","refName":"Zerphi's Heart","namespace":"UNIQUE","unique":{"base":"Paua Amulet","disenchantValue":26.52},"icon":"https://webtw.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQW11bGV0cy9aZXJwaGlzSGVhcnQiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/3e35140dfe/ZerphisHeart.png"}
 {"name":"澤佛伊的終息","refName":"Zerphi's Last Breath","namespace":"UNIQUE","unique":{"base":"Grand Mana Flask","disenchantValue":106.41},"icon":"https://webtw.poecdn.com/gen/image/WzksMTQseyJmIjoiMkRJdGVtcy9GbGFza3MvWmVycGhpc0xhc3RCcmVhdGgiLCJ3IjoxLCJoIjoyLCJzY2FsZSI6MSwibGV2ZWwiOjF9XQ/bf8cb7b943/ZerphisLastBreath.png"}
+{"name":"艾貝拉斯犄角","refName":"Abberathine Horns","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"深淵的培育器","refName":"Abyssal Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"普克勒上將的煙斗","refName":"Admiral Proclar's Pipe","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"托沃的聖盾接肢","refName":"Aegis Tulgraft","namespace":"ITEM","craftable":{"category":"Graft"},"icon":"","src":"zh-tw-missing"}
+{"name":"白化螃蟹鉗子","refName":"Albino Crab Claw","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"煉金聖杯","refName":"Alchemical Chalice","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"點金石碎片","refName":"Alchemy Shard","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"改造石碎片","refName":"Alteration Shard","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"古代封印","refName":"Ancient Seal","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"古變石碎片","refName":"Ancient Shard","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"製圖封印．見習","refName":"Apprentice Cartographer's Seal","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"增幅植入物","refName":"Augmentation Implant","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"製圖六分儀．覺醒","refName":"Awakened Sextant","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"烏爾尼托的破壞接肢","refName":"Battering Uulgraft","namespace":"ITEM","craftable":{"category":"Graft"},"icon":"","src":"zh-tw-missing"}
+{"name":"獸魂玉","refName":"Bestiary Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"束縛石碎片","refName":"Binding Shard","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"三者之誕","refName":"Birth of the Three","namespace":"DIVINATION_CARD","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"夏烏拉的祝福","refName":"Blessing of Chayula","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"艾許的祝福","refName":"Blessing of Esh","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"與神同行","refName":"Blessing of God","namespace":"DIVINATION_CARD","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"托沃的祝福","refName":"Blessing of Tul","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"烏爾尼多的祝福","refName":"Blessing of Uul-Netol","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"索伏的祝福","refName":"Blessing of Xoph","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"凋落的培育器","refName":"Blighted Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"凋落偵查報告","refName":"Blighted Scouting Report","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"三稜箱","refName":"Box of Tripyxis","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"碎裂的卡蘭德魔鏡","refName":"Broken Mirror of Kalandra","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"帝王卡斯皮羅半身像","refName":"Bust of Emperor Caspiro","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"製圖釘","refName":"Cartographer's Chisel","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"製圖師的培育器","refName":"Cartographer's Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"眾星．鐵匠的培育器","refName":"Celestial Armoursmith's Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"眾星．鑄鐵的培育器","refName":"Celestial Blacksmith's Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"眾星．珠寶匠的培育器","refName":"Celestial Jeweller's Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"禮儀酒杯","refName":"Ceremonial Goblet","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"挑戰的培育器","refName":"Challenging Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"充能的羅盤","refName":"Charged Compass","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"全面偵查報告","refName":"Comprehensive Scouting Report","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"艾茲麥之紋","refName":"Crest of Ezomyr","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"桂冠黃金神像","refName":"Crested Golden Idol","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"部下的決心","refName":"Dekhara's Resolve","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"譫妄偵查報告","refName":"Delirious Scouting Report","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"反常卷軸","refName":"Deregulation Scroll","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"聖者的培育器","refName":"Diviner's Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"艾許的汲取接肢","refName":"Draining Eshgraft","namespace":"ITEM","craftable":{"category":"Graft"},"icon":"","src":"zh-tw-missing"}
+{"name":"異界尊師的培育器","refName":"Eldritch Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"電擊卷軸","refName":"Electroshock Scroll","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"製圖六分儀．高尚","refName":"Elevated Sextant","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"空靈柩","refName":"Empty Coffin","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"附魔的培育器","refName":"Enchanted Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"工程石","refName":"Engineer's Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"工程石碎片","refName":"Engineer's Shard","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"神秘配件 A4","refName":"Enigmatic Assembly A4","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"神秘配件 B2","refName":"Enigmatic Assembly B2","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"神秘配件 C5","refName":"Enigmatic Assembly C5","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"神秘配件 D1","refName":"Enigmatic Assembly D1","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"索伏的噴湧接肢","refName":"Erupting Xophgraft","namespace":"ITEM","craftable":{"category":"Graft"},"icon":"","src":"zh-tw-missing"}
+{"name":"精華燃燒器","refName":"Essence Burner","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"崇高植入物","refName":"Exalted Implant","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"卓越黑暗血鐮文物","refName":"Exceptional Black Scythe Artifact","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"卓越破碎之環文物","refName":"Exceptional Broken Circle Artifact","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"卓越秩序文物","refName":"Exceptional Order Artifact","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"卓越豔陽文物","refName":"Exceptional Sun Artifact","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"探險家偵查報告","refName":"Explorer's Scouting Report","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"伊茲．邁拉書冊","refName":"Ez Myrae Tome","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"費斯特之鏡","refName":"Facetor's Lens","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"狂野的培育器","refName":"Feral Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"滿靈柩","refName":"Filled Coffin","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"精緻的培育器","refName":"Fine Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"索伏的換焰接肢","refName":"Flamecaller Xophgraft","namespace":"ITEM","craftable":{"category":"Graft"},"icon":"","src":"zh-tw-missing"}
+{"name":"瓦勒克撒藥劑","refName":"Flask of Welakath","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"血肉接肢","refName":"Fleshgraft","namespace":"ITEM","craftable":{"category":"Graft"},"icon":"","src":"zh-tw-missing"}
+{"name":"禁忌之燈","refName":"Forbidden Lamp","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"預示的培育器","refName":"Foreboding Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"化石的培育器","refName":"Fossilised Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"碎片卷軸","refName":"Fragmentation Scroll","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"碎片培育器","refName":"Fragmented Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"托沃的冷凍接肢","refName":"Freezing Tulgraft","namespace":"ITEM","craftable":{"category":"Graft"},"icon":"","src":"zh-tw-missing"}
+{"name":"寶石匠的培育器","refName":"Gemcutter's Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"占卜師的培育器","refName":"Geomancer's Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"黃金","refName":"Gold","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"黃金儀式面紗","refName":"Golden Ceremonial Mask","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"黃金怪誕圖像","refName":"Golden Grotesque","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"黃金赫扎帕爾神像","refName":"Golden Hetzapal Idol","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"黃金麥塔爾神像","refName":"Golden Matatl Idol","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"黃金納普阿茲神像","refName":"Golden Napuatzi Idol","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"黃金獵物神像","refName":"Golden Prayer Idol","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"黃金祭品雕像","refName":"Golden Sacrificial Glyph","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"黃金奴隸神像","refName":"Golden Slave Idol","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"黃金柔帕立神像","refName":"Golden Xoplotli Idol","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"宏偉黑暗血鐮文物","refName":"Grand Black Scythe Artifact","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"宏偉破碎之環文物","refName":"Grand Broken Circle Artifact","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"宏偉秩序文物","refName":"Grand Order Artifact","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"宏偉豔陽文物","refName":"Grand Sun Artifact","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"高階黑暗血鐮文物","refName":"Greater Black Scythe Artifact","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"高階破碎之環文物","refName":"Greater Broken Circle Artifact","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"高階秩序文物","refName":"Greater Order Artifact","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"高階豔陽文物","refName":"Greater Sun Artifact","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"爆燃卷軸","refName":"Haemocombustion Scroll","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"阿里摩爾之手","refName":"Hand of Arimor","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"神諭石","refName":"Harbinger's Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"神諭石碎片","refName":"Harbinger's Shard","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"烏爾尼托的硬化接肢","refName":"Hardening Uulgraft","namespace":"ITEM","craftable":{"category":"Graft"},"icon":"","src":"zh-tw-missing"}
+{"name":"心型線圈","refName":"Heart Coil","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"榮耀的培育器","refName":"Honoured Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"地平石碎片","refName":"Horizon Shard","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"烏爾尼托的穿刺接肢","refName":"Impaling Uulgraft","namespace":"ITEM","craftable":{"category":"Graft"},"icon":"","src":"zh-tw-missing"}
+{"name":"不思議水晶","refName":"Impossible Crystal","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"印記","refName":"Imprint","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"凱斯的香水","refName":"Incense of Keth","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"勢力偵查報告","refName":"Influenced Scouting Report","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"充能的工程石","refName":"Infused Engineer's Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"注能的培育器","refName":"Infused Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"艾許的震顫接肢","refName":"Jolting Eshgraft","namespace":"ITEM","craftable":{"category":"Graft"},"icon":"","src":"zh-tw-missing"}
+{"name":"製圖封印．學者","refName":"Journeyman Cartographer's Seal","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"卡爾葛的培育器","refName":"Kalguuran Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"低階黑暗血鐮文物","refName":"Lesser Black Scythe Artifact","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"低階破碎之環文物","refName":"Lesser Broken Circle Artifact","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"低階秩序文物","refName":"Lesser Order Artifact","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"低階豔陽文物","refName":"Lesser Sun Artifact","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"活冰","refName":"Living Ice","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"瘋狂的培育器","refName":"Maddening Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"製圖封印．大師","refName":"Master Cartographer's Seal","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"蜃景的培育器","refName":"Miraged Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"塔克勒提普利斯之鏡","refName":"Mirror of Teklatipitzi","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"索伏的熔岩接肢","refName":"Molten Xophgraft","namespace":"ITEM","craftable":{"category":"Graft"},"icon":"","src":"zh-tw-missing"}
+{"name":"神祕的培育器","refName":"Mysterious Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"亡靈捕獸網","refName":"Necromancy Net","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"朦朧的培育器","refName":"Obscured Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"奧格姆．德拉布拉","refName":"Ogham Candelabra","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"精油淬鍊","refName":"Oil Extractor","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"加速之預兆","refName":"Omen of Acceleration","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"傳承之預兆","refName":"Omen of Bequeathal","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"復甦之預兆","refName":"Omen of Resurgence","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"復仇之預兆","refName":"Omen of Revenge","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"技工偵查報告","refName":"Operative's Scouting Report","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"地平石","refName":"Orb of Horizons","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"奧爾巴拉的第五次冒險","refName":"Orbala's Fifth Adventure","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"華麗的孵育器","refName":"Ornate Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"超凡的培育器","refName":"Otherworldly Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"超凡偵查報告","refName":"Otherworldly Scouting Report","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"普蘭德斯金幣","refName":"Perandus Coin","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"先祖培育器","refName":"Primal Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"富豪植入物","refName":"Regal Implant","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"強化硬鐵捕獸網","refName":"Reinforced Iron Net","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"強化套索捕獸網","refName":"Reinforced Rope Net","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"強化鋼鐵捕獸網","refName":"Reinforced Steel Net","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"遺忘的污染器皿","refName":"Remnant of Corruption","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"艾許的重現接肢","refName":"Replicating Eshgraft","namespace":"ITEM","craftable":{"category":"Graft"},"icon":"","src":"zh-tw-missing"}
+{"name":"神聖的培育器","refName":"Sacred Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"卷軸碎片","refName":"Scroll Fragment","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"占卜寶珠","refName":"Scrying Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"月影神封印","refName":"Seal of Lunaris","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"日耀神封印","refName":"Seal of Solaris","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"簡易硬鐵捕獸網","refName":"Simple Iron Net","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"簡易套索捕獸網","refName":"Simple Rope Net","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"簡易鋼鐵捕獸網","refName":"Simple Steel Net","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"卓越的培育器","refName":"Singular Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"卓越偵查報告","refName":"Singular Scouting Report","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"飛掠的培育器","refName":"Skittering Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"靈魂安息","refName":"Soul Quenched","namespace":"DIVINATION_CARD","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"反射卷軸","refName":"Specularity Scroll","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"烏爾尼托的銳釘接肢","refName":"Spiking Uulgraft","namespace":"ITEM","craftable":{"category":"Graft"},"icon":"","src":"zh-tw-missing"}
+{"name":"夏烏拉裂片","refName":"Splinter of Chayula","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"艾許裂片","refName":"Splinter of Esh","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"托沃裂片","refName":"Splinter of Tul","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"烏爾尼多裂片","refName":"Splinter of Uul-Netol","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"索伏裂片","refName":"Splinter of Xoph","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"托沃的狂號接肢","refName":"Squalling Tulgraft","namespace":"ITEM","craftable":{"category":"Graft"},"icon":"","src":"zh-tw-missing"}
+{"name":"罪孽嗜者初代長杖","refName":"Staff of the First Sin Eater","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"索伏的燃灼接肢","refName":"Stoking Xophgraft","namespace":"ITEM","craftable":{"category":"Graft"},"icon":"","src":"zh-tw-missing"}
+{"name":"艾許的雷暴接肢","refName":"Storming Eshgraft","namespace":"ITEM","craftable":{"category":"Graft"},"icon":"","src":"zh-tw-missing"}
+{"name":"堅固硬鐵捕獸網","refName":"Strong Iron Net","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"堅固套索捕獸網","refName":"Strong Rope Net","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"堅固鋼鐵捕獸網","refName":"Strong Steel Net","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"托沃的召喚接肢","refName":"Summoning Tulgraft","namespace":"ITEM","craftable":{"category":"Graft"},"icon":"","src":"zh-tw-missing"}
+{"name":"逆反聖之劍","refName":"Sword of the Inverse Relic","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"幻術師的培育器","refName":"Thaumaturge's Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"幻術捕獸網","refName":"Thaumaturgical Net","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"製圖師","refName":"The Cartographer","namespace":"DIVINATION_CARD","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"詐欺師","refName":"The Cheater","namespace":"DIVINATION_CARD","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"女神之水","refName":"The Goddess of Water","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"黃金愛必斯","refName":"The Golden Ibis","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"降落","refName":"The Landing","namespace":"DIVINATION_CARD","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"大師級","refName":"The Master","namespace":"DIVINATION_CARD","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"晦澀","refName":"The Obscured","namespace":"DIVINATION_CARD","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"謎","refName":"The Puzzle","namespace":"DIVINATION_CARD","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"海洋珍珠傳家寶","refName":"The Sea Pearl Heirloom","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"賴以為生","refName":"The Sustenance","namespace":"DIVINATION_CARD","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"鋼之山谷","refName":"The Valley of Steel Boxes","namespace":"DIVINATION_CARD","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"時光卷軸","refName":"Time-light Scroll","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"時間遺忘的培育器","refName":"Time-Lost Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"蛻變石碎片","refName":"Transmutation Shard","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"人類先祖骷髏","refName":"Tusked Hominid Skull","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"未雕刻寶石","refName":"Uncarved Gemstone","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"還原玉","refName":"Unshaping Orb","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"不穩定植入物","refName":"Unstable Implant","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"詐欺之甕","refName":"Urn of Farud","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"原始灰燼之甕","refName":"Urn of the Original Ashes","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"瓦爾偵查報告","refName":"Vaal Scouting Report","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"隱匿聖甲蟲","refName":"Veiled Scarab","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"低語的培育器","refName":"Whispering Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}

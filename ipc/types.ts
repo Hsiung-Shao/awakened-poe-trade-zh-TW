@@ -176,7 +176,9 @@ type IpcUpdaterState =
 // Actions below are triggered by user interaction with the UI.
 type IpcUserAction =
   Event<'CLIENT->MAIN::user-action', {
-    action: 'check-for-update' | 'update-and-restart' | 'quit'
+    // `download-update` 是本專案新增的。上游沒有它,因為上游一偵測到更新就
+    // 自己在背景下載了;這裡改成**必須由使用者按下**才開始下載。
+    action: 'check-for-update' | 'download-update' | 'update-and-restart' | 'quit'
   } | {
     action: 'stash-search'
     text: string

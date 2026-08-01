@@ -24,6 +24,12 @@
       <p>{{ info.str2 }}</p>
       <button v-if="info.action" @click="info.action"
         class="btn w-full mt-1">{{ info.actionText }}</button>
+      <!--
+        次要出口:想自己核對 SHA-256 再安裝的人可以走這裡。一旦更新變成一鍵,
+        實務上不會有人主動去核對雜湊,至少要讓想核對的人找得到路。
+      -->
+      <a v-if="info.showManualLink" :href="`${REPO_URL}/releases`" target="_blank"
+        class="block text-center border-b mt-2 text-gray-500">{{ t('updates.downloads_page') }}</a>
     </div>
     <!--
       上游這裡放的是作者本人的 Discord 帳號。留著會讓這個繁中版的問題回報
@@ -73,9 +79,18 @@ function checkForUpdates () {
   })
 }
 
+/**
+ * 開始下載更新。**只由使用者按下這顆按鈕觸發** —— 程式不會自己下載
+ * (見 main/src/AppUpdater.ts 對 autoDownload 的說明)。
+ */
+function downloadUpdate () {
+  Host.sendEvent({
+    name: 'CLIENT->MAIN::user-action',
+    payload: { action: 'download-update' }
+  })
+}
+
 function openDownloadPage () {
-  // 本專案不自動下載安裝更新(未簽章,見 main/src/AppUpdater.ts),
-  // 這顆按鈕是使用者取得新版的唯一途徑。
   window.open(`${REPO_URL}/releases`)
 }
 
@@ -109,12 +124,24 @@ export default defineComponent({
           return { str1: t('updates.maybe_outdated'), str2: t('updates.error'), action: openDownloadPage, actionText: t('updates.downloads_page') }
         case 'update-downloaded':
           return { str1: t('updates.available', [rawInfo.version]), str2: t('updates.installed_on_exit'), action: quitAndInstall, actionText: t('updates.install_now') }
-        case 'update-available':
-          // 只有「使用者自己用 --no-updates 關掉」才說「你關閉了自動下載」;
-          // 其餘情況(含本專案恆為的 unsigned-build)一律引導去 GitHub 手動下載。
-          return (rawInfo.noDownloadReason)
-            ? { str1: t('updates.available', [rawInfo.version]), str2: (rawInfo.noDownloadReason === 'disabled-by-flag') ? t('updates.download_disabled') : t('updates.download_manually'), action: openDownloadPage, actionText: t('updates.downloads_page') }
-            : { str1: t('updates.available', [rawInfo.version]), str2: t('updates.downloading') }
+        case 'update-available': {
+          const str1 = t('updates.available', [rawInfo.version])
+          switch (rawInfo.noDownloadReason) {
+            // 本專案的預設:不自動下載,但按一下就能下載安裝。
+            // 旁邊另外給一條「自己去下載頁」的連結,讓想核對 SHA-256 的人有路走。
+            case 'unsigned-build':
+              return { str1, str2: t('updates.download_manually'), action: downloadUpdate, actionText: t('updates.install_now'), showManualLink: true }
+            // portable / macOS 沒有就地安裝的能力,只能引導去下載頁。
+            case 'not-supported':
+              return { str1, str2: t('updates.download_manually'), action: openDownloadPage, actionText: t('updates.downloads_page') }
+            // 使用者自己用 --no-updates 關掉的。
+            case 'disabled-by-flag':
+              return { str1, str2: t('updates.download_disabled'), action: openDownloadPage, actionText: t('updates.downloads_page') }
+            // null = 已按下下載、正在進行中。
+            default:
+              return { str1, str2: t('updates.downloading') }
+          }
+        }
       }
     })
 
