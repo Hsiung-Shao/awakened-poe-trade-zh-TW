@@ -43,6 +43,7 @@ const parsers: Array<
   parseUnidentified,
   { virtual: parseSuperior },
   { virtual: parseFoulborn },
+  { virtual: parseVestigial },
   parseSynthesised,
   parseCategoryByHelpText,
   { virtual: parseMapTier },
@@ -599,7 +600,11 @@ function parseVaalGemName (section: string[], item: ParserState) {
       gemName = section[0]
     }
     if (gemName) {
-      item.name = ITEM_BY_TRANSLATED('GEM', gemName)![0].refName
+      // 上游寫的是 `.refName`(英文),但下游 `findInDatabase` 對 GEM 走的是
+      // `ITEM_BY_TRANSLATED` —— 拿英文去查翻譯名,在英文以外的語系必然落空,
+      // 整件瓦爾寶石解析失敗。英文資料集 `name === refName`,所以寫回翻譯名
+      // 對 en 是逐字相同的行為。
+      item.name = ITEM_BY_TRANSLATED('GEM', gemName)![0].name
       return 'SECTION_PARSED'
     }
   }
@@ -965,6 +970,34 @@ function parseFoulborn (item: ParserState) {
     item.name = _$.FOULBORN_NAME.exec(item.name)![1]
     item.isFoulborn = true
   }
+}
+
+/**
+ * 3.29 軍團機制「殘存」(Vestigial)。籠罩晶石作用於傳奇護甲後,遊戲在**底材那一行**
+ * 前面加一個裝飾詞:
+ *
+ *     毀面者
+ *     殘存 扣環護手        ← `ITEM_BY_TRANSLATED('ITEM', …)` 查不到,整件解析失敗
+ *
+ * 剝的是 `baseType` 不是 `name`(與 `parseFoulborn` 相反,Foulborn 裝飾的是傳奇名),
+ * 但仍照 `parseSynthesised` 的寫法留 `name` 的退路 —— 沒有底材那一行的物品也能處理。
+ *
+ * ⚠ 這**不是**繁中專屬的缺陷:英文的 `Vestigial Strapped Mitts` 在 en 資料集同樣查無,
+ * 上游只是還沒遇到。`ru` / `ko` 沒有可信譯名,`VESTIGIAL_NAME` 在那兩個語系不存在,
+ * 此函式直接跳過,行為與加這段之前一模一樣。
+ */
+function parseVestigial (item: ParserState) {
+  const re = _$.VESTIGIAL_NAME
+  if (!re) return
+
+  if (item.baseType) {
+    if (!re.test(item.baseType)) return
+    item.baseType = re.exec(item.baseType)![1]
+  } else {
+    if (!re.test(item.name)) return
+    item.name = re.exec(item.name)![1]
+  }
+  item.isVestigial = true
 }
 
 function parseCategoryByHelpText (section: string[], item: ParsedItem) {

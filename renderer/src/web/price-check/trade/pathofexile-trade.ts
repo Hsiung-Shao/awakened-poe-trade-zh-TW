@@ -135,6 +135,7 @@ interface TradeRequest {
           stack_size?: FilterRange
           memory_level?: FilterRange
           foulborn_item?: FilterBoolean
+          vestigial?: FilterBoolean
         }
       }
       armour_filters?: {
@@ -331,6 +332,13 @@ export function createTradeRequest (filters: ItemFilters, stats: StatFilter[]) {
   }
   if (filters.foulborn?.value === false) {
     propSet(query.filters, 'misc_filters.filters.foulborn_item.option', String(false))
+  }
+  // 與上面的 foulborn 不同,這裡**兩個方向都送**。foulborn 只送 false 是因為
+  // `foulborn_item` 這個篩選器四個 realm 都已經不存在了(實測 intl/tw/kr/cn 皆無),
+  // 送了也是被忽略;`vestigial` 則四個 realm 都在。只送 false 的話,查一件殘存傳奇
+  // 會連普通版一起撈回來,而兩者價格差很多。
+  if (filters.vestigial) {
+    propSet(query.filters, 'misc_filters.filters.vestigial.option', String(filters.vestigial.value))
   }
   if (filters.mirrored?.disabled) {
     propSet(query.filters, 'misc_filters.filters.mirrored.option', String(false))

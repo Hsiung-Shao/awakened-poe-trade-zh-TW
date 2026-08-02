@@ -422,6 +422,11 @@ function createFiltersInner (
     filters.foulborn = {
       value: Boolean(item.isFoulborn)
     }
+    // 殘存傳奇的詞綴是從別件傳奇移轉過來的,價格跟普通版差很多。不分開的話兩邊
+    // 互相污染:查殘存版會撈回一堆普通版,查普通版也會被殘存版拉歪。
+    filters.vestigial = {
+      value: Boolean(item.isVestigial)
+    }
   }
 
   if (item.category === ItemCategory.HeistContract) {

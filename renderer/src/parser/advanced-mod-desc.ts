@@ -43,6 +43,85 @@ export interface ModifierInfo {
 const MOD_INFO_SEPARATOR_STRICT = '\u2014'
 const MOD_INFO_SEPARATOR_RELAXED = /\u2014|(?<=\))\s*-(?=\s)/
 
+interface AnnotationWord {
+  text: string
+  type?: ModifierType
+  generation?: ModifierInfo['generation']
+}
+
+let annotationCache: { key: object, words: AnnotationWord[] } | undefined
+
+/**
+ * 詞綴標註的角色表,最長優先。
+ *
+ * GGG 的標註是「wrapper × core」組出來的 —— GGPK clientstrings 的 `ModDescriptionLine*`
+ * 是 `Master Crafted {0}`、`Fractured {0}`、`Prefix Modifier "{0}"` 這種模板。上游把每一種
+ * **組合**寫成一個常數,再用全字串 `switch` 比對,所以是 O(wrapper × core) 而且每個新賽季
+ * 都得改程式。後果現在就看得到:3.29 的 `殘存固定詞綴` 整條落到 Explicit,
+ * 篩選器會把一條固定詞綴當成一般詞綴生。
+ *
+ * 改成 PobTools 的做法(`translate/translation_manager.cpp` 的 `rebuild_mod_annotation`):
+ * **最長優先 + 找到就消耗**。「固定詞綴」因此偷不走「已汙染固定詞綴」,而已知的字
+ * 可以任意組合、任意順序。
+ *
+ * 只有在載入的語系真的有那個字串時才進表 —— 見 `VESTIGIAL_IMPLICIT` 的選填理由。
+ */
+function annotationWords (): AnnotationWord[] {
+  if (annotationCache?.key === _$) return annotationCache.words
+
+  const words: AnnotationWord[] = []
+  const add = (
+    text: string | undefined,
+    type?: ModifierType,
+    generation?: ModifierInfo['generation']
+  ) => { if (text) words.push({ text, type, generation }) }
+
+  add(_$.CRAFTED_PREFIX, ModifierType.Crafted, 'prefix')
+  add(_$.CRAFTED_SUFFIX, ModifierType.Crafted, 'suffix')
+  add(_$.FRACTURED_PREFIX, ModifierType.Fractured, 'prefix')
+  add(_$.FRACTURED_SUFFIX, ModifierType.Fractured, 'suffix')
+  add(_$.CORRUPTED_IMPLICIT, ModifierType.Implicit, 'corrupted')
+  add(_$.VESTIGIAL_IMPLICIT, ModifierType.Implicit)
+  add(_$.IMPLICIT_MODIFIER, ModifierType.Implicit)
+  add(_$.PREFIX_MODIFIER, undefined, 'prefix')
+  add(_$.SUFFIX_MODIFIER, undefined, 'suffix')
+  add(_$.FOULBORN_MODIFIER, undefined, 'foulborn')
+
+  words.sort((a, b) => b.text.length - a.text.length)
+  annotationCache = { key: _$, words }
+  return words
+}
+
+/**
+ * 把標註的 type 段解成 `{ type, generation }`。
+ *
+ * ⚠ 與 PobTools 的一個**刻意差異**:整段沒被吃乾淨就回 `undefined`,呼叫端據此
+ * 完全照上游行為走(Explicit、無 generation)。PobTools 只服務繁中而且手上有 GGPK
+ * 全表,可以放心輸出局部旗標;APT 出四個語系,我們只有 `en` / `cmn-Hant` 的可信全表。
+ * 允許局部匹配的話,`附魔固定詞綴`(Enchantment Modifier)會因為包含「固定詞綴」
+ * 被判成 Implicit,但英文的 `Enchantment Modifier` 不含 `Implicit Modifier`
+ * —— 同一件物品在兩個語系會解出不同結果,那比少認一個標註嚴重得多。
+ *
+ * 「認不得就照舊」也讓這次改動成為現行行為的嚴格超集:今天會匹配的字串,
+ * 一定整段吃得乾淨,結果逐欄不變。
+ */
+function matchAnnotation (typeText: string): Pick<ModifierInfo, 'type' | 'generation'> | undefined {
+  let rest = typeText
+  let type: ModifierType | undefined
+  let generation: ModifierInfo['generation']
+
+  for (const word of annotationWords()) {
+    const at = rest.indexOf(word.text)
+    if (at === -1) continue
+    rest = rest.slice(0, at) + rest.slice(at + word.text.length)
+    if (word.type !== undefined && type === undefined) type = word.type
+    if (word.generation !== undefined && generation === undefined) generation = word.generation
+  }
+
+  if (rest.trim().length > 0) return undefined
+  return { type: type ?? ModifierType.Explicit, generation }
+}
+
 export function parseModInfoLine (line: string): ModifierInfo {
   try {
     return parseModInfoLineWith(line, MOD_INFO_SEPARATOR_STRICT)
@@ -88,31 +167,11 @@ function parseModInfoLineWith (line: string, separator: string | RegExp): Modifi
       throw new Error('Invalid regex for mod info line')
     }
 
-    switch (match.groups!.type) {
-      case _$.IMPLICIT_MODIFIER:
-      case _$.CORRUPTED_IMPLICIT:
-        type = ModifierType.Implicit; break
-      case _$.FRACTURED_PREFIX:
-      case _$.FRACTURED_SUFFIX:
-        type = ModifierType.Fractured; break
-      case _$.CRAFTED_PREFIX:
-      case _$.CRAFTED_SUFFIX:
-        type = ModifierType.Crafted; break
-    }
-
-    switch (match.groups!.type) {
-      case _$.PREFIX_MODIFIER:
-      case _$.FRACTURED_PREFIX:
-      case _$.CRAFTED_PREFIX:
-        generation = 'prefix'; break
-      case _$.SUFFIX_MODIFIER:
-      case _$.FRACTURED_SUFFIX:
-      case _$.CRAFTED_SUFFIX:
-        generation = 'suffix'; break
-      case _$.CORRUPTED_IMPLICIT:
-        generation = 'corrupted'; break
-      case _$.FOULBORN_MODIFIER:
-        generation = 'foulborn'; break
+    // 認不得就維持 Explicit / 無 generation —— 與上游的 switch 落空時一致。
+    const role = matchAnnotation(match.groups!.type)
+    if (role) {
+      type = role.type!
+      generation = role.generation
     }
 
     name = match.groups!.name ?? undefined

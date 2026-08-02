@@ -68,6 +68,8 @@ export interface ParsedItem {
   isVeiled?: boolean
   isFoil?: boolean
   isFoulborn?: boolean
+  /** 3.29 軍團機制:籠罩晶石作用過的傳奇護甲,底材名帶「殘存 」裝飾詞。 */
+  isVestigial?: boolean
   statsByType: StatCalculated[]
   newMods: ParsedModifier[]
   unknownModifiers: Array<{

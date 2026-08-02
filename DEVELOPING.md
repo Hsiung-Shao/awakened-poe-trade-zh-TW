@@ -64,6 +64,22 @@ verify-datasets             檢查 en 與 cmn-Hant 的語言無關鍵是否對�
 要單獨乾跑看差異就 `npm run gen-missing-items` / `npm run gen-disc-variants`
 (不帶 `--write`)。
 
+改完資料還要跑一支**不在 `regen-data` 裡**的稽核(它要連網):
+
+```shell
+npm run audit-trade-names            # 加 --verbose 看逐筆
+```
+
+**解析成功不等於查得到。** 送給交易站的搜尋條件是資料列的 `name` 那一串,交易站清單
+裡沒有它就回 0 筆,而畫面上只會看起來像「這東西沒人賣」。`fixtures` 測的是解析、
+`verify-datasets` 測的是兩語系對齊,**兩者都看不到這一層**。
+
+這支拿國際服與台服的 `/api/trade/data/items` 當權威清單逐列核對,再與
+`scripts/KNOWN-TRADE-GAPS.json` 比對:新出現的缺口、或清單裡突然查得到的條目,
+都會讓它以非零碼結束。目前登記在案的是 `en` 4 筆、`cmn-Hant` 19 筆,每一筆都寫了理由
+(舊版底材、大逃殺模式遺留的 `*Royale` 底材、台服未上架…),全部是遊戲與交易站的現況,
+不是可修的缺陷。
+
 > ### ⚠ 為什麼不能只跑其中一支
 >
 > 兩支都會「先移除自己上一輪產生的列」,而**判準有重疊**:占卜寶珠的 100 列區域
