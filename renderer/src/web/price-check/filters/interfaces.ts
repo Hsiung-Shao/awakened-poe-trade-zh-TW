@@ -53,6 +53,9 @@ export interface ItemFilters {
   foulborn?: {
     value: boolean
   }
+  vestigial?: {
+    value: boolean
+  }
   influences?: Array<{
     value: ItemInfluence
     disabled: boolean

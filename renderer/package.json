@@ -11,7 +11,9 @@
     "gen-missing-items": "node ../scripts/gen-missing-items.mjs",
     "_comment_regen-data": "順序是硬性的,不是風格。gen-missing-items 會把所有帶 src 標記的列(含 disc 變體)清掉、重放到檔尾;只有 gen-disc-variants 會把變體重新插回基底列後面,而索引依 namespace::refName 去重、查表靠那個相鄰關係。單獨跑第一支會靜默弄丟 100 列占卜寶珠變體。",
     "regen-data": "npm run gen-missing-items -- --write && npm run gen-disc-variants -- --write && npm run make-index-files && npm run verify-datasets",
-    "verify-datasets": "node ../scripts/verify-datasets.mjs"
+    "verify-datasets": "node ../scripts/verify-datasets.mjs",
+    "_comment_audit-trade-names": "需要網路,所以不併進 regen-data。查的是「送出去交易站認不認得」—— 解析成功不等於查得到,前兩支都看不到這一層。發版前跑。",
+    "audit-trade-names": "node ../scripts/audit-trade-names.mjs"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "6.x.x",

@@ -1,0 +1,32 @@
+{
+  "_readme": "資料集裡有、但交易站查不到的名字。這是棘輪不是藉口清單:audit-trade-names.mjs 要求列在這裡的每一筆都持續查不到,哪天某一筆突然查得到了就會報錯要求移除。鍵是語言無關的 namespace::refName,值寫清楚為什麼 —— 沒有理由的條目等於沒被查證過。",
+  "_generatedAt": "2026-08-03",
+  "_howToVerify": "node scripts/audit-trade-names.mjs --verbose",
+  "en": {
+    "ITEM::Blighted Map": "內部列,不是交易 type。parseBlightedMap 用 ITEM_BY_REF 取它的圖示",
+    "ITEM::Blight-ravaged Map": "同上",
+    "ITEM::Thermal Vents Chart": "交易站的 chart 分類只有 Coral Forest / Coral Reef / Sandy Seabed 三種基底",
+    "GEM::Frost Wall of Encroachment": "交易站的寶石清單沒有這個蛻變條目(Frost Wall 本體有,但沒有任何 alt_* 變體)"
+  },
+  "cmn-Hant": {
+    "ITEM::Blighted Map": "內部列,不是交易 type。parseBlightedMap 用 ITEM_BY_REF 取它的圖示,名字刻意留英文",
+    "ITEM::Blight-ravaged Map": "同上",
+    "ITEM::Small Life Flask": "GGPK 有兩列同名底材,第二列是 Flasks/FlaskLife1Royale(大逃殺模式,已下線),繁中叫「生命藥劑（小）」。交易站只收正規的「小型生命藥劑」",
+    "ITEM::Medium Life Flask": "同上,FlaskLife2Royale /「生命藥劑（中）」",
+    "ITEM::Large Life Flask": "同上,FlaskLife3Royale /「生命藥劑（大）」",
+    "ITEM::Conductive Quiver": "舊版箭袋底材,交易站已下架",
+    "ITEM::Cured Quiver": "舊版箭袋底材,交易站已下架",
+    "ITEM::Heavy Quiver": "舊版箭袋底材,交易站已下架",
+    "ITEM::Light Quiver": "舊版箭袋底材,交易站已下架",
+    "ITEM::Rugged Quiver": "舊版箭袋底材,交易站已下架",
+    "ITEM::Golden Bracers": "舊版底材,交易站已下架",
+    "ITEM::Golden Caligae": "舊版底材,交易站已下架",
+    "ITEM::Thermal Vents Chart": "交易站的 chart 分類只有珊瑚林/珊瑚礁/沙質海床三種基底,兩服皆無此海圖",
+    "GEM::Frost Wall of Encroachment": "兩服交易站的寶石清單都沒有這個蛻變條目(冰牆本體有,但沒有任何 alt_* 變體)",
+    "UNIQUE::Broadstroke": "台服交易站未上架。繁中名經 GGPK + poedb 雙證人確認無誤,只是台服沒有這個條目",
+    "UNIQUE::Demigod's Presence": "台服交易站未上架,同上",
+    "UNIQUE::Demigod's Stride": "台服交易站未上架,同上",
+    "UNIQUE::Demigod's Touch": "台服交易站未上架,同上",
+    "UNIQUE::The Wellhook": "台服交易站未上架,同上"
+  }
+}

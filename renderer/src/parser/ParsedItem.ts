@@ -68,6 +68,8 @@ export interface ParsedItem {
   isVeiled?: boolean
   isFoil?: boolean
   isFoulborn?: boolean
+  /** 3.29 軍團機制:籠罩晶石作用過的傳奇護甲,底材名帶「殘存 」裝飾詞。 */
+  isVestigial?: boolean
   statsByType: StatCalculated[]
   newMods: ParsedModifier[]
   unknownModifiers: Array<{
@@ -85,6 +87,15 @@ export interface ParsedItem {
   }
   category?: ItemCategory
   info: BaseType
+  /**
+   * 傳奇物品**實際那一行底材**對應到的資料列。
+   *
+   * 不能事後用 `ITEM_BY_REF('ITEM', info.unique.base)![0]` 補算 —— 同一個英文底材可以有
+   * 兩個中文名,而那個 `[0]` 永遠是 ndjson 裡的第一列。實測:巨狼之眼送
+   * `type=狼王魔符`(舊版)撈到 2521 筆,送 `type=巨狼魔符`(現行)只有 55 筆,
+   * 拿舊版的價估現行的物品就是報錯價。
+   */
+  baseTypeInfo?: BaseType
   rawText: string
 }
 

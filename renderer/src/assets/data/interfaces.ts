@@ -251,6 +251,17 @@ export interface TranslationDict {
   UNMODIFIABLE: string
   FOULBORN_NAME: RegExp
   FOULBORN_MODIFIER: string
+  /**
+   * 3.29 軍團機制「殘存」(Vestigial):籠罩晶石作用於傳奇護甲後,底材名前面多一個
+   * 裝飾詞,物品上並多一條「殘存固定詞綴」。兩者都取自 GGPK clientstrings,ident
+   * 分別是 `DivergentItem`(`Vestigial {0}` / `殘存 {0}`)與
+   * `ModDescriptionLineDivergentImplicit`(`Vestigial Implicit Modifier` / `殘存固定詞綴`)。
+   *
+   * **選填**:只有 `en` 與 `cmn-Hant` 填得出來。`ru` / `ko` 沒有可信譯名,依專案鐵則
+   * 不憑空填 —— 那兩個語系維持現狀(殘存物品解析不出來,與加這兩個鍵之前一模一樣)。
+   */
+  VESTIGIAL_NAME?: RegExp
+  VESTIGIAL_IMPLICIT?: string
   // ---
   CHAT_SYSTEM: RegExp
   CHAT_TRADE: RegExp
