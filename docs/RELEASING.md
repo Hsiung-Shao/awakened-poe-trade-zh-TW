@@ -66,7 +66,27 @@ git config user.signingkey <你的 key id>
 cd renderer
 npm run verify-datasets          # en 與 cmn-Hant 的語言無關鍵必須對齊
 npm run make-index-files         # 確保索引與 ndjson 同步
+npm run lint                     # ⚠ CI 會擋,而 `npm run build` 不含它
 ```
+
+> ### ⚠ `npm run build` **不會**跑 lint
+>
+> `build` 是 `vue-tsc --noEmit && vite build` —— 型別過了不代表 lint 過。
+> CI 的 `renderer` job 會跑 `npm run lint` 而且 **error 會讓整個 workflow 紅掉**。
+> 3.29.904 就是這樣發出去的:程式碼正確、型別乾淨、測試全過,CI 卻因為
+> 四行縮排而失敗。
+>
+> ⚠ 本機第一次跑會說「'eslint' 不是內部或外部命令」—— 那不是壞掉,是
+> `renderer/node_modules` 少了 dev 相依。**修法只有 `npm ci`**:
+>
+> ```shell
+> cd renderer && npm ci
+> ```
+>
+> **不要用 `npm install` 補**。實測它會把 `package-lock.json` 砍掉 331 行
+> (整棵 eslint 連同其他 dev 相依),而且回報「up to date」不報任何錯 ——
+> 之後 `npm ci` 就再也裝不出 eslint,CI 卻還是紅的。真的誤跑了就
+> `git checkout -- renderer/package-lock.json` 還原再 `npm ci`。
 
 ```shell
 cd main
