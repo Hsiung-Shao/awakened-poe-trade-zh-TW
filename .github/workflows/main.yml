@@ -56,9 +56,19 @@ jobs:
       working-directory: ./main
     - run: npm run build
       working-directory: ./main
-    # `-p never`:只打包、不上傳。刻意不給 GH_TOKEN —— 沒有 token 就算
-    # 設定被改回 onTagOrDraft 也寫不進 Release。
-    - run: npm run package "--" -p never
+    # `-p never` 已經寫在 `main/package.json` 的 package script 裡,**這裡不要再傳一次**。
+    # 刻意不給 GH_TOKEN,所以就算設定被改回 onTagOrDraft 也寫不進 Release。
+    #
+    # ⚠⚠ 傳兩次是把保護關掉,不是加倍。CLI 收到重複的 `-p` 會解析成陣列
+    # `['never','never']`,而判斷是「等於字串 never」—— 不相等就走預設發布路徑,
+    # 去建 GitHubPublisher,再因為沒有 token 而失敗:
+    #
+    #     ⨯ GitHub Personal Access Token is not set, neither programmatically,
+    #       nor using env "GH_TOKEN"
+    #
+    # 本機實測:`npm run package` 乾淨通過,`npm run package -- -p never` 就報上面那行。
+    # 這就是 3.29.902 之後 Linux 打包一直紅的原因,而擋住上傳的其實只是「沒給 token」。
+    - run: npm run package
       working-directory: ./main
     - name: Hash
       if: ${{ startsWith(matrix.os, 'windows') }}
