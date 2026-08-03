@@ -304,12 +304,21 @@ function findInDatabase (item: ParserState) {
     const baseTypes = ITEM_BY_TRANSLATED('ITEM', item.baseType!)
     if (!baseTypes?.length) return err('item.unknown')
 
-    const baseTypeRef = baseTypes[0].refName
-    info = info.filter(info => info.unique!.base === baseTypeRef)
-    // 上游沒有檢查這裡是否濾空。濾空時 `info[0]` 是 undefined,錯誤會延後到下面的
+    // 上游只看 `baseTypes[0].refName`,但**一個顯示名可以對到多個英文底材**:
+    // 繁中的「狼王魔符」同時是 `Greatwolf Talisman`(舊版譯名)與
+    // `Wolf Alpha Talisman`(瑞佛詛咒的底材)。取第一個的話,瑞佛詛咒會被
+    // 過濾成空陣列 → 整件解析失敗。改成比對**所有**候選。
+    const baseTypeRefs = new Set(baseTypes.map(base => base.refName))
+    const matched = info.filter(candidate => baseTypeRefs.has(candidate.unique!.base))
+    // 上游也沒有檢查這裡是否濾空。濾空時 `info[0]` 是 undefined,錯誤會延後到下面的
     // `item.info.craftable` 才爆成看不懂的 TypeError。回報 item.unknown 才是
     // 誠實的結果 —— 「查不到這件物品」,而不是「程式壞了」。
-    if (!info.length) return err('item.unknown')
+    if (!matched.length) return err('item.unknown')
+    info = matched
+
+    // 記住實際對上的那一列底材。反過來也成立:**一個英文底材可以有兩個中文名**
+    // (`Greatwolf Talisman` = 狼王魔符 / 巨狼魔符),而查詢要送的是物品身上那一個。
+    item.baseTypeInfo = baseTypes.find(base => base.refName === matched[0].unique!.base)
   }
   item.infoVariants = info
   // choose 1st variant, correct one will be picked at the end of parsing

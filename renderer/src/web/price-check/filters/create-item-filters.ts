@@ -146,7 +146,11 @@ function createFiltersInner (
       filters.searchExact = {
         name: item.info.name,
         nameTrade: t(opts, item.info),
-        baseTypeTrade: t(opts, ITEM_BY_REF('ITEM', item.info.unique.base)![0])
+        // `baseTypeInfo` 是解析時**物品那一行底材**真正對上的列。退回 `ITEM_BY_REF(…)![0]`
+      // 只是給未鑑定等沒走過底材比對的情況用 —— 那個 `[0]` 永遠是 ndjson 的第一列,
+      // 而同一個英文底材可以有兩個中文名(`Greatwolf Talisman` = 狼王魔符 / 巨狼魔符),
+      // 送錯的話撈到的是完全不同的一批(實測 2521 筆 vs 55 筆)。
+      baseTypeTrade: t(opts, item.baseTypeInfo ?? ITEM_BY_REF('ITEM', item.info.unique.base)![0])
       }
     } else {
       filters.searchExact = {
@@ -210,7 +214,11 @@ function createFiltersInner (
     filters.searchExact = {
       name: item.info.name,
       nameTrade: t(opts, item.info),
-      baseTypeTrade: t(opts, ITEM_BY_REF('ITEM', item.info.unique.base)![0])
+      // `baseTypeInfo` 是解析時**物品那一行底材**真正對上的列。退回 `ITEM_BY_REF(…)![0]`
+      // 只是給未鑑定等沒走過底材比對的情況用 —— 那個 `[0]` 永遠是 ndjson 的第一列,
+      // 而同一個英文底材可以有兩個中文名(`Greatwolf Talisman` = 狼王魔符 / 巨狼魔符),
+      // 送錯的話撈到的是完全不同的一批(實測 2521 筆 vs 55 筆)。
+      baseTypeTrade: t(opts, item.baseTypeInfo ?? ITEM_BY_REF('ITEM', item.info.unique.base)![0])
     }
   } else {
     filters.searchExact = {
