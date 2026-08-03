@@ -36,7 +36,9 @@
     </div>
     <stack-value :filters="itemFilters" :item="item"/>
     <div v-if="showSupportLinks" class="mt-auto border border-dashed p-2">
-      <div class="mb-1">{{ t('Support development on') }} <a href="https://patreon.com/awakened_poe_trade" class="inline-flex align-middle animate__animated animate__fadeInRight" target="_blank"><img class="inline h-5" src="/images/Patreon.svg"></a></div>
+      <!-- 與 SettingsWindow.vue 同一個決定:贊助入口改指本版維護者,標籤說清楚
+           對象是這份繁中建置,且不使用 Patreon 的標誌(MIT 不授權商標)。 -->
+      <div class="mb-1">{{ t('settings.support_build') }} <a href="https://buymeacoffee.com/hsiung" class="inline-flex align-middle border-b animate__animated animate__fadeInRight" target="_blank">Buy&nbsp;Me&nbsp;a&nbsp;Coffee</a></div>
       <i18n-t keypath="app.thanks_3rd_party" tag="div">
         <a href="https://poeprices.info" target="_blank" class="bg-gray-900 px-1 rounded">poeprices.info</a>
         <a href="https://poe.ninja/support" target="_blank" class="bg-gray-900 px-1 rounded">poe.ninja</a>

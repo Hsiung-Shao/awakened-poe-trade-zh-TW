@@ -24,6 +24,20 @@ files:
     filter: ["main.js", "vision.js"]
   - from: "../renderer/dist"
     to: "."
+
+# ⚠ MIT 的條件是「著作權聲明**與授權聲明**必須包含在所有副本或重要部分中」。
+# 上面的 `copyright:` 只會寫進 Windows exe 的 VERSIONINFO,那是**著作權聲明**,
+# 不是授權聲明全文 —— 兩者不能互相取代。
+#
+# 實測 3.29.904 的安裝目錄:只有 LICENSE.electron.txt、LICENSES.chromium.html
+# (electron-builder 自己放的)與兩個 npm 相依的 LICENSE,**本程式自己的 MIT
+# 授權全文從來沒有隨產物出貨過**。這裡把上游的 LICENSE 原樣放到 exe 旁邊,
+# 與 Electron 的授權檔同一個位置。
+#
+# 用 extraFiles 而不是 files:後者會把它塞進 app.asar 壓縮檔,使用者打不開。
+extraFiles:
+  - from: "../LICENSE"
+    to: "LICENSE.txt"
 extraMetadata:
   main: "main.js"
 nsis:

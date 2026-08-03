@@ -27,6 +27,9 @@
     "Refresh": "刷新",
     "map.mods.heist": "劫盜",
     "map.mods.outdated": "過時",
-    "Support development on": "支持開發"
-  
+    "Support development on": "支持開發",
+    "settings": {
+      "support_build": "贊助這份繁中版建置"
+    }
+
 }

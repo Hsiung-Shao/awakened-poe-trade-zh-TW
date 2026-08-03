@@ -6,7 +6,6 @@ export * from './interfaces'
 export let ITEM_DROP: DropEntry[]
 export let CLIENT_STRINGS: TranslationDict
 export let CLIENT_STRINGS_REF: TranslationDict
-export let APP_PATRONS: Array<{ from: string, months: number, style: number }>
 
 export let ITEM_BY_TRANSLATED: (ns: BaseType['namespace'], name: string) => BaseType[] | undefined = () => undefined
 export let ITEM_BY_REF: (ns: BaseType['namespace'], name: string) => BaseType[] | undefined = () => undefined
@@ -223,8 +222,9 @@ export function stat (text: string) {
 
 export async function init (lang: string) {
   CLIENT_STRINGS_REF = (await import(/* @vite-ignore */`${import.meta.env.BASE_URL}data/en/client_strings.js`)).default
+  // 上游在這裡載入 data/patrons.json(原作者的贊助者名單)。名單與顯示它的
+  // 獎台/跑馬燈已一併移除,理由見 web/settings/SettingsWindow.vue 頂端。
   ITEM_DROP = await (await fetch(`${import.meta.env.BASE_URL}data/item-drop.json`)).json()
-  APP_PATRONS = await (await fetch(`${import.meta.env.BASE_URL}data/patrons.json`)).json()
 
   await loadForLang(lang)
 

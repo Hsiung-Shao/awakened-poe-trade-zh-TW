@@ -18,6 +18,20 @@
         <a class="border-b" :href="UPSTREAM_URL" target="_blank">Awakened PoE Trade</a>
         by SnosMe</p>
       <p>based on upstream {{ UPSTREAM_VERSION }}</p>
+      <!--
+        MIT 要求著作權聲明與授權聲明包含在所有副本中。授權全文隨安裝放在程式目錄的
+        LICENSE.txt(見 main/electron-builder.yml 的 extraFiles),這裡是它在介面上
+        的入口 —— 使用者不必去翻資料夾就知道自己拿到的是什麼、原作者是誰。
+
+        原作者的贊助入口也放這裡。設定頁左下的贊助連結已改指本繁中版的維護者,
+        所以支持原作者的路必須在程式裡另外留一條,不能只留在 README。
+      -->
+      <p class="mt-2">MIT License &middot; Copyright &copy; 2020 Alexander Drozdov</p>
+      <p>
+        <a class="border-b" :href="`${REPO_URL}/blob/master/LICENSE`" target="_blank">License text</a>
+        &middot;
+        <a class="border-b" href="https://patreon.com/awakened_poe_trade" target="_blank">Support the original author</a>
+      </p>
     </div>
     <div class="border border-gray-600 rounded p-2 whitespace-nowrap min-w-min w-72">
       <p>{{ info.str1 }}</p>

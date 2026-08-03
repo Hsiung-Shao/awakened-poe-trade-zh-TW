@@ -99,6 +99,18 @@ Get-FileHash .\Awakened-PoE-Trade-zh-TW-Setup-3.29.900.exe -Algorithm SHA256
 本專案是衍生作品,**所有核心功能都出自原作者之手**。如果這個工具對你有幫助,
 請支持原作者:[Patreon](https://patreon.com/awakened_poe_trade)。
 
+> ### 兩個贊助連結分別是誰的
+>
+> 程式裡設定頁的贊助連結指向**本繁中版維護者**
+> ([Buy Me a Coffee](https://buymeacoffee.com/hsiung)),贊助的是繁體中文的
+> 修正與維護,**不是** Awakened PoE Trade 本身的開發。
+>
+> **原作者的贊助入口沒有被移除**,在程式的「關於」頁與上面這一行都找得到。
+> 核心功能是他寫的,請優先支持他。
+>
+> 上游程式內的贊助者名單(247 位)已一併移除 —— 那些人贊助的是原作者,
+> 不是這份建置,留著會造成誤解。
+
 | 專案 | 作者 | 貢獻 |
 |---|---|---|
 | [Awakened PoE Trade](https://github.com/SnosMe/awakened-poe-trade) | [@SnosMe](https://github.com/SnosMe) | 本專案的全部基礎 |
