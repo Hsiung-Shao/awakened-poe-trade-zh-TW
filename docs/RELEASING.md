@@ -195,10 +195,24 @@ $port = (Get-NetTCPConnection -State Listen | Where-Object { $pids -contains $_.
 { "state": "update-available", "version": "3.29.900", "noDownloadReason": "unsigned-build" }
 ```
 
-4. **確認沒有自動下載**:`%LOCALAPPDATA%\awakened-poe-trade-updater` 必須不存在
-   或為空。裡面有 `installer.exe` 就代表 autoDownload 沒關掉。
-   ⚠ 該目錄可能有**官方版 APT** 留下的舊檔(兩者共用 app 名稱),測試前先清空,
-   否則會把別人的殘留當成我們自動下載的證據。
+4. **確認沒有自動下載**:看 `%LOCALAPPDATA%\awakened-poe-trade-updater`。
+
+   > ### ⚠⚠ 「有 `installer.exe` 就代表 autoDownload 沒關掉」是**錯的判準**
+   >
+   > 這條寫在這裡誤導過一次。實測(3.29.904 發布後):**NSIS 安裝檔自己就會在那個
+   > 目錄放一份 `installer.exe`** —— 把 app 關掉、刪掉該檔、單獨執行 Setup,
+   > 檔案照樣出現。它跟更新器有沒有自動下載完全無關。
+   >
+   > 那個目錄還是**兩個 app 共用的**:`updaterCacheDirName` 是
+   > `awakened-poe-trade-updater`,與官方版 APT 相同。實測看到
+   > `pending\Awakened-PoE-Trade-Setup-3.29.103.exe`(檔名沒有 `-zh-TW`)——
+   > 那是官方版下載的,不是我們的。
+   >
+   > **可信的判準只有一個:app 自己回報的更新器狀態。** 上面第 3 步的 `/config`
+   > 回 `noDownloadReason` 就代表它決定不下載。要再確認一層,就比對
+   > `installer.exe` 的 SHA-256 是不是「比目前安裝版**更新**的那一版」——
+   > 等於現行版本的話,那份是安裝當下留的,不是下載來的。
+
 5. 測完把版本改回去,並清掉 `main/dist`
 
 ---
