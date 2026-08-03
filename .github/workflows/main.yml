@@ -31,6 +31,10 @@ jobs:
       working-directory: ./renderer
     - run: npm run lint
       working-directory: ./renderer
+    # 漏翻不會讓建置或型別檢查失敗 —— vue-i18n 設了 fallbackFormat + missingWarn:
+    # false,少一個鍵就安靜地退回英文。這一步是唯一會擋下來的地方。
+    - run: npm run verify-i18n
+      working-directory: ./renderer
     - run: npm run build
       working-directory: ./renderer
     - uses: actions/upload-artifact@v7

@@ -13,7 +13,9 @@
     "regen-data": "npm run gen-missing-items -- --write && npm run gen-disc-variants -- --write && npm run make-index-files && npm run verify-datasets",
     "verify-datasets": "node ../scripts/verify-datasets.mjs",
     "_comment_audit-trade-names": "需要網路,所以不併進 regen-data。查的是「送出去交易站認不認得」—— 解析成功不等於查得到,前兩支都看不到這一層。發版前跑。",
-    "audit-trade-names": "node ../scripts/audit-trade-names.mjs"
+    "audit-trade-names": "node ../scripts/audit-trade-names.mjs",
+    "_comment_verify-i18n": "繁中漏翻不會讓建置失敗(fallbackFormat 會安靜退回英文),所以要有這支",
+    "verify-i18n": "node ../scripts/verify-i18n.mjs"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "6.x.x",

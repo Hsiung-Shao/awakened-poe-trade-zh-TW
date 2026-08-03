@@ -67,6 +67,7 @@ cd renderer
 npm run verify-datasets          # en 與 cmn-Hant 的語言無關鍵必須對齊
 npm run make-index-files         # 確保索引與 ndjson 同步
 npm run lint                     # ⚠ CI 會擋,而 `npm run build` 不含它
+npm run verify-i18n              # ⚠ 漏翻不會讓建置失敗,只會安靜退回英文
 ```
 
 > ### ⚠ `npm run build` **不會**跑 lint
