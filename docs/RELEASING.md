@@ -127,10 +127,24 @@ cd main && npm run checksums -- --write
 
 ```shell
 git tag -s v3.29.900 -m "Awakened PoE Trade-zh-TW 3.29.900"
-git push origin main
+git push origin master
 git push origin v3.29.900
 git verify-tag v3.29.900            # 自己先驗一次
 ```
+
+> ⚠ 本專案的預設分支是 **`master`**,不是 `main`。
+
+> ### ⚠⚠ `gh` 預設指向的是**上游**,不是我們的 repo
+>
+> 這個 clone 有兩個 remote(`origin` 是我們的、`upstream` 是 SnosMe 的),而
+> `gh repo view` 實測回的是 **`SnosMe/awakened-poe-trade`**。不帶 `--repo` 的
+> `gh release create` 會往上游發 —— 權限會擋下來,但錯誤訊息不會告訴你是打錯了地方。
+>
+> 每條 `gh` 指令都帶 `--repo Hsiung-Shao/awakened-poe-trade-zh-TW`,或先固定一次:
+>
+> ```shell
+> gh repo set-default Hsiung-Shao/awakened-poe-trade-zh-TW
+> ```
 
 ⚠ `git tag` 預設是**字串排序**,`v0.10.0` 會排在 `v0.9.0` 前面。
 列 tag 一律加 `--sort=v:refname`,否則會誤以為某個版本沒打過 tag。
