@@ -69,6 +69,7 @@ const parsers: Array<
   parseHeistContract,
   parseHeistBlueprint,
   parseChart,
+  parseUltimatum,
   parseAreaLevel,
   parseAtzoatlRooms,
   parseMirroredTablet,
@@ -1135,6 +1136,75 @@ function parseChart (section: string[], item: ParsedItem) {
       item.map.itemRarity = parseInt(line.slice(_$.MAP_ITEM_RARITY.length), 10)
     } else if (line.startsWith(_$.MAP_MONSTER_PACK_SIZE)) {
       item.map.packSize = parseInt(line.slice(_$.MAP_MONSTER_PACK_SIZE.length), 10)
+    }
+  }
+
+  return 'SECTION_PARSED'
+}
+
+/**
+ * 最後通牒雕刻(`Inscribed Ultimatum`)—— 上游完全沒做過這個物品類別。
+ *
+ * 名牌下方那一段有四行決定價值的資訊(挑戰、區域等級、需求獻祭、獎勵),而在此之前
+ * **整段被靜默丟棄**:`parseAreaLevel` 的白名單沒有它,leftovers 的
+ * `parseUnannotatedModifiers` 又只處理白裝/魔法/稀有/傳奇,雕刻的稀有度是通貨。
+ * 結果查價只送得出物品名,等於在搜尋全部的雕刻。
+ *
+ * 對接一律走 GGPK 的 ident(`ultimatumencountertypes` / `ultimatumitemisedrewards`),
+ * 因為**物品上的文字與交易站選項的文字不一樣**(遊戲寫「存活」、交易站寫「倖存」),
+ * 拿文字互比必錯。ident 本身就是交易站的 option id。
+ */
+function parseUltimatum (section: string[], item: ParserState) {
+  if (item.info.refName !== 'Inscribed Ultimatum') return 'PARSER_SKIPPED'
+
+  parseAreaLevelNested(section, item)
+  if (!item.areaLevel) {
+    return 'SECTION_SKIPPED'
+  }
+
+  const challengeByText = new Map<string | undefined, NonNullable<ParsedItem['ultimatum']>['challenge']>([
+    [_$.ULTIMATUM_CHALLENGE_EXTERMINATE, 'Exterminate'],
+    [_$.ULTIMATUM_CHALLENGE_SURVIVAL, 'Survival'],
+    [_$.ULTIMATUM_CHALLENGE_DEFENSE, 'Defense'],
+    [_$.ULTIMATUM_CHALLENGE_CONQUER, 'Conquer']
+  ])
+  const rewardByText = new Map<string | undefined, NonNullable<ParsedItem['ultimatum']>['reward']>([
+    [_$.ULTIMATUM_REWARD_DOUBLE_CURRENCY, 'DoubleCurrency'],
+    [_$.ULTIMATUM_REWARD_DOUBLE_DIVCARDS, 'DoubleDivCards'],
+    [_$.ULTIMATUM_REWARD_MIRROR_RARE, 'MirrorRare']
+  ])
+
+  item.ultimatum = {}
+
+  for (const line of section) {
+    if (_$.ULTIMATUM_CHALLENGE !== undefined && line.startsWith(_$.ULTIMATUM_CHALLENGE)) {
+      // 認不出的挑戰類型留 undefined,不猜
+      item.ultimatum.challenge = challengeByText.get(line.slice(_$.ULTIMATUM_CHALLENGE.length))
+      continue
+    }
+
+    const sacrificeMatch = _$.ULTIMATUM_SACRIFICE && line.match(_$.ULTIMATUM_SACRIFICE)
+    if (sacrificeMatch) {
+      // 獻祭通貨時尾巴帶數量(`寶石匠的稜鏡 x10`),交易站只吃物品名,先剝掉。
+      // 剝不掉就原樣保留 —— 「可鏡像、稀有物品」那種靜態敘述本來就沒有數量。
+      const withQuantity = _$.ULTIMATUM_SACRIFICE_QUANTITY &&
+        sacrificeMatch[1].match(_$.ULTIMATUM_SACRIFICE_QUANTITY)
+      if (withQuantity) {
+        item.ultimatum.sacrifice = withQuantity[1]
+        item.ultimatum.sacrificeQuantity = Number(withQuantity[2])
+      } else {
+        item.ultimatum.sacrifice = sacrificeMatch[1]
+      }
+      continue
+    }
+
+    const rewardMatch = _$.ULTIMATUM_REWARD && line.match(_$.ULTIMATUM_REWARD)
+    if (rewardMatch) {
+      // 三種靜態文字都不是 → 這一行是動態的傳奇物品名,也就是「獻祭傳奇換傳奇」那種。
+      // ⚠ 這條回推路徑目前沒有實物樣本可驗,只有 GGPK 的資料結構佐證
+      //   (ultimatumitemisedrewards 對 ExchangeUnique 沒有靜態 RewardText)。
+      item.ultimatum.reward = rewardByText.get(rewardMatch[1]) ?? 'ExchangeUnique'
+      continue
     }
   }
 

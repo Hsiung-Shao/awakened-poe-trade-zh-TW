@@ -85,6 +85,24 @@ export interface ParsedItem {
     jobLevel?: number
     targetValue?: 'Priceless'
   }
+  /**
+   * 最後通牒雕刻。三個值都用 GGPK 的 ident,而 ident 就是交易站的 option id。
+   *
+   * `challenge` / `reward` 認不出來時留 `undefined` —— 送出時就不帶那個篩選器,
+   * 退回「只搜物品名」的現行行為,不猜。
+   */
+  ultimatum?: {
+    challenge?: 'Exterminate' | 'Survival' | 'Defense' | 'Conquer'
+    reward?: 'DoubleCurrency' | 'DoubleDivCards' | 'MirrorRare' | 'ExchangeUnique'
+    /**
+     * 「需求獻祭」要交出去的東西。數量已剝除,所以這裡是純物品名
+     * (`寶石匠的稜鏡`、`沙塵之影`);獎勵是「複製稀有物品」那種時,
+     * 這一行是靜態敘述而不是物品名,原樣保留。
+     */
+    sacrifice?: string
+    /** 獻祭通貨時的數量(`寶石匠的稜鏡 x10` 的 10);沒有數量就是 undefined */
+    sacrificeQuantity?: number
+  }
   category?: ItemCategory
   info: BaseType
   /**

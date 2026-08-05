@@ -169,6 +169,15 @@ interface TradeRequest {
           map_completion_reward?: { option?: 'any' | string }
         }
       }
+      ultimatum_filters?: {
+        filters: {
+          // option id 直接沿用 GGPK 的 ident,見 parser 的 parseUltimatum
+          ultimatum_challenge?: { option?: string }
+          ultimatum_reward?: { option?: string }
+          // 這兩個在交易站是自由文字(沒有下拉選項),填的是物品名
+          ultimatum_input?: { option?: string }
+        }
+      }
       heist_filters?: {
         filters: {
           heist_wings?: FilterRange
@@ -396,6 +405,19 @@ export function createTradeRequest (filters: ItemFilters, stats: StatFilter[]) {
     propSet(query.filters, 'map_filters.filters.area_level.min', filters.areaLevel.value)
     if (filters.areaLevel.max) {
       propSet(query.filters, 'map_filters.filters.area_level.max', filters.areaLevel.max)
+    }
+  }
+
+  if (filters.ultimatum && !filters.ultimatum.disabled) {
+    // 每一項各自判斷 —— 認不出來的欄位是 undefined,那就不送,退回只搜物品名
+    if (filters.ultimatum.challenge) {
+      propSet(query.filters, 'ultimatum_filters.filters.ultimatum_challenge.option', filters.ultimatum.challenge)
+    }
+    if (filters.ultimatum.reward) {
+      propSet(query.filters, 'ultimatum_filters.filters.ultimatum_reward.option', filters.ultimatum.reward)
+    }
+    if (filters.ultimatum.sacrifice) {
+      propSet(query.filters, 'ultimatum_filters.filters.ultimatum_input.option', filters.ultimatum.sacrifice)
     }
   }
 

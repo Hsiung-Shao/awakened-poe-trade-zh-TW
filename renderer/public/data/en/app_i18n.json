@@ -111,6 +111,16 @@
     "not_split": "Not Split",
     "map_foil_reward": "Foil {0}"
   },
+  "ultimatum": {
+    "Exterminate": "Defeat Waves of Enemies",
+    "Survival": "Survive",
+    "Defense": "Protect the Altar",
+    "Conquer": "Stand in the Stone Circles",
+    "DoubleCurrency": "Currency",
+    "DoubleDivCards": "Divination Cards",
+    "MirrorRare": "Mirrored Rare Item",
+    "ExchangeUnique": "Unique Item"
+  },
   "item_category": {
     "prop": "Category: {0}",
     "map": "Map",

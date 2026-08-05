@@ -53,7 +53,13 @@ export function createExactStatFilters (
     item.category !== ItemCategory.Sentinel
   )) {
     keepByType.push(ModifierType.Explicit)
-  } else if (item.rarity === ItemRarity.Rare && item.category === ItemCategory.Idol) {
+  } else if (item.rarity === ItemRarity.Rare && (
+    item.category === ItemCategory.Idol ||
+    // 稀有地圖的詞綴上游整批不收,所以「釋界干擾玩家」「區域內含有不穩定的惡魔觸手」
+    // 這些決定要不要買的詞綴**連勾都勾不到**。收進來但預設不勾(見下方地圖分支),
+    // 送出的查詢因此與收之前逐字相同,只是多了可勾的選項。
+    item.category === ItemCategory.Map
+  )) {
     keepByType.push(ModifierType.Explicit)
   }
 
@@ -89,9 +95,10 @@ export function createExactStatFilters (
   }
   if (item.category === ItemCategory.Map) {
     for (const filter of ctx.filters) {
-      if (filter.tag !== FilterTag.Property && filter.tag !== FilterTag.Pseudo) {
-        filter.disabled = false
-      }
+      if (filter.tag === FilterTag.Property || filter.tag === FilterTag.Pseudo) continue
+      // 稀有地圖有 6-8 條詞綴,全部當條件送出必定 0 筆 —— 所以顯示出來讓使用者自己挑,
+      // 但預設不勾。魔法地圖只有 1-2 條,維持原本的全勾。
+      filter.disabled = (item.rarity === ItemRarity.Rare && filter.tag === FilterTag.Explicit)
     }
     return ctx.filters
   }

@@ -130,6 +130,28 @@ export default {
   // 3.29「殘存」(Legion)。GGPK clientstrings ident:DivergentItem / ModDescriptionLineDivergentImplicit
   VESTIGIAL_NAME: /^殘存 (.*)$/,
   VESTIGIAL_IMPLICIT: '殘存固定詞綴',
+  // 最後通牒雕刻。標籤取自 GGPK clientstrings,ident 依序為
+  // UltimatumItemisedTrialEncounter / ...ItemRequirement / ...Reward。
+  // ⚠ 區域等級不必另立鍵 —— 上面的 AREA_LEVEL_ALT 已經是「區域等級: 」。
+  ULTIMATUM_CHALLENGE: '挑戰: ',
+  ULTIMATUM_SACRIFICE: /^需求獻祭: (.*)$/,
+  // 獻祭通貨時會多帶數量:GGPK 的 UltimatumItemisedTrialItemRequirementQuantity
+  // (`需求獻祭: {0} {1}`)配 UltimatumItemisedTrialQuantityFormat(`x{0}`),
+  // 實際長成「需求獻祭: 寶石匠的稜鏡 x10」。數量格式兩語系相同。
+  ULTIMATUM_SACRIFICE_QUANTITY: /^(.*?) x(\d+)$/,
+  ULTIMATUM_REWARD: /^獎勵: (.*)$/,
+  // 挑戰類型 = GGPK ultimatumencountertypes.Name。
+  // ⚠ 這裡的**中文與交易站選項的中文不一樣**(遊戲裡寫「存活」,交易站寫「倖存」),
+  // 所以對接一律走 ident,ident 本身就是交易站的 option id。
+  ULTIMATUM_CHALLENGE_EXTERMINATE: '擊敗數波怪物',
+  ULTIMATUM_CHALLENGE_SURVIVAL: '存活',
+  ULTIMATUM_CHALLENGE_DEFENSE: '保護神壇',
+  ULTIMATUM_CHALLENGE_CONQUER: '站在符文上',
+  // 獎勵類型 = GGPK ultimatumitemisedrewards.RewardText。只有這三種是靜態文字;
+  // 第四種 ExchangeUnique 的獎勵行是動態的傳奇物品名,認不出來時才回推成它。
+  ULTIMATUM_REWARD_DOUBLE_CURRENCY: '翻倍獻祭的通貨',
+  ULTIMATUM_REWARD_DOUBLE_DIVCARDS: '翻倍獻祭的命運卡',
+  ULTIMATUM_REWARD_MIRROR_RARE: '物品和複製品',
   // ---
   CHAT_SYSTEM: /^: (?<body>.+)$/,
   CHAT_TRADE: /^\$(?:<(?<guild_tag>.+?)> )?(?<char_name>.+?): (?<body>.+)$/,

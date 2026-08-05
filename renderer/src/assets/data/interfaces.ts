@@ -262,6 +262,43 @@ export interface TranslationDict {
    */
   VESTIGIAL_NAME?: RegExp
   VESTIGIAL_IMPLICIT?: string
+  /**
+   * 最後通牒雕刻(`Inscribed Ultimatum`)名牌下方那三行。
+   *
+   * 標籤取自 GGPK `clientstrings`,ident 依序是 `UltimatumItemisedTrialEncounter`、
+   * `UltimatumItemisedTrialItemRequirement`、`UltimatumItemisedTrialReward`。
+   * 區域等級沿用 `AREA_LEVEL` / `AREA_LEVEL_ALT`,不另立鍵。
+   *
+   * **選填**,理由同 `VESTIGIAL_NAME`:GGPK 只有英文與繁中,`ru` / `ko` 沒有可信
+   * 譯名就不憑空填,那兩個語系維持現狀(雕刻的四行讀不到,與加這些鍵之前一樣)。
+   */
+  ULTIMATUM_CHALLENGE?: string
+  ULTIMATUM_SACRIFICE?: RegExp
+  /**
+   * 「需求獻祭」帶數量時的尾綴(`寶石匠的稜鏡 x10`)。第 1 組是物品名、第 2 組是數量。
+   * 交易站的 `ultimatum_input` 只吃物品名,所以要先把數量剝掉才查得到。
+   */
+  ULTIMATUM_SACRIFICE_QUANTITY?: RegExp
+  ULTIMATUM_REWARD?: RegExp
+  /**
+   * 挑戰類型 = GGPK `ultimatumencountertypes.Name`,鍵名後半就是該列的 ident,
+   * 而 **ident 本身即交易站的 option id**。
+   *
+   * ⚠ 這些是**物品上顯示的文字**,與交易站選項的文字不同(遊戲寫「存活」、
+   * 交易站寫「倖存」),所以跨層對接只能走 ident,不能拿文字互比。
+   */
+  ULTIMATUM_CHALLENGE_EXTERMINATE?: string
+  ULTIMATUM_CHALLENGE_SURVIVAL?: string
+  ULTIMATUM_CHALLENGE_DEFENSE?: string
+  ULTIMATUM_CHALLENGE_CONQUER?: string
+  /**
+   * 獎勵類型 = GGPK `ultimatumitemisedrewards.RewardText`。
+   * 只有這三種是靜態文字;第四種 `ExchangeUnique` 顯示的是動態的傳奇物品名,
+   * 因此只在這三種都不匹配時才回推成它。
+   */
+  ULTIMATUM_REWARD_DOUBLE_CURRENCY?: string
+  ULTIMATUM_REWARD_DOUBLE_DIVCARDS?: string
+  ULTIMATUM_REWARD_MIRROR_RARE?: string
   // ---
   CHAT_SYSTEM: RegExp
   CHAT_TRADE: RegExp

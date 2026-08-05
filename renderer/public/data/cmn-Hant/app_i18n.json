@@ -107,6 +107,16 @@
     "not_split": "未分化",
     "map_foil_reward": "貼模 {0}"
   },
+  "ultimatum": {
+    "Exterminate": "擊敗數波敵人",
+    "Survival": "倖存",
+    "Defense": "保護祭壇",
+    "Conquer": "站在石陣內",
+    "DoubleCurrency": "通貨",
+    "DoubleDivCards": "命運卡",
+    "MirrorRare": "複製稀有物品",
+    "ExchangeUnique": "傳奇物品"
+  },
   "item_category": {
     "prop": "類別：{0}",
     "map": "地圖",

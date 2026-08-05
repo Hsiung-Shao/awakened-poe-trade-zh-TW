@@ -126,6 +126,29 @@ export default {
   // 3.29「殘存」(Legion)。GGPK clientstrings ident:DivergentItem / ModDescriptionLineDivergentImplicit
   VESTIGIAL_NAME: /^Vestigial (.*)$/,
   VESTIGIAL_IMPLICIT: 'Vestigial Implicit Modifier',
+  // Inscribed Ultimatum. Labels come from GGPK clientstrings, idents in order:
+  // UltimatumItemisedTrialEncounter / ...ItemRequirement / ...Reward.
+  // NOTE: area level needs no key of its own — AREA_LEVEL above already covers it.
+  ULTIMATUM_CHALLENGE: 'Challenge: ',
+  ULTIMATUM_SACRIFICE: /^Requires Sacrifice: (.*)$/,
+  // Sacrificing currency also carries a count: GGPK's
+  // UltimatumItemisedTrialItemRequirementQuantity (`Requires Sacrifice: {0} {1}`)
+  // with UltimatumItemisedTrialQuantityFormat (`x{0}`), e.g. "Gemcutter's Prism x10".
+  ULTIMATUM_SACRIFICE_QUANTITY: /^(.*?) x(\d+)$/,
+  ULTIMATUM_REWARD: /^Reward: (.*)$/,
+  // Challenge type = GGPK ultimatumencountertypes.Name. The ident *is* the trade
+  // site's option id, which is why matching goes through these and never through
+  // the trade site's own wording (it differs from the wording on the item).
+  ULTIMATUM_CHALLENGE_EXTERMINATE: 'Defeat waves of enemies',
+  ULTIMATUM_CHALLENGE_SURVIVAL: 'Survive',
+  ULTIMATUM_CHALLENGE_DEFENSE: 'Protect the Altar',
+  ULTIMATUM_CHALLENGE_CONQUER: 'Stand in the Stone Circles',
+  // Reward type = GGPK ultimatumitemisedrewards.RewardText. Only these three are
+  // static text; the fourth (ExchangeUnique) shows a unique item name instead,
+  // so it is inferred only when none of these match.
+  ULTIMATUM_REWARD_DOUBLE_CURRENCY: 'Doubles sacrificed Currency',
+  ULTIMATUM_REWARD_DOUBLE_DIVCARDS: 'Doubles sacrificed Divination Cards',
+  ULTIMATUM_REWARD_MIRROR_RARE: 'Item and Mirrored Copy',
   // ---
   CHAT_SYSTEM: /^: (?<body>.+)$/,
   CHAT_TRADE: /^\$(?:<(?<guild_tag>.+?)> )?(?<char_name>.+?): (?<body>.+)$/,

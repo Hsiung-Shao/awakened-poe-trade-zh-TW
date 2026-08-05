@@ -9,6 +9,8 @@
         :filter="{ disabled: false }" :text="t('item.map_foil_reward', [filters.mapCompletionReward.name])" />
       <filter-btn-numeric v-if="filters.areaLevel"
         :filter="filters.areaLevel" :name="t('item.area_level')" />
+      <filter-btn-logical v-if="filters.ultimatum && ultimatumText"
+        :filter="filters.ultimatum" :text="ultimatumText" />
       <filter-btn-numeric v-if="filters.heistWingsRevealed"
         :filter="filters.heistWingsRevealed" :name="t('item.heist_wings_revealed')" />
       <filter-btn-numeric v-if="filters.sentinelCharge"
@@ -162,6 +164,18 @@ export default defineComponent({
         }
       }),
       showUnknownMods,
+      // 最後通牒雕刻:一顆按鈕代表整組條件(挑戰/獎勵/需求獻祭),關掉就三個都不送。
+      // 用交易站自己的措辭,因為使用者接著就是去看交易站的結果 —— 那與物品上的
+      // 文字不同(物品寫「存活」、交易站寫「倖存」),兩者靠 ident 對接。
+      ultimatumText: computed(() => {
+        const ultimatum = props.filters.ultimatum
+        if (!ultimatum) return ''
+        const parts: string[] = []
+        if (ultimatum.challenge) parts.push(t(`ultimatum.${ultimatum.challenge}`))
+        if (ultimatum.reward) parts.push(t(`ultimatum.${ultimatum.reward}`))
+        if (ultimatum.sacrifice) parts.push(ultimatum.sacrifice)
+        return parts.join(' · ')
+      }),
       hasStats: computed(() =>
         props.stats.length ||
         (showUnknownMods.value && props.item.rarity === ItemRarity.Unique) ||

@@ -81,6 +81,16 @@ export interface ItemFilters {
     disabled: boolean
   }
   areaLevel?: FilterNumeric
+  /**
+   * 最後通牒雕刻。`challenge` / `reward` 是交易站的 option id(值來自 GGPK 的 ident);
+   * `sacrifice` 是「需求獻祭」那一行的物品名,只有查得到對應資料列時才會填。
+   */
+  ultimatum?: {
+    challenge?: string
+    reward?: string
+    sacrifice?: string
+    disabled: boolean
+  }
   heistWingsRevealed?: FilterNumeric
   sentinelCharge?: FilterNumeric
   trade: {

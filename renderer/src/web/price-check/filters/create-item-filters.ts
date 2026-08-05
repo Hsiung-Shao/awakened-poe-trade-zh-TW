@@ -131,6 +131,34 @@ function createFiltersInner (
       if (item.areaLevel! < 83) {
         filters.areaLevel.max = item.areaLevel!
       }
+    } else if (item.info.refName === 'Inscribed Ultimatum') {
+      // ⚠ 雕刻的 category 是 **Currency**,所以它在這個分支就 return 了 ——
+      // 寫在下面那串 else-if 裡的話永遠不會執行到。
+      if (item.areaLevel) {
+        filters.areaLevel = {
+          value: item.areaLevel,
+          disabled: false
+        }
+      }
+      if (item.ultimatum) {
+        // 「需求獻祭」有兩種形態:靜態文字(可鏡像、稀有物品)與物品名。交易站的
+        // ultimatum_input 收的是物品名,所以**只有查得到對應資料列時才送**,
+        // 靜態文字查不到就留空,不會把整句話當成物品名送出去。
+        //
+        // 三個 namespace 都要找 —— 實際掛售的雕刻獻祭的有通貨(混沌石 x10)、
+        // 傳奇(沙塵之影)**與命運卡**(黑暗術者 x3),命運卡不在 ITEM 裡。
+        const sacrificed = item.ultimatum.sacrifice
+          ? (ITEM_BY_TRANSLATED('ITEM', item.ultimatum.sacrifice) ??
+             ITEM_BY_TRANSLATED('UNIQUE', item.ultimatum.sacrifice) ??
+             ITEM_BY_TRANSLATED('DIVINATION_CARD', item.ultimatum.sacrifice))?.[0]
+          : undefined
+        filters.ultimatum = {
+          challenge: item.ultimatum.challenge,
+          reward: item.ultimatum.reward,
+          sacrifice: sacrificed ? t(opts, sacrificed) : undefined,
+          disabled: false
+        }
+      }
     } else if (item.itemLevel) {
       // Incubators, Wombgifts
       filters.itemLevel = {
