@@ -144,16 +144,37 @@ cd main && npm run checksums -- --write
 腳本會擋下兩種錯誤:`main/dist/` 有不認得的檔案(可能該簽卻沒簽),
 以及產物檔名不含當前版號(上一版的殘留)。**兩種都是硬失敗,不是警告。**
 
-### 4. 簽章的 tag
+它同時會把每個 exe 封進一個 `.zip`,裡面附一份只針對該檔的 `SHA256SUM.txt` ——
+起因是使用者只下載了 exe、沒下載旁邊的對照檔,結果無從比對。
+
+> ⚠ **附在 zip 裡的對照檔擋不住惡意竄改**,能改 zip 的人也能改它。它解決的是
+> 「漏下載」與「下載損毀」。要確認來源可信,靠的是 Release 說明裡公告的雜湊 ——
+> 那是另一個管道,所以第 5 步仍然要把雜湊寫進說明。
+
+> ⚠ **安裝檔會同時保留一份獨立的 `.exe`**,不要以為 zip 可以取代它:
+> `latest.yml` 的 `url` 指向那個檔名,electron-updater 直接去
+> `releases/download/<tag>/<檔名>` 抓,只給 zip 就是 404,而且更新失敗是安靜的。
+> 攜帶版沒有這個限制,所以只出 zip。
+
+### 4. tag
 
 ```shell
-git tag -s v3.29.900 -m "Awakened PoE Trade-zh-TW 3.29.900"
-git push origin master
+git push origin master              # 先推分支,再建 tag
+git tag -a v3.29.900 -m "Awakened PoE Trade-zh-TW 3.29.900"
 git push origin v3.29.900
-git verify-tag v3.29.900            # 自己先驗一次
+git rev-parse v3.29.900^{}          # 必須等於 master HEAD
 ```
 
 > ⚠ 本專案的預設分支是 **`master`**,不是 `main`。
+
+> ⚠ **順序不能顛倒。** 先建 tag 再推分支的話,`gh release create` 會把 tag 建在
+> 遠端**當時的** HEAD 上 —— 附件、發版說明全對,只有 Release 頁的原始碼是上一版,
+> 而且 `targetCommitish` 只顯示 `"master"`,從介面上看不出來。實際發生過。
+> 驗證只認 `git rev-parse <tag>^{}`:annotated tag 自己有一個 hash,
+> `git ls-remote --tags` 印的是那個,**不是它指向的 commit**。
+
+> 本專案**沒有 GPG 金鑰**,歷來的 tag 都是 annotated 而非簽章。要改成 `-s`
+> 得先產金鑰並上傳到 GitHub;已經存在的 tag 補不回去。
 
 > ### ⚠⚠ `gh` 預設指向的是**上游**,不是我們的 repo
 >
@@ -174,10 +195,14 @@ git verify-tag v3.29.900            # 自己先驗一次
 
 上傳 `main/dist/` 裡的:
 
-- 安裝版 `.exe`
-- 免安裝版 `.exe`
+- 安裝版 `.zip`(給手動下載的人,內含對照檔)
+- 免安裝版 `.zip`(同上)
+- 安裝版 `.exe`(**給 electron-updater**,`latest.yml` 指向它,漏掉就更新不到)
 - `latest.yml`(**漏掉的話「檢查更新」會失敗**,electron-updater 就是讀它)
 - `SHA256SUMS-<版本>.txt`
+
+發版說明要講清楚 `.exe` 與 `.zip` 的分工,否則使用者會直接抓那個獨立的 exe,
+又回到「漏下載對照檔」的原點。
 
 Release 說明裡要放雜湊值本身,不要只放檔案連結 —— 使用者要能在不下載附件的
 情況下看到該比對什麼。
