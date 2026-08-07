@@ -356,6 +356,8 @@ export default defineComponent({
   @apply bg-orange-600 text-white; }
 .tag-foulborn {
   @apply bg-pink-700 text-white; }
+.tag-vestigial {
+  @apply bg-teal-700 text-white; }
 .tag-enchant {
   @apply bg-purple-600 text-purple-100; }
 .tag-pseudo,

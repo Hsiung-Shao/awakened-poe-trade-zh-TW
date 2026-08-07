@@ -248,6 +248,8 @@ export function calculatedStatToFilter (
       filter.tag = FilterTag.Corrupted
     } else if (sources.some(s => s.modifier.info.generation === 'eldritch')) {
       filter.tag = FilterTag.Eldritch
+    } else if (sources.some(s => s.modifier.info.generation === 'vestigial')) {
+      filter.tag = FilterTag.Vestigial
     } else if (item.isSynthesised) {
       filter.tag = FilterTag.Synthesised
     }
@@ -469,7 +471,13 @@ function finalFilterTweaks (ctx: FiltersCreationContext) {
         // hide only if fractured mod has corresponding explicit variant
         filter.hidden = 'filters.hide_for_crafting'
       }
-    } else if (filter.tag === FilterTag.Foulborn || filter.tag === FilterTag.Variant) {
+    } else if (
+      filter.tag === FilterTag.Foulborn ||
+      filter.tag === FilterTag.Vestigial ||
+      filter.tag === FilterTag.Variant
+    ) {
+      // 殘存詞綴與穢生詞綴同一類:是這件物品**額外被賦予**的東西,不是底材本來
+      // 就有的。它決定值不值錢,所以預設勾選。
       filter.disabled = false
     }
   }

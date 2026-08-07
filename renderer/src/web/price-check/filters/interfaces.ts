@@ -185,6 +185,7 @@ export enum FilterTag {
   Corrupted = 'corrupted',
   Synthesised = 'synthesised',
   Foulborn = 'foulborn',
+  Vestigial = 'vestigial',
   Eldritch = 'eldritch',
   Variant = 'variant',
   Property = 'property',

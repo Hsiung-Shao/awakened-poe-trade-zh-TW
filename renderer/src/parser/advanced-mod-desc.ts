@@ -13,7 +13,7 @@ export interface ParsedModifier {
 
 export interface ModifierInfo {
   type: ModifierType
-  generation?: 'suffix' | 'prefix' | 'corrupted' | 'eldritch' | 'foulborn'
+  generation?: 'suffix' | 'prefix' | 'corrupted' | 'eldritch' | 'foulborn' | 'vestigial'
   name?: string
   tier?: number
   rank?: number
@@ -81,7 +81,10 @@ function annotationWords (): AnnotationWord[] {
   add(_$.FRACTURED_PREFIX, ModifierType.Fractured, 'prefix')
   add(_$.FRACTURED_SUFFIX, ModifierType.Fractured, 'suffix')
   add(_$.CORRUPTED_IMPLICIT, ModifierType.Implicit, 'corrupted')
-  add(_$.VESTIGIAL_IMPLICIT, ModifierType.Implicit)
+  // 標成 vestigial 而不是只給 Implicit:殘存詞綴是籠罩晶石**隨機**賦予的,不是
+  // 這件傳奇本來就有的固定敘述,買家要能單獨篩它。分不出來的話,篩選器那層就只能
+  // 把它當成普通固定詞綴,而普通固定詞綴沒有數值時會被 hide_const_roll 藏起來。
+  add(_$.VESTIGIAL_IMPLICIT, ModifierType.Implicit, 'vestigial')
   add(_$.IMPLICIT_MODIFIER, ModifierType.Implicit)
   add(_$.PREFIX_MODIFIER, undefined, 'prefix')
   add(_$.SUFFIX_MODIFIER, undefined, 'suffix')
