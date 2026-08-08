@@ -15,7 +15,9 @@
     "_comment_audit-trade-names": "需要網路,所以不併進 regen-data。查的是「送出去交易站認不認得」—— 解析成功不等於查得到,前兩支都看不到這一層。發版前跑。",
     "audit-trade-names": "node ../scripts/audit-trade-names.mjs",
     "_comment_verify-i18n": "繁中漏翻不會讓建置失敗(fallbackFormat 會安靜退回英文),所以要有這支",
-    "verify-i18n": "node ../scripts/verify-i18n.mjs"
+    "verify-i18n": "node ../scripts/verify-i18n.mjs",
+    "test": "vitest run --config vitest.config.mts",
+    "_comment_test": "解析器回歸網。更新快照:UPDATE_FIXTURES=1 npm test —— **產生的快照必須人工 review 才可 commit**,盲目更新會把回歸網變成永遠是綠的。"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "6.x.x",
@@ -42,10 +44,15 @@
     "@types/node": "^20.0.0",
     "@types/object-hash": "^3.0.0",
     "@vitejs/plugin-vue": "^4.0.0",
+    "@vue/eslint-config-standard-with-typescript": "^9.2.0",
+    "@vue/eslint-config-typescript": "^14.7.0",
     "autoprefixer": "^10.0.2",
+    "eslint": "^9.39.4",
+    "eslint-plugin-vue": "^10.8.0",
     "postcss": "^8.2.14",
     "typescript": "5.6.x",
     "vite": "^5.0.0",
+    "vitest": "^2.1.9",
     "vue-tsc": "^2.0.0"
   },
   "optionalDependencies": {
