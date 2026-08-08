@@ -1,0 +1,9 @@
+# 解析器的回歸樣本是**真實剪貼簿內容**,必須逐位元組保存。
+#
+# 沒有這條的話,core.autocrlf 會在 add / checkout 時改寫行尾,而快照裡的
+# `rawText` 存的是產生當下的行尾 —— 同一份程式碼在 commit 前後、或換一台機器
+# clone 之後就會跑出不同結果。實際發生過:fixture 以 LF 寫入、產生快照,
+# git 在 add 時轉成 CRLF,下一次跑測試三件全部報 rawText 不符。
+#
+# 遊戲在 Windows 上輸出的剪貼簿本來就是 CRLF,保持原樣也更貼近真實輸入。
+renderer/test/fixtures/** -text

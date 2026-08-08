@@ -32,23 +32,29 @@ import {
  *   第一個。所以這裡在 beforeAll 裡逐一切換、跑完一個語系才換下一個。
  */
 
-/** 這個專案出貨的語系。沒有樣本的不會被跳過而假裝通過,見下方 `describe`。 */
-const LANGUAGES = ['cmn-Hant', 'en', 'ru', 'ko'] as const
+/**
+ * **本專案維護的語系** —— 繁中是這個 fork 存在的理由,解析它的物品文字是我們的
+ * 責任,所以少了樣本就是缺口,必須讓測試紅掉。
+ */
+const MAINTAINED = ['cmn-Hant'] as const
+
+/**
+ * **上游維護的語系**。en 是上游 SnosMe 的來源語言,ru / ko 由上游的貢獻者維護,
+ * 我們只是沿用 —— 替它們建回歸樣本不是這個 fork 的工作,少了也不算缺口。
+ *
+ * 這個分野與 `verify-i18n` 一致(它把 ko / ru 標成「非本專案維護,僅報告」)。
+ * ⚠ 「有樣本就照樣測」是刻意的:哪天真的補了英文樣本,它就自動納入回歸網,
+ *   不必回來改這裡。
+ */
+const UPSTREAM = ['en', 'ru', 'ko'] as const
 
 function hasFixtures (language: string): boolean {
   const dir = path.join(FIXTURES_DIR, language)
   return fs.existsSync(dir) && fs.readdirSync(dir).some(f => f.endsWith('.txt'))
 }
 
-/**
- * 只對真的有樣本的語系建立測試。
- *
- * ⚠ **不是**「沒樣本就跳過」那種放水:少了樣本的語系會在下面被明確列出來,
- *   而且「至少要有一個語系有樣本」是硬斷言。原本的 corpus 有 en 樣本,
- *   隨舊專案(poe-price-check)一起遺失,這裡誠實反映現況而不是假裝測過。
- */
-const COVERED = LANGUAGES.filter(hasFixtures)
-const UNCOVERED = LANGUAGES.filter(l => !hasFixtures(l))
+const MISSING_MAINTAINED = MAINTAINED.filter(l => !hasFixtures(l))
+const COVERED = [...MAINTAINED, ...UPSTREAM].filter(hasFixtures)
 
 interface LanguageRun {
   fixtures: Fixture[]
@@ -71,20 +77,14 @@ beforeAll(async () => {
 }, 180_000)
 
 describe('corpus 覆蓋範圍', () => {
-  it('至少有一個語系有樣本', () => {
+  it('本專案維護的語系都有樣本', () => {
     // 全空的話下面每一項都會空轉通過 —— 那比沒有測試更危險
-    expect(COVERED.length, '沒有任何語系有 fixture,回歸網等於不存在').toBeGreaterThan(0)
-  })
-
-  it('列出還沒有樣本的語系', () => {
-    if (UNCOVERED.length > 0) {
-      // eslint-disable-next-line no-console -- 這是給人看的待補清單,不是失敗判定
-      console.log(
-        `\n⚠ 這些語系目前沒有 fixture,解析器對它們的行為沒有回歸保護:\n  ` +
-        UNCOVERED.join(', ') +
-        `\n  (原本的 en 樣本隨已刪除的 poe-price-check 一起遺失)`)
-    }
-    expect(Array.isArray(UNCOVERED)).toBe(true)
+    expect(
+      MISSING_MAINTAINED,
+      MISSING_MAINTAINED.length === 0
+        ? ''
+        : `這些是本專案維護的語系,少了 fixture 等於沒有回歸保護:${MISSING_MAINTAINED.join(', ')}`
+    ).toEqual([])
   })
 })
 
