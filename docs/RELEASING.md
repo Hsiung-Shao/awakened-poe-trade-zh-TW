@@ -66,16 +66,40 @@ git config user.signingkey <你的 key id>
 cd renderer
 npm run verify-datasets          # en 與 cmn-Hant 的語言無關鍵必須對齊
 npm run make-index-files         # 確保索引與 ndjson 同步
-npm run lint                     # ⚠ CI 會擋,而 `npm run build` 不含它
+npm run lint                     # ⚠ `npm run build` 不含它
 npm run verify-i18n              # ⚠ 漏翻不會讓建置失敗,只會安靜退回英文
+npm test                         # ⚠ 解析器回歸網,見下
+npm run build                    # 型別檢查 + 打包 renderer
 ```
 
-> ### ⚠ `npm run build` **不會**跑 lint
+> ### ⚠ 每一步都要看退出碼,不要接管線
+>
+> `npm run build | tail -2` 這種寫法**會把失敗吞掉** —— 管線的退出碼是最後一個
+> 指令(`tail`)的,所以 `&&` 後面照跑。實際發生過:renderer 建置失敗被吃掉,
+> 打包照樣成功,產出的 exe 裡是**上一次建置的 renderer**,版號對、檔案新、
+> 功能沒進去。要精簡輸出就導檔再看:
+>
+> ```shell
+> npm run build > /tmp/build.log 2>&1; echo "exit=$?"; tail -4 /tmp/build.log
+> ```
+
+> ### ⚠ `npm run build` **不會**跑 lint 也不會跑測試
 >
 > `build` 是 `vue-tsc --noEmit && vite build` —— 型別過了不代表 lint 過。
-> CI 的 `renderer` job 會跑 `npm run lint` 而且 **error 會讓整個 workflow 紅掉**。
-> 3.29.904 就是這樣發出去的:程式碼正確、型別乾淨、測試全過,CI 卻因為
-> 四行縮排而失敗。
+> 3.29.904 就是這樣發出去的:程式碼正確、型別乾淨,卻因為四行縮排讓 CI 紅掉
+> (CI 已於 2026-08-08 移除,所以現在**沒有任何獨立的建置驗證**,這些本機
+> 檢查是唯一防線)。
+
+> ### 解析器回歸網(`npm test`)
+>
+> 拿真實剪貼簿文字跑一遍,與人工核可過的快照逐欄比對。**改壞既有物品是靜默的** ——
+> 認不出來的詞綴會被收進 `unknownModifiers` 而不是拋錯,型別/lint/建置全看不到。
+>
+> 更新快照:`UPDATE_FIXTURES=1 npm test`,然後 `git diff renderer/test/fixtures/`
+> **逐項核對再 commit**。盲目更新等於把回歸網拆掉:解析器壞掉時它會把錯誤結果
+> 寫成「期望值」,測試從此永遠是綠的。
+>
+> ⚠ 目前只有繁中三件樣本。測試會列出沒有樣本的語系 —— 那是待補清單,不是雜訊。
 >
 > ⚠ 本機第一次跑會說「'eslint' 不是內部或外部命令」—— 那不是壞掉,是
 > `renderer/node_modules` 少了 dev 相依。**修法只有 `npm ci`**:
@@ -88,6 +112,11 @@ npm run verify-i18n              # ⚠ 漏翻不會讓建置失敗,只會安靜�
 > (整棵 eslint 連同其他 dev 相依),而且回報「up to date」不報任何錯 ——
 > 之後 `npm ci` 就再也裝不出 eslint,CI 卻還是紅的。真的誤跑了就
 > `git checkout -- renderer/package-lock.json` 還原再 `npm ci`。
+>
+> **2026-08-08 已修掉這個坑的根源**:eslint、eslint-plugin-vue 與
+> `@vue/eslint-config-*` 過去裝在 `node_modules` 卻**沒登記進 `package.json`**,
+> 所以任何一次 `npm install`(哪怕只是加一個無關套件)都會把它們 prune 掉。
+> 現在它們是正式的 devDependencies,`npm i` 新套件不會再讓 lint 消失。
 
 ```shell
 cd main
