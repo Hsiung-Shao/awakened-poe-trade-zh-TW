@@ -4850,6 +4850,7 @@
 {"name":"索伏的祝福","refName":"Blessing of Xoph","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
 {"name":"凋落的培育器","refName":"Blighted Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
 {"name":"凋落偵查報告","refName":"Blighted Scouting Report","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"浸血碑器","refName":"Blood-filled Vessel","namespace":"ITEM","icon":"","src":"zh-tw-missing"}
 {"name":"三稜箱","refName":"Box of Tripyxis","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
 {"name":"碎裂的卡蘭德魔鏡","refName":"Broken Mirror of Kalandra","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
 {"name":"帝王卡斯皮羅半身像","refName":"Bust of Emperor Caspiro","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}

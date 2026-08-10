@@ -152,6 +152,22 @@ export default {
   ULTIMATUM_REWARD_DOUBLE_CURRENCY: '翻倍獻祭的通貨',
   ULTIMATUM_REWARD_DOUBLE_DIVCARDS: '翻倍獻祭的命運卡',
   ULTIMATUM_REWARD_MIRROR_RARE: '物品和複製品',
+  // 浸血碑器名牌下方那一段。標籤取自 GGPK clientstrings,ident 依序為
+  // RitualStoneVarieties / RitualStoneNumOtherMonsters / RitualStoneLevel /
+  // RitualStoneFromArea。前三個在遊戲檔裡不帶冒號,依本專案慣例補成「…: 」,
+  // normalizeLabelPunctuation 才會把全形寫法(GGPK 給的是「怪物：」)一併認得。
+  RITUAL_MONSTERS: '怪物: ',
+  RITUAL_OTHER_MONSTERS: /^(\d+) 其他怪物$/,
+  RITUAL_MONSTER_LEVEL: '怪物等級: ',
+  RITUAL_FROM: '來自: ',
+  // 浸血碑器固定帶的三行加成 = GGPK clientstrings 的單一條目 RitualBloodVesselBonuses
+  // (內含兩個 \n)。⚠ 這不是詞綴:每顆碑器逐字相同、20% 是寫死的,交易站沒有對應
+  // 篩選器。列在這裡只是讓 parser 認得出「這段是已知說明文字」。
+  RITUAL_VESSEL_BONUSES: [
+    '祭祀有優化 20% 恩賜獎勵',
+    '祭祀產生怪物比平常快 20%',
+    '祭祀存活 20% 更多上限怪物'
+  ],
   // ---
   CHAT_SYSTEM: /^: (?<body>.+)$/,
   CHAT_TRADE: /^\$(?:<(?<guild_tag>.+?)> )?(?<char_name>.+?): (?<body>.+)$/,

@@ -12,6 +12,7 @@
 | 通貨 | 173 |
 | 命運卡 | 11 |
 | 接肢(Graft) | 17 |
+| 地圖碎片(Fragment) | 1 |
 | **傳奇物品** | **202** |
 
 ---
@@ -28,10 +29,19 @@ Parser.ts:findInDatabase
   其餘          → ITEM_BY_TRANSLATED('ITEM',            基底名)   ← 依基底
 ```
 
-- **通貨 / 命運卡 / 接肢 / 傳奇是依名字查的** —— 名字不在資料庫就是查不到,必收。
+- **通貨 / 命運卡 / 接肢 / 地圖碎片 / 傳奇是依名字查的** —— 名字不在資料庫就是查不到,必收。
 - 一般的防具 / 武器 / 飾品是**依基底類型**查的。名稱比對會顯示這些分類「覆蓋率
   只有五成」,但那是設計如此,不是缺漏。光靠名稱比對分不出「真的缺」與「設計不同」,
   所以**不收**。
+
+判準是**這一類物品在交易站怎麼被搜到**,不是它在遊戲裡屬於哪個分類。地圖碎片
+(2026-08-10 新增的 `fragment` 組)在交易站是自己的 `type`,與通貨同性質,所以收 ——
+儘管它既不是通貨也不是傳奇。
+
+`fragment` 產生的列與通貨唯一的差別是**不給 `exchangeable`**:那個旗標會讓查價視窗
+掛上「這件物品可以在通貨交易市場買賣」的橫幅,而地圖碎片不在通貨交易所。少了它,
+產生的列就與上游的 `Mirrored Tablet` 完全同形(純 `ITEM` 列,`category` 留 undefined,
+要認出特定碎片時 parser 走 `item.info.refName`)。
 
 傳奇是後來才發現的:它明明走「依名字」那條路,卻缺了 202 個,連 Voidheart、
 Timetwist、Frostferno 這種老東西都沒有。
@@ -40,7 +50,7 @@ Timetwist、Frostferno 這種老東西都沒有。
 
 ## 每一筆通過了什麼驗證
 
-### 通貨 / 命運卡 / 接肢
+### 通貨 / 命運卡 / 接肢 / 地圖碎片
 
 1. 國際服交易 API 有這個英文名(交易站真的搜得到)
 2. 上游的 `en/items.ndjson` 沒有它(確實是缺漏,不是我們誤判)
@@ -48,6 +58,22 @@ Timetwist、Frostferno 這種老東西都沒有。
 4. 台服交易 API 也認得那個繁中名(第三方獨立證人)
 
 繁中名若已被現有資料佔用一律剔除 —— 撞名會讓查表拿到錯的物品。
+
+浸血碑器(唯一的 `fragment`,2026-08-10)實跑的四道:
+
+| | 結果 |
+|---|---|
+| 1 | 國際服 `{"type":"Blood-filled Vessel"}`,掛在 **Maps** 底下 |
+| 2 | `git show 18a401e:…/en/items.ndjson` 查無 —— 3.29 新物品,上游基準 3.29.102 沒跟上 |
+| 3 | GGPK `baseitemtypes.Name` / `Metadata/Items/MapFragments/RitualFragment` → 浸血碑器 |
+| 4 | 台服 `{"type":"浸血碑器"}`,掛在 **地圖** 底下 |
+
+> ⚠ **大小寫陷阱,不要「順手改成一致」。** 交易站 items API 給的是
+> `Blood-filled Vessel`(**小寫 f**),而交易站那兩條 pseudo 詞綴的文字是
+> `Blood-Filled Vessel`(**大寫 F**)。GGPK 自己也兩種都有
+> (`baseitemtypes.Name` 小寫、`currencyitems.Directions` 大寫)。
+> `refName` 一律照 items API 的小寫版 —— 改哪一邊都會靜默搜不到,而且型別檢查、
+> lint、建置全部照樣綠。`test/blood-filled-vessel.test.ts` 把兩種拼法都釘住了。
 
 ### 傳奇物品
 

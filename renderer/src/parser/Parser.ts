@@ -5,6 +5,8 @@ import {
   ITEM_BY_REF,
   STAT_BY_MATCH_STR,
   StatBetter,
+  stat,
+  pseudoStatByRef,
   type BaseType
 } from '@/assets/data'
 import { ModifierType, sumStatsByModType } from './modifiers'
@@ -74,6 +76,8 @@ const parsers: Array<
   parseAtzoatlRooms,
   parseMirroredTablet,
   parseFilledCoffin,
+  parseBloodFilledVessel, // 怪物清單那一段
+  parseBloodFilledVessel, // 固定加成說明那一段
   parseMirrored,
   parseSplit,
   parseSentinelCharge,
@@ -1331,6 +1335,132 @@ function parseFilledCoffin (section: string[], item: ParsedItem) {
   parseStatsFromMod(lines, item, { info: modInfo, stats: [] })
 
   return 'SECTION_PARSED'
+}
+
+/**
+ * 交易站對浸血碑器的兩條 pseudo 詞綴。四個 realm 的 id 一致
+ * (`pseudo.pseudo_ritual_unique_monsters` / `pseudo.pseudo_ritual_other_monsters`),
+ * 四個語系的 `stats.ndjson` 也都已經有這兩列,所以這裡不必補資料、只要取用。
+ *
+ * ⚠ **大小寫陷阱,不要「順手改成一致」**:交易站 items API 給的物品名是
+ * `Blood-filled Vessel`(**小寫 f**,`refName` 與送出去的 type 一律照它),而這兩條
+ * pseudo 的 ref 寫的是 `… (Blood-Filled Vessel): #`(**大寫 F**)。GGG 自己就不一致
+ * —— 把任何一邊改成跟另一邊一樣,結果都是靜默搜不到(前者查無此物品,後者查無此
+ * stat),而且型別檢查、lint、建置全都照樣綠。
+ */
+const RITUAL_UNIQUE_MONSTERS = stat('Unique Monsters (Blood-Filled Vessel): #')
+const RITUAL_OTHER_MONSTERS = stat('Non-Unique Monsters (Blood-Filled Vessel): #')
+
+/**
+ * 浸血碑器(`Blood-filled Vessel`)—— 3.29 的地圖碎片,**上游完全沒做**。
+ *
+ * 兩層缺口疊在一起,所以這不是繁中壞掉,英文版一樣查不到:
+ *   1. `items.ndjson` **四個語系一個都沒有**這個基底(上游基準 3.29.102 沒跟上),
+ *      `findInDatabase` 直接回 `item.unknown`。本專案只補 en / cmn-Hant
+ *      (`missing-items.json` 的 `fragment` 組),`ru` / `ko` 沿用上游;
+ *   2. 就算補上基底,parser 也沒有「數怪物」的程式碼 —— 而交易站對這件物品**正是**
+ *      用怪物數量分的,那兩條 pseudo 是它唯一有意義的搜尋條件。
+ *
+ * 物品文字長這樣(標籤來自 GGPK clientstrings `RitualStone*`):
+ *
+ *     怪物：                  ← RitualStoneVarieties(`Monsters:\n{0}`),標籤後面沒有值
+ *     超然的卡洛斯            ← 具名 = 傳奇怪物,有幾行就是幾隻
+ *     焚屍者波莉亞
+ *     燃屍者波莉亞
+ *     41 其他怪物             ← RitualStoneNumOtherMonsters(`{0} Other Monsters`)
+ *     怪物等級: 83            ← RitualStoneLevel
+ *     來自: 危城廣場          ← RitualStoneFromArea
+ *
+ * 不能照 `parseMirroredTablet` 那樣逐行 `tryParseTranslation`:兩個數字都**不是**
+ * 「一行一條詞綴」,而且交易站那兩條 pseudo 的措辭是**篩選器的顯示名**,物品文字裡
+ * 永遠不會出現。所以要先數,再依 ref 取 stat 合成。
+ *
+ * 邊界:全是傳奇怪物時**沒有**「N 其他怪物」那一行(於是不送那一條 pseudo,而不是
+ * 送 0);沒有任何具名怪物時傳奇數就是 0。兩種都不靠行數判斷,靠「終止行」——
+ * 尾巴的三行(其他怪物 / 怪物等級 / 來自)任何一行都可能缺席。
+ */
+function parseBloodFilledVessel (section: string[], item: ParsedItem) {
+  if (item.info.refName !== 'Blood-filled Vessel') return 'PARSER_SKIPPED'
+
+  if (parseVesselMonstersNested(section, item)) return 'SECTION_PARSED'
+  if (isVesselBonusSection(section)) return 'SECTION_PARSED'
+
+  return 'SECTION_SKIPPED'
+}
+
+/**
+ * 標籤行比對。
+ *
+ * `normalizeLabelPunctuation` 會把全形寫法補成 `標籤: `(**帶尾空白**),但
+ * 「怪物:」這種標籤後面沒有值的行,在半形客戶端本來就沒有尾空白。實測使用者的樣本
+ * 是半形、GGPK 的字串是全形,兩種都要認得,所以兩邊都去尾空白再比。
+ */
+function isLabelOnlyLine (line: string | undefined, label: string): boolean {
+  return line !== undefined && line.trimEnd() === label.trimEnd()
+}
+
+function parseVesselMonstersNested (section: string[], item: ParsedItem): boolean {
+  const label = _$.RITUAL_MONSTERS
+  const otherMonsters = _$.RITUAL_OTHER_MONSTERS
+  // 沒有這兩個鍵的語系(ru / ko)直接不處理,行為與加這段之前一模一樣
+  if (label === undefined || otherMonsters === undefined) return false
+  if (!isLabelOnlyLine(section[0], label)) return false
+
+  const trailingLabels = [_$.RITUAL_MONSTER_LEVEL, _$.RITUAL_FROM]
+    .filter((it): it is string => it !== undefined)
+
+  let uniqueMonsters = 0
+  for (const line of section.slice(1)) {
+    if (otherMonsters.test(line)) break
+    if (trailingLabels.some(prefix => line.startsWith(prefix))) break
+    uniqueMonsters += 1
+  }
+
+  // 「N 其他怪物」刻意**掃整段**而不是只看終止的那一行:它在實測樣本裡排在怪物等級
+  // 之前,但那個順序是 GGG 的排版決定的,不是我們能保證的東西。掃整段的話順序調換
+  // 也還讀得到;讀不到時是這一行真的不存在(全是傳奇),那就不送這條 pseudo。
+  const otherMonstersLine = section.find(line => otherMonsters.test(line))
+
+  pushVesselMonsterCount(item, RITUAL_UNIQUE_MONSTERS, uniqueMonsters)
+  if (otherMonstersLine !== undefined) {
+    pushVesselMonsterCount(item, RITUAL_OTHER_MONSTERS,
+      Number(otherMonsters.exec(otherMonstersLine)![1]))
+  }
+
+  return true
+}
+
+function pushVesselMonsterCount (item: ParsedItem, ref: string, count: number) {
+  const found = pseudoStatByRef(ref)!
+  item.newMods.push({
+    info: { tags: [], type: ModifierType.Pseudo },
+    stats: [{
+      stat: found,
+      translation: found.matchers[0],
+      // 數量是點出來的,不是骰出來的 —— 沒有區間,也不會被神聖石改變
+      roll: { value: count, min: count, max: count, dp: false, unscalable: true }
+    }]
+  })
+}
+
+/**
+ * 碑器固定帶的那三行加成。
+ *
+ * ⚠ 它們**不是詞綴**,是 GGPK clientstrings 的**單一條目** `RitualBloodVesselBonuses`
+ * (內含兩個 `\n`):每一顆碑器逐字相同、20% 是寫死的,交易站也沒有對應的篩選器。
+ * 認領它只是為了不讓這一段變成「沒有任何 parser 認領 → 無聲消失」。
+ *
+ * 判定用 `some` 不是 `every`,而且**認出來之後整段吃掉、不往 `unknownModifiers` 塞**:
+ *   - `some`:三行裡任何一行改了措辭都還認得出這一段是什麼。
+ *   - 不塞 unknownModifiers:這是零查詢價值的說明文字,措辭一漂就會讓**每一位**
+ *     拿到碑器的使用者看到一條假的「未知詞綴」。同一份文字在實測樣本與 GGPK 之間
+ *     就已經有一個字不同(「更多上限怪物」/「更多上級怪物」),把它當成需要回報的
+ *     缺陷是誤報。真正需要 §6.2 保護的是上面那段怪物清單,它才會影響送出去的查詢。
+ */
+function isVesselBonusSection (section: string[]): boolean {
+  const bonuses = _$.RITUAL_VESSEL_BONUSES
+  if (bonuses === undefined || bonuses.length === 0) return false
+  return section.some(line => bonuses.includes(line))
 }
 
 function markupConditionParser (text: string) {

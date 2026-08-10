@@ -55,7 +55,7 @@ npm run regen-data                   # 這一條就是全部。順序見下。
 它依序做四件事,**順序是硬性的**:
 
 ```
-gen-missing-items --write   補上游缺的物品(通貨/命運卡/接肢/傳奇)
+gen-missing-items --write   補上游缺的物品(通貨/命運卡/接肢/地圖碎片/傳奇)
 gen-disc-variants --write   補同名多變體(占卜寶珠區域、海圖區域、傭兵流派)
 make-index-files            重建 byte-offset 索引
 verify-datasets             檢查 en 與 cmn-Hant 的語言無關鍵是否對齊

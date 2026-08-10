@@ -299,6 +299,32 @@ export interface TranslationDict {
   ULTIMATUM_REWARD_DOUBLE_CURRENCY?: string
   ULTIMATUM_REWARD_DOUBLE_DIVCARDS?: string
   ULTIMATUM_REWARD_MIRROR_RARE?: string
+  /**
+   * 浸血碑器(`Blood-filled Vessel`)名牌下方那一段的四個標籤。全部取自 GGPK
+   * `clientstrings`,ident 依序是 `RitualStoneVarieties`(`Monsters:\n{0}`)、
+   * `RitualStoneNumOtherMonsters`(`{0} Other Monsters`)、`RitualStoneLevel`
+   * (`Monster Level`)、`RitualStoneFromArea`(`From`)。
+   *
+   * ⚠ 前三個 ident 在 GGPK 裡**不帶冒號**(冒號是客戶端排版時加的),這裡照本專案的
+   * 標籤慣例補成 `…: `,`normalizeLabelPunctuation` 才會把全形寫法(`怪物：`)一併
+   * 認得。`RITUAL_MONSTERS` 那一行**標籤後面沒有值**,所以比對時兩邊都要去尾空白。
+   *
+   * **選填**,理由同 `VESTIGIAL_NAME`:GGPK 只有英文與繁中,`ru` / `ko` 沒有可信
+   * 譯名就不憑空填,那兩個語系維持現狀(碑器上的怪物數讀不到,與加這些鍵之前一樣)。
+   */
+  RITUAL_MONSTERS?: string
+  RITUAL_OTHER_MONSTERS?: RegExp
+  RITUAL_MONSTER_LEVEL?: string
+  RITUAL_FROM?: string
+  /**
+   * 浸血碑器固定帶的三行加成。
+   *
+   * ⚠ 這**不是詞綴**。它是 GGPK `clientstrings` 的**單一條目**
+   * `RitualBloodVesselBonuses`(內含兩個 `\n`),每一顆碑器逐字相同、數值寫死 20%,
+   * 交易站也沒有對應的篩選器。收在這裡只為了讓 parser 認得出「這一段是已知的說明
+   * 文字」,而不是把它當成解析不出來的詞綴丟給使用者。
+   */
+  RITUAL_VESSEL_BONUSES?: string[]
   // ---
   CHAT_SYSTEM: RegExp
   CHAT_TRADE: RegExp

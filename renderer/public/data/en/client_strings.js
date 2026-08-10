@@ -149,6 +149,26 @@ export default {
   ULTIMATUM_REWARD_DOUBLE_CURRENCY: 'Doubles sacrificed Currency',
   ULTIMATUM_REWARD_DOUBLE_DIVCARDS: 'Doubles sacrificed Divination Cards',
   ULTIMATUM_REWARD_MIRROR_RARE: 'Item and Mirrored Copy',
+  // Blood-filled Vessel, the block under the name plate. Labels come from GGPK
+  // clientstrings, idents in order: RitualStoneVarieties / RitualStoneNumOtherMonsters
+  // / RitualStoneLevel / RitualStoneFromArea. The first three carry no colon in the
+  // game files (the client adds it when laying the tooltip out); they follow this
+  // project's label convention of a trailing `: ` so that normalizeLabelPunctuation
+  // covers the full-width spelling in CJK clients too.
+  RITUAL_MONSTERS: 'Monsters: ',
+  RITUAL_OTHER_MONSTERS: /^(\d+) Other Monsters$/,
+  RITUAL_MONSTER_LEVEL: 'Monster Level: ',
+  RITUAL_FROM: 'From: ',
+  // The three bonus lines every Blood-filled Vessel carries = a *single* GGPK
+  // clientstrings entry, RitualBloodVesselBonuses (it contains two \n).
+  // NOTE: these are not modifiers — the text is identical on every vessel, the 20%
+  // is hardcoded, and the trade site has no filter for them. They are listed here
+  // only so the parser can tell "this section is known description text".
+  RITUAL_VESSEL_BONUSES: [
+    'Rituals have 20% improved Favour Rewards',
+    'Rituals spawn Monsters 20% faster',
+    'Rituals have 20% more maximum monsters alive'
+  ],
   // ---
   CHAT_SYSTEM: /^: (?<body>.+)$/,
   CHAT_TRADE: /^\$(?:<(?<guild_tag>.+?)> )?(?<char_name>.+?): (?<body>.+)$/,

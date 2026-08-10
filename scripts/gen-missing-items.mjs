@@ -64,6 +64,17 @@ function makeRow (entry, lang) {
   if (entry.category) {
     return { ...base, namespace: 'ITEM', craftable: { category: entry.category }, icon: '', src: MARKER }
   }
+  // 地圖碎片。形狀刻意與上游的 Mirrored Tablet 一致 —— 純 ITEM 列,靠名字查表。
+  //
+  // **不給 exchangeable**:那個旗標的語意是「在通貨交易所、只是還沒進 bulk 區」,
+  // 它會讓查價視窗掛上「這件物品可以在通貨交易市場買賣」的橫幅(TradeListing.vue),
+  // 而地圖碎片不在通貨交易所 —— 掛了就是騙人。
+  // **不給 tradeTag**:理由同下面的通貨,我們不知道它的 exchange 代碼,給錯比不給更糟。
+  // **不給 craftable**:碎片沒有 ItemCategory,category 留 undefined 才與上游一致;
+  //   需要認出某一個特定碎片時,parser 走 `item.info.refName`(見 parseBloodFilledVessel)。
+  if (entry.group === 'fragment') {
+    return { ...base, namespace: 'ITEM', icon: '', src: MARKER }
+  }
   // 通貨在上游是 namespace ITEM、不帶 craftable(對照 Chaos Orb)。
   // `exchangeable: true` 讓 merchantOnly 變 false —— 上游註解說明那是給
   // 「在通貨交易所、但還沒進 bulk 區」的物品用的,正是這批的處境。
