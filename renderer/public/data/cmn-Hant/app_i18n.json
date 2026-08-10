@@ -179,6 +179,7 @@
     "hide_anointment": "買家通常會換掉塗油",
     "hide_for_crafting": "只有在把它當成工藝底材查價時才勾選",
     "hide_empty_mod": "只有在物品有 6 條詞綴（其中 1 條是工藝）或有 5 條詞綴時才勾選",
+    "hide_map_random_mod": "地圖的隨機詞綴，定價看的是這張圖的產出",
     "tag_implicit": "固定",
     "tag_fractured": "破裂",
     "tag_crafted": "工藝",

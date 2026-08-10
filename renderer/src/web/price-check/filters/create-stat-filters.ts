@@ -98,7 +98,23 @@ export function createExactStatFilters (
       if (filter.tag === FilterTag.Property || filter.tag === FilterTag.Pseudo) continue
       // 稀有地圖有 6-8 條詞綴,全部當條件送出必定 0 筆 —— 所以顯示出來讓使用者自己挑,
       // 但預設不勾。魔法地圖只有 1-2 條,維持原本的全勾。
-      filter.disabled = (item.rarity === ItemRarity.Rare && filter.tag === FilterTag.Explicit)
+      const isRandomRareMapMod = (item.rarity === ItemRarity.Rare && filter.tag === FilterTag.Explicit)
+      filter.disabled = isRandomRareMapMod
+
+      // 地圖的定價看的是**產出**(物品數量/稀有度/怪物群大小 = property,更多地圖/
+      // 聖甲蟲/通貨/命運卡 = pseudo,上面那行 continue 掉的就是它們)與**固定詞綴**
+      // (區域受到開創者的記憶影響、地圖被異界佔據、地圖含有壁壘 —— 一律是 implicit,
+      // 預設勾選)。是否汙染、是否鑑定不是詞綴,那兩顆是 FiltersBlock 的按鈕。
+      //
+      // 剩下的就是這一段自己剛停用掉的隨機詞綴:它們占滿版面,害使用者得先略過
+      // 一長串才找得到真正在看的那幾條。收進「已隱藏」而不是不產生 —— 地圖的負面
+      // 詞綴偶爾還是有人要搜,使用者按開關就能叫回來。
+      //
+      // ⚠ 隱藏的範圍必須與**這一行剛停用的範圍逐字相同**。被隱藏卻仍勾選的條件
+      //   會變成看不見的查詢條件 —— 使用者搜不到東西也看不出是哪一條在擋。
+      if (isRandomRareMapMod) {
+        filter.hidden = 'filters.hide_map_random_mod'
+      }
     }
     return ctx.filters
   }

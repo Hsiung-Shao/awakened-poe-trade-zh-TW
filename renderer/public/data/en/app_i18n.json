@@ -183,6 +183,7 @@
     "hide_anointment": "Buyer will likely change anointment",
     "hide_for_crafting": "Select only if price-checking as base item for crafting",
     "hide_empty_mod": "Select only if item has 6 modifiers (1 of which is crafted) or if it has 5 modifiers",
+    "hide_map_random_mod": "Random map modifier, it is the map's yield that sets the price",
 
     "tag_implicit": "implicit",
     "tag_fractured": "fractured",
