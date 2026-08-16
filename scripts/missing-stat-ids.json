@@ -1,0 +1,872 @@
+{
+  "_note": [
+    "上游資料集缺的 implicit 交易 id。由 `gen-missing-stat-ids.mjs --audit --write` 產生,",
+    "`gen-missing-stat-ids.mjs --write` 套用到兩份 stats.ndjson(已併進 npm run regen-data)。",
+    "",
+    "背景:3.29 的殘存(Vestigial)機制把另一件同部位傳奇的一條詞綴複製到這件物品上,",
+    "而複製後是以固定屬性(implicit)呈現。所以同一條詞綴天生有兩個交易站身分 ——",
+    "在原主身上是 explicit.stat_N,被賦予後是 implicit.stat_N。上游只收了前者。",
+    "",
+    "少了 implicit id 的後果不是報錯:`tryParseTranslation` 的",
+    "`!(modType in found.stat.trade.ids)` 會讓整條詞綴被當成沒認出來,收進",
+    "unknownModifiers —— 畫面上就是「這條詞綴不在篩選清單裡」,沒有任何提示。",
+    "",
+    "收錄判準:",
+    "  1. 該 stat 的 trade.ids.explicit 含 explicit.stat_N",
+    "  2. 同一個 stat 的 trade.ids.implicit 沒有 implicit.stat_N",
+    "  3. implicit.stat_N 在國際服 /api/trade/data/stats 的 implicit 群組裡",
+    "",
+    "⚠ 第 3 條不可以改成「送去搜尋沒報錯」。搜尋端點只驗 stat 編號存在,不驗群組;",
+    "  實測 5,577 個候選整批送出兩服一個都沒拒絕,而 implicit 群組總共才 1,811 個。",
+    "  用它當判準會收進一堆送出去必定 0 筆、而且交易站不會報錯的死條件。",
+    "",
+    "⚠ 落在會消歧的 resolve 群組(strat 非 select)裡的候選一律不自動收錄 ——",
+    "  替群組成員加 id 會改變 _resolveTranslation 挑到哪個 stat,那是行為改變。",
+    "",
+    "⚠ 判準用國際服,因為 app 預設 realm 是 pc-ggg、Config.ts 的 useIntlSite 讓",
+    "  「繁中 + pc-ggg」也走國際站,而且上游出貨資料集本來就照國際服對齊",
+    "  (實測國際服不認得的出貨 id 為 0,台服為 281)。台服 implicit 群組少了其中",
+    "  一部分,台服玩家勾到那幾條會查到 0 筆;資料集按語系而非按 realm 出貨,",
+    "  無法只對某一服生效。每筆的 realms 欄位記錄當下兩服各自索引得到與否。",
+    "",
+    "驗證時點:3.29.0.4.2 / 2026-08-16。新賽季重跑 --audit。"
+  ],
+  "entries": [
+    {
+      "explicit": "explicit.stat_2787733863",
+      "implicit": "implicit.stat_2787733863",
+      "ref": "# to # Added Lightning Damage with Wand Attacks",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1618482990",
+      "implicit": "implicit.stat_1618482990",
+      "ref": "#% chance for Energy Shield Recharge to start when you Kill an Enemy",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1299868012",
+      "implicit": "implicit.stat_1299868012",
+      "ref": "#% chance to deal Double Damage while affected by Glorious Madness",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_3738335639",
+      "implicit": "implicit.stat_3738335639",
+      "ref": "#% chance to gain a Frenzy Charge when your Trap is triggered by an Enemy",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_273206351",
+      "implicit": "implicit.stat_273206351",
+      "ref": "#% chance to gain a Power Charge on hitting an Enemy affected by a Spider's Web",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_3132227798",
+      "implicit": "implicit.stat_3132227798",
+      "ref": "#% chance to throw up to 4 additional Traps",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_3251948367",
+      "implicit": "implicit.stat_3251948367",
+      "ref": "#% chance to Trigger Commandment of Inferno on Critical Strike",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_3141831683",
+      "implicit": "implicit.stat_3141831683",
+      "ref": "#% chance to Trigger Level 20 Glimpse of Eternity when Hit",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1746347097",
+      "implicit": "implicit.stat_1746347097",
+      "ref": "#% increased Aspect of the Avian Buff Effect",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_2409504914",
+      "implicit": "implicit.stat_2409504914",
+      "ref": "#% increased Critical Strike Chance per Brand",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1073310669",
+      "implicit": "implicit.stat_1073310669",
+      "ref": "#% increased Evasion Rating if you have been Hit Recently",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1360723495",
+      "implicit": "implicit.stat_1360723495",
+      "ref": "#% increased Movement Speed for each Poison on you up to a maximum of 50%",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1541516339",
+      "implicit": "implicit.stat_1541516339",
+      "ref": "#% increased Movement Speed per Frenzy Charge",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_495095219",
+      "implicit": "implicit.stat_495095219",
+      "ref": "#% increased Spell Critical Strike Chance per Raised Spectre",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1050359418",
+      "implicit": "implicit.stat_1050359418",
+      "ref": "#% increased Valour gained",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1237693206",
+      "implicit": "implicit.stat_1237693206",
+      "ref": "#% less Poison Duration",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_2881210047",
+      "implicit": "implicit.stat_2881210047",
+      "ref": "#% of Cold Damage taken as Lightning Damage",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_807450540",
+      "implicit": "implicit.stat_807450540",
+      "ref": "#% of Damage dealt by your Mines is Leeched to you as Life",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_2340750293",
+      "implicit": "implicit.stat_2340750293",
+      "ref": "#% of Elemental Damage from Hits taken as Physical Damage",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_4142376596",
+      "implicit": "implicit.stat_4142376596",
+      "ref": "#% of Fire Damage taken as Lightning Damage",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1429385513",
+      "implicit": "implicit.stat_1429385513",
+      "ref": "+# Armour per Summoned Totem",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_2611224062",
+      "implicit": "implicit.stat_2611224062",
+      "ref": "+# to maximum Fortification while affected by Glorious Madness",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_3806100539",
+      "implicit": "implicit.stat_3806100539",
+      "ref": "+# to Maximum Life per 10 Dexterity",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_2894704558",
+      "implicit": "implicit.stat_2894704558",
+      "ref": "+# to Maximum number of Crab Barriers",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_4108186648",
+      "implicit": "implicit.stat_4108186648",
+      "ref": "+#% chance to Suppress Spell Damage while Channelling",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1030987123",
+      "implicit": "implicit.stat_1030987123",
+      "ref": "+#% to all maximum Resistances while Poisoned",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_779829642",
+      "implicit": "implicit.stat_779829642",
+      "ref": "+#% to Chaos Resistance while stationary",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_2212731469",
+      "implicit": "implicit.stat_2212731469",
+      "ref": "+#% to Damage over Time Multiplier for Ailments per Elder Item Equipped",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_3203086927",
+      "implicit": "implicit.stat_3203086927",
+      "ref": "+#% to Damage over Time Multiplier if you've dealt a Critical Strike in the past 8 seconds",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_3613173483",
+      "implicit": "implicit.stat_3613173483",
+      "ref": "+#% to Unarmed Melee Attack Critical Strike Chance",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_855634301",
+      "implicit": "implicit.stat_855634301",
+      "ref": "Adds # to # Lightning Damage while you have Avian's Might",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_3359218839",
+      "implicit": "implicit.stat_3359218839",
+      "ref": "All Damage inflicts Poison while affected by Glorious Madness",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1483066460",
+      "implicit": "implicit.stat_1483066460",
+      "ref": "Arctic Armour has no Reservation",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_3850409117",
+      "implicit": "implicit.stat_3850409117",
+      "ref": "Aspect of the Cat has no Reservation",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1509532587",
+      "implicit": "implicit.stat_1509532587",
+      "ref": "Aspect of the Spider can inflict Spider's Web on Enemies an additional time",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_2059771038",
+      "implicit": "implicit.stat_2059771038",
+      "ref": "Attacks always inflict Bleeding while you have Cat's Stealth",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_3292262540",
+      "implicit": "implicit.stat_3292262540",
+      "ref": "Call to Arms",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_241251790",
+      "implicit": "implicit.stat_241251790",
+      "ref": "Cannot lose Crab Barriers if you have lost Crab Barriers Recently",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_2439129490",
+      "implicit": "implicit.stat_2439129490",
+      "ref": "Chaos Resistance is Zero",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1243613350",
+      "implicit": "implicit.stat_1243613350",
+      "ref": "Create Profane Ground instead of Consecrated Ground",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_3840847348",
+      "implicit": "implicit.stat_3840847348",
+      "ref": "Curse Aura Skills reserve Life instead of Mana",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_541329769",
+      "implicit": "implicit.stat_541329769",
+      "ref": "Curse Enemies with Temporal Chains when you Block their Projectile Attack Damage, ignoring Curse Limit",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_2280341859",
+      "implicit": "implicit.stat_2280341859",
+      "ref": "Curse Skills cost Life instead of Mana",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_2510276385",
+      "implicit": "implicit.stat_2510276385",
+      "ref": "Damage of Enemies Hitting you is Unlucky while you have a Magic Ring Equipped",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1238227257",
+      "implicit": "implicit.stat_1238227257",
+      "ref": "Debuffs on you expire #% faster",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_785655723",
+      "implicit": "implicit.stat_785655723",
+      "ref": "Enemies affected by your Spider's Webs have +#% to All Resistances",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_2780297117",
+      "implicit": "implicit.stat_2780297117",
+      "ref": "Enemies you Kill while affected by Glorious Madness have a #% chance to Explode, dealing a quarter of their Life as Chaos Damage",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_4231915769",
+      "implicit": "implicit.stat_4231915769",
+      "ref": "Gain Adrenaline for # second when Ward Breaks",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1243641369",
+      "implicit": "implicit.stat_1243641369",
+      "ref": "Grant a Frenzy Charge to nearby Allies on Kill",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_3174788165",
+      "implicit": "implicit.stat_3174788165",
+      "ref": "Grant an Endurance Charge to nearby Allies on Hit",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_3914740665",
+      "implicit": "implicit.stat_3914740665",
+      "ref": "Grants Level # Aspect of the Avian Skill",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_956546305",
+      "implicit": "implicit.stat_956546305",
+      "ref": "Grants Level # Aspect of the Spider Skill",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_4009462747",
+      "implicit": "implicit.stat_4009462747",
+      "ref": "Grants Level # Savage Barnacle",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_608058997",
+      "implicit": "implicit.stat_608058997",
+      "ref": "Grants Level # Will of the Lords Skill",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_2878779644|1",
+      "implicit": "implicit.stat_2878779644|1",
+      "ref": "Grants Level 20 Summon Bestial Rhoa Skill",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_2878779644|3",
+      "implicit": "implicit.stat_2878779644|3",
+      "ref": "Grants Level 20 Summon Bestial Snake Skill",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_3872739249|11",
+      "implicit": "implicit.stat_3872739249|11",
+      "ref": "Grants Summon Greater Harbinger of Storms Skill",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_3872739249|3",
+      "implicit": "implicit.stat_3872739249|3",
+      "ref": "Grants Summon Harbinger of Focus Skill",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_3520223758",
+      "implicit": "implicit.stat_3520223758",
+      "ref": "Increases and Reductions to Cast Speed also Apply to Trap Throwing Speed",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_3675300253",
+      "implicit": "implicit.stat_3675300253",
+      "ref": "Melee Strike Skills deal Splash Damage to surrounding targets",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_3217428772",
+      "implicit": "implicit.stat_3217428772",
+      "ref": "Minions gain #% of Physical Damage as Extra Fire Damage",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_2834476618",
+      "implicit": "implicit.stat_2834476618",
+      "ref": "Minions have #% faster start of Energy Shield Recharge",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_293071889",
+      "implicit": "implicit.stat_293071889",
+      "ref": "Nearby corpses Explode when you Warcry, dealing #% of their Life as Physical Damage",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_517280174",
+      "implicit": "implicit.stat_517280174",
+      "ref": "On Killing a Rare monster, a random Linked Minion gains its Modifiers for # seconds",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_2930706364",
+      "implicit": "implicit.stat_2930706364",
+      "ref": "Permanently Intimidate Enemies on Block",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_2424163939",
+      "implicit": "implicit.stat_2424163939",
+      "ref": "Physical Damage of Enemies Hitting you is Lucky",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1678831767",
+      "implicit": "implicit.stat_1678831767",
+      "ref": "Recover # Life when you Block",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_4235886357",
+      "implicit": "implicit.stat_4235886357",
+      "ref": "Reflects # Cold Damage to Melee Attackers",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1757945818",
+      "implicit": "implicit.stat_1757945818",
+      "ref": "Reflects # Fire Damage to Melee Attackers",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1704843611",
+      "implicit": "implicit.stat_1704843611",
+      "ref": "Regenerate # Life per second if you have at least 1000 Maximum Energy Shield",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1898967950",
+      "implicit": "implicit.stat_1898967950",
+      "ref": "Regenerate # Life per second per Endurance Charge",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_2547149004",
+      "implicit": "implicit.stat_2547149004",
+      "ref": "Retaliation Skills become Usable for #% longer",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1881314095",
+      "implicit": "implicit.stat_1881314095",
+      "ref": "Share Endurance Charges with nearby party members",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1471600638",
+      "implicit": "implicit.stat_1471600638",
+      "ref": "Socketed Curse Gems have #% increased Reservation Efficiency",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_4020144606",
+      "implicit": "implicit.stat_4020144606",
+      "ref": "Socketed Gems are Supported by Level # Added Cold Damage",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_3356013982",
+      "implicit": "implicit.stat_3356013982",
+      "ref": "Socketed Gems are Supported by Level # Unleash",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_4006301249",
+      "implicit": "implicit.stat_4006301249",
+      "ref": "Socketed Minion Gems are Supported by Level # Life Leech",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_3784504781",
+      "implicit": "implicit.stat_3784504781",
+      "ref": "Socketed Warcry Skills have +# Cooldown Use",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_7847395",
+      "implicit": "implicit.stat_7847395",
+      "ref": "Summoned Phantasms have #% chance to refresh their Duration when they Hit a Rare or Unique Enemy",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_4070754804",
+      "implicit": "implicit.stat_4070754804",
+      "ref": "Summoned Raging Spirits have #% chance to refresh their Duration when they Hit a Rare or Unique Enemy",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_3892608176",
+      "implicit": "implicit.stat_3892608176",
+      "ref": "Trigger Level # Intimidating Cry when you lose Cat's Stealth",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_401685616",
+      "implicit": "implicit.stat_401685616",
+      "ref": "Trigger Level # Shield Shatter when you Block",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_658873122",
+      "implicit": "implicit.stat_658873122",
+      "ref": "Trigger Level # Summon Void Spawn every 4 seconds",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_2554328719",
+      "implicit": "implicit.stat_2554328719",
+      "ref": "Trigger Level 20 Twister when you gain Avian's Might or Avian's Flight",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_2603798371",
+      "implicit": "implicit.stat_2603798371",
+      "ref": "Trigger Level 30 Shade Form when Hit",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_3918947537",
+      "implicit": "implicit.stat_3918947537",
+      "ref": "Triggers Level # Cold Aegis when Equipped",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1128763150",
+      "implicit": "implicit.stat_1128763150",
+      "ref": "Triggers Level # Fire Aegis when Equipped",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_850729424",
+      "implicit": "implicit.stat_850729424",
+      "ref": "Triggers Level # Lightning Aegis when Equipped",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_2716882575",
+      "implicit": "implicit.stat_2716882575",
+      "ref": "Unaffected by Ignite or Shock if Maximum Life and Maximum Mana are within 500",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_3399924348",
+      "implicit": "implicit.stat_3399924348",
+      "ref": "Warcries grant Arcane Surge to you and Allies, with #% increased effect per 5 power, up to 50%",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_2567751411",
+      "implicit": "implicit.stat_2567751411",
+      "ref": "Warcry Skills have #% increased Area of Effect",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1831757355",
+      "implicit": "implicit.stat_1831757355",
+      "ref": "Wintertide Brand has #% increased Chill Effect",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_113536037",
+      "implicit": "implicit.stat_113536037",
+      "ref": "You and Enemies in your Presence count as moving while affected by Elemental Ailments",
+      "realms": [
+        "intl",
+        "tw"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_2936084533",
+      "implicit": "implicit.stat_2936084533",
+      "ref": "You and nearby Allies have 30% increased Mana Regeneration Rate",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_799872465",
+      "implicit": "implicit.stat_799872465",
+      "ref": "You have Fungal Ground around you while stationary",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_3058395672",
+      "implicit": "implicit.stat_3058395672",
+      "ref": "You have Perfect Agony if you've dealt a Critical Strike recently",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_455217103",
+      "implicit": "implicit.stat_455217103",
+      "ref": "You only lose # Crab Barriers when you take Physical Damage from a Hit",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1623397857",
+      "implicit": "implicit.stat_1623397857",
+      "ref": "You take Chaos Damage instead of Physical Damage from Bleeding",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1917124426",
+      "implicit": "implicit.stat_1917124426",
+      "ref": "Your Cold Damage can Poison",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1985969957",
+      "implicit": "implicit.stat_1985969957",
+      "ref": "Your Fire Damage can Poison",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
+      "explicit": "explicit.stat_1604984482",
+      "implicit": "implicit.stat_1604984482",
+      "ref": "Your Lightning Damage can Poison",
+      "realms": [
+        "intl"
+      ]
+    }
+  ]
+}

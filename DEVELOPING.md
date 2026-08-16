@@ -52,22 +52,24 @@ cd renderer
 npm run regen-data                   # 這一條就是全部。順序見下。
 ```
 
-它依序做四件事,**順序是硬性的**:
+它依序做五件事,**順序是硬性的**:
 
 ```
-gen-missing-items --write   補上游缺的物品(通貨/命運卡/接肢/地圖碎片/傳奇)
-gen-disc-variants --write   補同名多變體(占卜寶珠區域、海圖區域、傭兵流派)
-make-index-files            重建 byte-offset 索引
-verify-datasets             檢查 en 與 cmn-Hant 的語言無關鍵是否對齊
+gen-missing-items --write     補上游缺的物品(通貨/命運卡/接肢/地圖碎片/傳奇)
+gen-disc-variants --write     補同名多變體(占卜寶珠區域、海圖區域、傭兵流派)
+gen-missing-stat-ids --write  補上游缺的 implicit 交易 id(殘存機制)
+make-index-files              重建 byte-offset 索引
+verify-datasets               檢查 en 與 cmn-Hant 的語言無關鍵是否對齊
 ```
 
-要單獨乾跑看差異就 `npm run gen-missing-items` / `npm run gen-disc-variants`
-(不帶 `--write`)。
+要單獨乾跑看差異就 `npm run gen-missing-items` / `npm run gen-disc-variants` /
+`npm run gen-missing-stat-ids`(不帶 `--write`)。
 
-改完資料還要跑一支**不在 `regen-data` 裡**的稽核(它要連網):
+改完資料還要跑兩支**不在 `regen-data` 裡**的稽核(它們要連網):
 
 ```shell
 npm run audit-trade-names            # 加 --verbose 看逐筆
+npm run audit-stat-ids               # 新賽季或上游換資料集後跑
 ```
 
 **解析成功不等於查得到。** 送給交易站的搜尋條件是資料列的 `name` 那一串,交易站清單
@@ -79,6 +81,21 @@ npm run audit-trade-names            # 加 --verbose 看逐筆
 都會讓它以非零碼結束。目前登記在案的是 `en` 4 筆、`cmn-Hant` 19 筆,每一筆都寫了理由
 (舊版底材、大逃殺模式遺留的 `*Royale` 底材、台服未上架…),全部是遊戲與交易站的現況,
 不是可修的缺陷。
+
+`audit-stat-ids` 查的是另一種缺口:**同一條詞綴少了某個 modType 的交易 id**。
+3.29 的殘存(Vestigial)機制把另一件同部位傳奇的一條詞綴複製過來,而複製後是以
+**固定屬性(implicit)**呈現,所以同一條詞綴天生有 `explicit.stat_N` 與
+`implicit.stat_N` 兩個身分 —— 上游只收了前者。
+
+少了 id 的症狀非常安靜:`tryParseTranslation` 的
+`!(modType in found.stat.trade.ids)` 會把整條詞綴當成沒認出來、收進
+`unknownModifiers`,畫面上就是「這條詞綴不在篩選清單裡」。清單與判準見
+`scripts/missing-stat-ids.json`。
+
+⚠ 判準是交易站 `/api/trade/data/stats` 的 implicit 群組,**不是「送去搜尋沒報錯」**。
+搜尋端點只驗 stat 編號存在、不驗群組:實測把 5,577 個候選整批送出兩服一個都沒拒絕,
+而 implicit 群組總共才 1,811 個。用它當判準會收進一堆送出去必定 0 筆、
+而且交易站不會報錯的死條件。
 
 > ### ⚠ 為什麼不能只跑其中一支
 >
@@ -97,6 +114,19 @@ npm run audit-trade-names            # 加 --verbose 看逐筆
 > git show HEAD:renderer/public/data/cmn-Hant/items.ndjson | wc -l
 > wc -l < renderer/public/data/cmn-Hant/items.ndjson
 > ```
+
+> ### ⚠ 改完 ndjson 一定要重建索引
+>
+> `*.index.bin` 存的是**位元組偏移量**。任何一列變長變短,其後每一列的偏移量就
+> 全部失效 —— 查表會切在某一列的中間,`JSON.parse` 當場丟
+> `Unexpected token '狂'` 這種看不出所以然的錯。
+>
+> 索引檔有進 `.gitignore`(打包時重建),所以這個坑只會在本機出現;但單獨跑
+> `gen-missing-stat-ids --write` 之後直接跑測試就會踩到。用 `regen-data` 一次做完,
+> 或記得補一句 `npm run make-index-files`。
+>
+> ⚠ `verify-datasets` 一樣**抓不到** —— 它讀的是 ndjson 本身,不經過索引。
+> 抓得到的是 `npm test`(解析器一查表就炸)。
 
 `gen-disc-variants` 會打國際服與台服的交易站 API,用語言無關的 `type` 欄對接,
 重新產生占卜寶珠 / 海圖 / 傭兵的 394 列變體。回應快取在 `.cache/`,新賽季重跑前先刪掉。
