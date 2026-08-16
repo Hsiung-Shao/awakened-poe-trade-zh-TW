@@ -1,4 +1,5 @@
 import * as fs from 'node:fs/promises'
+import * as fsSync from 'node:fs'
 import * as path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseClipboard } from '@/parser'
@@ -20,6 +21,41 @@ export interface Fixture {
 export type FixtureOutcome =
   | { kind: 'parsed', item: ParsedItem, snapshot: unknown }
   | { kind: 'error', error: string }
+
+/**
+ * **本專案維護的語系** —— 繁中是這個 fork 存在的理由,解析它的物品文字是我們的
+ * 責任,所以少了樣本就是缺口,必須讓測試紅掉。
+ */
+export const MAINTAINED_LANGUAGES = ['cmn-Hant'] as const
+
+/**
+ * **上游維護的語系**。en 是上游 SnosMe 的來源語言,ru / ko 由上游的貢獻者維護,
+ * 我們只是沿用 —— 替它們建回歸樣本不是這個 fork 的工作,少了也不算缺口。
+ *
+ * 這個分野與 `verify-i18n` 一致(它把 ko / ru 標成「非本專案維護,僅報告」)。
+ * ⚠ 「有樣本就照樣測」是刻意的:哪天真的補了英文樣本,它就自動納入回歸網。
+ */
+export const UPSTREAM_LANGUAGES = ['en', 'ru', 'ko'] as const
+
+export function hasFixtures (language: string): boolean {
+  const dir = path.join(FIXTURES_DIR, language)
+  return fsSync.existsSync(dir) && fsSync.readdirSync(dir).some(f => f.endsWith('.txt'))
+}
+
+/**
+ * 上面兩份清單裡、磁碟上真的有樣本的語系。
+ *
+ * ⚠ 判準是**宣告的清單**,不是「掃 fixtures 底下所有子目錄」。掃描版寫過一次就
+ *   踩到:`fixtures/filter-visibility/` 是 `map-price-mods.test.ts` 的地圖樣本集,
+ *   不是語系,被當成語系之後 `loadForLang('filter-visibility')` 直接炸掉。
+ *   「目錄裡有 .txt」根本不是「這是一個語系」的證據。
+ *
+ * ⚠ 回空陣列時呼叫端必須自己擋掉 —— 否則後面每一項斷言都會空轉通過,
+ *   那比沒有測試更危險。
+ */
+export function fixtureLanguages (): string[] {
+  return [...MAINTAINED_LANGUAGES, ...UPSTREAM_LANGUAGES].filter(hasFixtures)
+}
 
 export async function listFixtures (language: string): Promise<Fixture[]> {
   const dir = path.join(FIXTURES_DIR, language)

@@ -66,6 +66,20 @@ export function statSourcesTotal (
   sources: StatSource[],
   mode: 'sum' | 'max' = 'sum'
 ): StatRoll | undefined {
+  // 一個來源都沒有帶數值時,「加總」既不是 0 也不是出現次數,而是**這條詞綴沒有數值**。
+  //
+  // 少了這一行,同一條無數值詞綴出現一次與出現兩次的結果會不一致:一次走
+  // `sources.length === 1` 回 undefined(正確,產生的是「有沒有這條」的篩選器),
+  // 兩次卻會落進下面的 reduce,把 `contributes` 補成 1 再相加,憑空生出一個
+  // `{ value: 2 }` 的數值。後果不只是篩選器長錯 —— `translateStatWithRoll` 看到
+  // 有 roll 就會去讀每個來源的 `stat.roll!.dp`,而那些來源根本沒有 roll,
+  // 當場 TypeError。實際踩到的是一張稀有地圖把「區域受到開創者的記憶影響」
+  // 列了兩次,查價視窗與地圖檢查小工具都會整個掛掉。
+  //
+  // ⚠ 只擋「全部都沒有數值」。部分來源有、部分沒有時仍照舊補 1 —— 那是上游刻意的
+  //   計數語意(例如同一條詞綴由一個帶數值的詞綴與一個旗標詞綴各貢獻一次)。
+  if (!sources.some(source => source.contributes)) return undefined
+
   const fn = (mode === 'sum')
     ? (a: number, b: number) => a + b
     : (a: number, b: number) => Math.max(a, b)
@@ -105,8 +119,11 @@ export function translateStatWithRoll (
   }
 
   const dp = (roll)
+    // ⚠ `s.stat.roll` 用 `?.` 不是 `!`。整體有 roll **不代表每個來源都有** ——
+    //   同一條詞綴可以由一個帶數值的詞綴與一個旗標詞綴各貢獻一次,後者沒有 roll。
+    //   沒有 roll 就沒有小數位,所以 undefined 落成 falsy 正是要的答案。
     ? calc.stat.dp ||
-      calc.sources.some(s => s.stat.stat.ref === calc.stat.ref && s.stat.roll!.dp)
+      calc.sources.some(s => s.stat.stat.ref === calc.stat.ref && s.stat.roll?.dp)
     : undefined
 
   return { string: translation.string, negate: translation.negate || false, dp: dp }

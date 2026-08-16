@@ -15,11 +15,13 @@
       "@/*": ["./src/*"],
       "@ipc/*": ["../ipc/*"]
     },
-    "types": ["vite/client"],
+    "types": ["vite/client", "node"],
     "lib": ["esnext", "dom", "dom.iterable"]
   },
+  "_comment_include_test": "測試檔一起檢查。vitest 用 esbuild 轉譯,型別是直接丟掉的,所以測試裡的型別錯誤在跑測試時完全看不到。手寫的替身尤其危險:少一個欄位、形狀對不上,測試照樣全綠,但測的是一個現實中不存在的物件 —— test/stat-roll-total.test.ts 的第一版就漏了 ModifierInfo.tags,是這道檢查抓到的。",
   "include": [
     "src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue",
+    "test/**/*.ts",
     "public/data/*/client_strings.js"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]

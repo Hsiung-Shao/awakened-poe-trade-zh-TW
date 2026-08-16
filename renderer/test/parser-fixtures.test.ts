@@ -1,15 +1,15 @@
-import * as fs from 'node:fs'
-import * as path from 'node:path'
 import { beforeAll, describe, expect, it } from 'vitest'
 import { init, loadForLang } from '@/assets/data'
 import {
   diffSnapshots,
+  fixtureLanguages,
   formatDiff,
+  hasFixtures,
   listFixtures,
   readExpected,
   runFixture,
   writeExpected,
-  FIXTURES_DIR,
+  MAINTAINED_LANGUAGES,
   UPDATE_MODE,
   type Fixture,
   type FixtureOutcome
@@ -32,29 +32,10 @@ import {
  *   第一個。所以這裡在 beforeAll 裡逐一切換、跑完一個語系才換下一個。
  */
 
-/**
- * **本專案維護的語系** —— 繁中是這個 fork 存在的理由,解析它的物品文字是我們的
- * 責任,所以少了樣本就是缺口,必須讓測試紅掉。
- */
-const MAINTAINED = ['cmn-Hant'] as const
-
-/**
- * **上游維護的語系**。en 是上游 SnosMe 的來源語言,ru / ko 由上游的貢獻者維護,
- * 我們只是沿用 —— 替它們建回歸樣本不是這個 fork 的工作,少了也不算缺口。
- *
- * 這個分野與 `verify-i18n` 一致(它把 ko / ru 標成「非本專案維護,僅報告」)。
- * ⚠ 「有樣本就照樣測」是刻意的:哪天真的補了英文樣本,它就自動納入回歸網,
- *   不必回來改這裡。
- */
-const UPSTREAM = ['en', 'ru', 'ko'] as const
-
-function hasFixtures (language: string): boolean {
-  const dir = path.join(FIXTURES_DIR, language)
-  return fs.existsSync(dir) && fs.readdirSync(dir).some(f => f.endsWith('.txt'))
-}
-
-const MISSING_MAINTAINED = MAINTAINED.filter(l => !hasFixtures(l))
-const COVERED = [...MAINTAINED, ...UPSTREAM].filter(hasFixtures)
+// 語系清單住在 harness 裡 —— 篩選器層的回歸網要用同一份。兩邊各寫一份的話,
+// 補了新語系只會有一半的測試跟上,而測試依然全綠。
+const MISSING_MAINTAINED = MAINTAINED_LANGUAGES.filter(l => !hasFixtures(l))
+const COVERED = fixtureLanguages()
 
 interface LanguageRun {
   fixtures: Fixture[]
