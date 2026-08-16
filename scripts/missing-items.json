@@ -241,6 +241,13 @@
       "name": "全面偵查報告"
     },
     {
+      "group": "gem",
+      "refName": "Coursing Current Support",
+      "name": "雷鳴湍流輔助",
+      "maxLevel": 3,
+      "_note": "3.29 新增,上游 18a401e 沒有。GGPK: Metadata/Items/Gems/SupportGemCrustaceousGrasp。maxLevel=3 的依據:物品帶「卓越」標籤,同標籤的 Empower/Enhance/Enlighten 在上游資料都是 3;台服交易站實測 gem_level>=3 有 3 筆、>=4 為 0 筆。"
+    },
+    {
       "group": "currency",
       "refName": "Crest of Ezomyr",
       "name": "艾茲麥之紋"

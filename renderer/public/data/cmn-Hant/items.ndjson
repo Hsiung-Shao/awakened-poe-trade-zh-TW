@@ -4863,6 +4863,7 @@
 {"name":"挑戰的培育器","refName":"Challenging Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
 {"name":"充能的羅盤","refName":"Charged Compass","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
 {"name":"全面偵查報告","refName":"Comprehensive Scouting Report","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"雷鳴湍流輔助","refName":"Coursing Current Support","namespace":"GEM","icon":"","gem":{"maxLevel":3},"src":"zh-tw-missing"}
 {"name":"艾茲麥之紋","refName":"Crest of Ezomyr","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
 {"name":"桂冠黃金神像","refName":"Crested Golden Idol","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
 {"name":"部下的決心","refName":"Dekhara's Resolve","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}

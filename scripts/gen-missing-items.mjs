@@ -58,6 +58,15 @@ function makeRow (entry, lang) {
   if (entry.group === 'card') {
     return { ...base, namespace: 'DIVINATION_CARD', exchangeable: true, icon: '', src: MARKER }
   }
+  // 寶石。`maxLevel` **不是可以照抄 20 的欄位** —— create-item-filters 用它決定
+  // 等級/品質篩選器要不要啟用,填錯會把 1 級的寶石當成已滿級。卓越類
+  // (Empower / Enhance / Enlighten)在上游資料裡是 3,一般輔助寶石才是 20,
+  // 所以對照表裡逐筆寫明,並在 missing-items.json 記下判斷依據。
+  //
+  // **不給** exchangeable / tradeTag:寶石不在通貨交易所,給了會掛出錯誤的橫幅。
+  if (entry.group === 'gem') {
+    return { ...base, namespace: 'GEM', icon: '', gem: { maxLevel: entry.maxLevel }, src: MARKER }
+  }
   // graft 之類的裝備型物品要帶 craftable.category,解析器才判得出 item.category。
   // 它們不是交易所物品,所以**不給** exchangeable —— 給了會把 merchantOnly 翻成
   // false(status: available),那是給通貨與命運卡用的。
@@ -84,10 +93,26 @@ function makeRow (entry, lang) {
 }
 
 const table = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/missing-items.json'), 'utf8'))
+function namespaceOf (group) {
+  if (group === 'card') return 'DIVINATION_CARD'
+  if (group === 'gem') return 'GEM'
+  return 'ITEM'
+}
+
 const entries = [
-  ...table.items.map(e => ({ ...e, namespace: e.group === 'card' ? 'DIVINATION_CARD' : 'ITEM' })),
+  ...table.items.map(e => ({ ...e, namespace: namespaceOf(e.group) })),
   ...table.uniques.map(e => ({ ...e, namespace: 'UNIQUE' }))
 ]
+
+// 寶石少了 maxLevel 會產生 `gem: { maxLevel: undefined }`,JSON.stringify 之後
+// 那個鍵直接消失 —— 型別上 maxLevel 是必填,但缺了不會有任何人報錯,只會讓
+// 篩選器在執行期拿到 undefined 做比較(永遠 false)。寧可在這裡硬失敗。
+const gemsWithoutMax = entries.filter(e => e.group === 'gem' && typeof e.maxLevel !== 'number')
+if (gemsWithoutMax.length) {
+  console.error(`\n✗ ${gemsWithoutMax.length} 個寶石沒有 maxLevel:`)
+  for (const g of gemsWithoutMax) console.error(`    ${g.refName}`)
+  process.exit(1)
+}
 console.log(`對照表 items ${table.items.length} 筆、uniques ${table.uniques.length} 筆` +
             `(上游基準 ${table._upstreamBase})`)
 

@@ -4858,6 +4858,7 @@
 {"name":"Challenging Incubator","refName":"Challenging Incubator","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
 {"name":"Charged Compass","refName":"Charged Compass","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
 {"name":"Comprehensive Scouting Report","refName":"Comprehensive Scouting Report","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
+{"name":"Coursing Current Support","refName":"Coursing Current Support","namespace":"GEM","icon":"","gem":{"maxLevel":3},"src":"zh-tw-missing"}
 {"name":"Crest of Ezomyr","refName":"Crest of Ezomyr","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
 {"name":"Crested Golden Idol","refName":"Crested Golden Idol","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
 {"name":"Dekhara's Resolve","refName":"Dekhara's Resolve","namespace":"ITEM","exchangeable":true,"icon":"","src":"zh-tw-missing"}
