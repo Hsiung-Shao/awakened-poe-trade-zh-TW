@@ -1591,23 +1591,7 @@ function parseStatsFromMod (lines: string[], item: ParsedItem, modifier: ParsedM
   const statIterator = linesToStatStrings(lines)
   let stat = statIterator.next()
   while (!stat.done) {
-    let parsedStat = tryParseTranslation(stat.value, modifier.info.type, item.category)
-    /**
-     * 殘存詞綴掛在 implicit 底下,但**它的 stat 不保證有 implicit 的 trade id**。
-     *
-     * `tryParseTranslation` 找得到 stat 卻在 `modType in trade.ids` 那關擋掉
-     * (stat-translations.ts),於是整條掉進 unknownModifiers —— 畫面上看不到、
-     * 也篩不了。實例:「被榮耀瘋癲影響時,免疫元素異常狀態」在交易站**只有**
-     * `explicit.stat_1065479853`,沒有 implicit 版本。
-     *
-     * 退回 explicit 是對的,不是將就:台服實測「限定殘存物品 + 那個 explicit id」
-     * 回 7 筆,而且全是殘存物品 —— 交易站認這個 id。
-     * 另一條殘存詞綴「行動速度不能被調整至低於基礎值」兩種 id 都有,implicit
-     * 先命中,不受這段影響。
-     */
-    if (!parsedStat && modifier.info.generation === 'vestigial') {
-      parsedStat = tryParseTranslation(stat.value, ModifierType.Explicit, item.category)
-    }
+    const parsedStat = tryParseTranslation(stat.value, modifier.info.type, item.category)
     if (parsedStat) {
       modifier.stats.push(parsedStat)
       stat = statIterator.next(true)

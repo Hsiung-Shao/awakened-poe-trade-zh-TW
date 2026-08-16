@@ -5047,7 +5047,7 @@
 {"ref":"Immune to Curses if Corrupted","better":1,"matchers":[{"string":"Immune to Curses if Corrupted"}],"trade":{"ids":{"implicit":["implicit.stat_1954526925"]}}}
 {"ref":"Immune to Curses if you've cast Despair in the past 10 seconds","better":1,"matchers":[{"string":"Immune to Curses if you've cast Despair in the past 10 seconds"}],"trade":{"ids":{"explicit":["explicit.stat_2773026887"]}}}
 {"ref":"Immune to Curses while you have at least # Rage","better":1,"matchers":[{"string":"Immune to Curses while you have at least # Rage"}],"trade":{"ids":{"explicit":["explicit.stat_534844170"]}}}
-{"ref":"Immune to Elemental Ailments while affected by Glorious Madness","better":1,"matchers":[{"string":"Immune to Elemental Ailments while affected by Glorious Madness"}],"trade":{"ids":{"explicit":["explicit.stat_1065479853"]}}}
+{"ref":"Immune to Elemental Ailments while affected by Glorious Madness","better":1,"matchers":[{"string":"Immune to Elemental Ailments while affected by Glorious Madness"}],"trade":{"ids":{"explicit":["explicit.stat_1065479853"],"implicit":["implicit.stat_1065479853"]}}}
 {"ref":"Immune to Elemental Ailments while Bleeding","better":1,"matchers":[{"string":"Immune to Elemental Ailments while Bleeding"}],"trade":{"ids":{"explicit":["explicit.stat_2526304488"]}}}
 {"ref":"Immune to Exposure if you've cast Elemental Weakness in the past 10 seconds","better":1,"matchers":[{"string":"Immune to Exposure if you've cast Elemental Weakness in the past 10 seconds"}],"trade":{"ids":{"explicit":["explicit.stat_2921954092"]}}}
 {"ref":"Immune to Freeze and Chill while Ignited","better":1,"matchers":[{"string":"Immune to Freeze and Chill while Ignited"}],"trade":{"ids":{"explicit":["explicit.stat_1512695141"]}}}
