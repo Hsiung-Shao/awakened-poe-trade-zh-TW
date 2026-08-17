@@ -11,6 +11,17 @@
  * 用法:
  *   node scripts/release-checksums.mjs            # 印出來,不寫檔
  *   node scripts/release-checksums.mjs --write    # 寫進 main/dist/
+ *   node scripts/release-checksums.mjs --write --dir dist-pkg   # 換一個產物目錄
+ *
+ * ⚠ `--dir` 存在的理由不是彈性,是**繞開檔案鎖**。打包前 electron-builder 會先
+ *   清空 `main/dist/win-unpacked/`(它的 `EnsureEmptyDir`),而 Windows 上只要有
+ *   任何程序開著裡面的 `app.asar`,那一步就會失敗、整個打包中止。實際踩到的是
+ *   VS Code 的 node utility 程序抓著它不放,重啟 VS Code 之後**立刻又抓回去**。
+ *   當下唯一能繼續的做法是 `--config.directories.output=<別的目錄>`,而那樣這支
+ *   腳本原本寫死的 `main/dist` 就找不到產物了。
+ *
+ *   ⚠ 不要改成「把產物搬進 main/dist 再跑」——那會讓真產物與上一版的殘留混在
+ *   同一個目錄,正是下面斷言二要防的事。換目錄比搬檔案安全。
  */
 
 import fs from 'node:fs'
@@ -20,7 +31,29 @@ import { execFileSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
-const DIST = path.join(ROOT, 'main/dist')
+
+/**
+ * 產物目錄。預設 `main/dist`,`--dir <名稱>` 可換成 `main/` 底下的別的目錄。
+ *
+ * ⚠ 刻意限制在 `main/` 之下、且不接受路徑分隔字元 —— 這支腳本會**刪檔**
+ * (`fs.rmSync` 移除原 exe 與暫存的對照檔),讓呼叫端隨意指定絕對路徑太危險。
+ */
+function distDir () {
+  const i = process.argv.indexOf('--dir')
+  if (i === -1) return path.join(ROOT, 'main/dist')
+  const name = process.argv[i + 1]
+  if (name === undefined || name.startsWith('-')) {
+    console.error('--dir 後面要接目錄名,例如 --dir dist-pkg')
+    process.exit(1)
+  }
+  if (/[\\/]|^\.\.?$/.test(name)) {
+    console.error(`--dir 只接 main/ 底下的單層目錄名,不接路徑:${name}`)
+    process.exit(1)
+  }
+  return path.join(ROOT, 'main', name)
+}
+
+const DIST = distDir()
 
 /** 要納入雜湊清單的檔案。副檔名以外的一律報錯,不靜默略過。 */
 const DISTRIBUTABLE = /\.(exe|AppImage|dmg|zip)$/
@@ -166,7 +199,7 @@ for (const e of entries) {
 
 // 斷言一:不認得的產物一律當失敗。漏簽一個檔比多簽一個危險得多。
 if (unexpected.length > 0) {
-  console.error('main/dist/ 有不認得的檔案,無法判斷該不該納入雜湊清單:')
+  console.error(`${path.relative(ROOT, DIST)}/ 有不認得的檔案,無法判斷該不該納入雜湊清單:`)
   for (const n of unexpected) console.error(`  ${n}`)
   console.error('\n確認它是產物就加進 DISTRIBUTABLE,是中間檔就加進 IGNORED。')
   process.exit(1)
@@ -178,12 +211,12 @@ const stale = hashed.filter(h => DISTRIBUTABLE.test(h.name) && !h.name.includes(
 if (stale.length > 0) {
   console.error(`這些檔名不含版本 ${VERSION},可能是上一版的殘留:`)
   for (const h of stale) console.error(`  ${h.name}`)
-  console.error('\n請先清空 main/dist/ 再重新打包。')
+  console.error(`\n請先清空 ${path.relative(ROOT, DIST)}/ 再重新打包。`)
   process.exit(1)
 }
 
 if (hashed.length === 0) {
-  console.error('main/dist/ 裡沒有任何可散布檔 —— 打包是不是失敗了?')
+  console.error(`${path.relative(ROOT, DIST)}/ 裡沒有任何可散布檔 —— 打包是不是失敗了?`)
   process.exit(1)
 }
 

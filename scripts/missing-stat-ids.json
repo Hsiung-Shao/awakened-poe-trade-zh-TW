@@ -517,6 +517,14 @@
       ]
     },
     {
+      "explicit": "explicit.stat_1065479853",
+      "implicit": "implicit.stat_1065479853",
+      "ref": "Immune to Elemental Ailments while affected by Glorious Madness",
+      "realms": [
+        "intl"
+      ]
+    },
+    {
       "explicit": "explicit.stat_3520223758",
       "implicit": "implicit.stat_3520223758",
       "ref": "Increases and Reductions to Cast Speed also Apply to Trap Throwing Speed",

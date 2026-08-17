@@ -1,6 +1,11 @@
 .DS_Store
 node_modules
 */dist/**
+# ⚠ 上面那條只涵蓋叫 `dist` 的目錄。打包遇到檔案鎖時會改用
+# `--config.directories.output=dist-pkg` 之類的替代目錄(理由見
+# scripts/release-checksums.mjs 的 --dir 說明),那些一樣是 400 MB 的建置產物,
+# 沒有這條 `git add -A` 就會把它們整包收進去。
+*/dist-*/**
 
 # local env files
 .env.local
